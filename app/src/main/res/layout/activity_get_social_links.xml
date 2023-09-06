@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Authentication.SignupActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_extrabold"
+                android:gravity="center"
+                android:onClick="login"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="30dp"
+                android:text="Social Links"
+                android:textColor="@color/app_color"
+                android:textSize="35dp" />
+            <EditText
+                android:id="@+id/facebook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="25dp"
+                
+                android:background="@drawable/edit_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Enter facebook url"
+                android:padding="12dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="#A39A9A"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/twitter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/edit_bg"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Enter Twitter url"
+                android:padding="12dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="#A39A9A"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/instagram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/edit_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Enter Instagram url"
+                android:inputType="textEmailAddress"
+                android:padding="12dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="#A39A9A"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/reddit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/edit_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Enter Reddit url"
+                android:padding="12dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="#A39A9A"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/edit_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:padding="12dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="#A39A9A"
+                android:textSize="15dp"
+                android:visibility="gone"/>
+
+
+            <EditText
+                android:id="@+id/pinterest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/edit_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Enter Pinterest url"
+                android:padding="12dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="#A39A9A"
+                android:textSize="15dp" />
+
+            <EditText
+                android:id="@+id/linked_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/edit_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="Enter LinkedIn url"
+                android:padding="12dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="#A39A9A"
+                android:textSize="15dp" />
+
+
+
+            <Button
+                android:id="@+id/next"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/btn_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="20dp"
+                android:text="Continue"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</ScrollView>
