@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.moutamid.dantlicorp.Admin.AdminPanel;
 import com.moutamid.dantlicorp.R;
 
 
@@ -65,7 +66,14 @@ public class LoginActivity extends AppCompatActivity {
         } else if (password_str.length() == 0) {
             password.setError("Please Error");
         } else {
-            startActivity(new Intent(this, GetSocialLinksActivity.class));
+
+            if (email.getText().toString().equals("admin@gmail.com") && password.getText().toString().equals("admin123")) {
+
+                startActivity(new Intent(this, AdminPanel.class));
+            } else {
+                startActivity(new Intent(this, GetSocialLinksActivity.class));
+            }
+
 
         }
     }

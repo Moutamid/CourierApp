@@ -70,11 +70,13 @@ public class VideosFragment extends Fragment {
                     productModelList.add(herbsModel);
                 }
                 videoAdapter.notifyDataSetChanged();
+                Config.dismissProgressDialog();
             }
 
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Config.dismissProgressDialog();
 
             }
 

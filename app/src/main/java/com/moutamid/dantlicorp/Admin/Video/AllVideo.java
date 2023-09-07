@@ -53,7 +53,7 @@ public class AllVideo extends AppCompatActivity {
     }
 
     private void getHerbs() {
-        Config.showProgressDialog(AllVideo.this);
+//        Config.showProgressDialog(AllVideo.this);
         Constants.VideosReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -63,13 +63,13 @@ public class AllVideo extends AppCompatActivity {
                     videoModelList.add(videoModel);
                 }
                 videoAdapter.notifyDataSetChanged();
-                Config.dismissProgressDialog();
+//                Config.dismissProgressDialog();
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Config.dismissProgressDialog();
+//                Config.dismissProgressDialog();
             }
         });
     }

@@ -30,7 +30,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="50dp"
         android:layout_toRightOf="@+id/profile_image"
-        android:text="Hania"
+        android:text="Admin"
         android:textColor="@color/black"
         android:textSize="16dp" />
 
@@ -106,7 +106,7 @@ time and place. See you soon!"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="46dp"
         android:layout_marginRight="35dp"
-        android:text="2:50 PM"
+        android:text="3:10 PM"
         android:textColor="#978D8D"
 
         android:textSize="14dp" />

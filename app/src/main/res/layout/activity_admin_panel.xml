@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.AdminPanel">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+
+        android:layout_margin="20dp"
+        android:background="@drawable/btn_bg"
+        android:gravity="center"
+        android:onClick="add_details"
+        android:padding="6dp"
+        android:text="Add Video"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
+
+
+</LinearLayout>
