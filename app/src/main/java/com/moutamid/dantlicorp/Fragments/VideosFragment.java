@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.moutamid.dantlicorp.Adapter.VideoAdapter;
+import com.moutamid.dantlicorp.Activities.Adapter.VideoAdapter;
 import com.moutamid.dantlicorp.Model.VideoModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
@@ -31,12 +31,6 @@ public class VideosFragment extends Fragment {
     RecyclerView content_rcv;
     public List<VideoModel> productModelList = new ArrayList<>();
     VideoAdapter videoAdapter;
-
-    EditText search;
-    TextView no_text;
-    ImageView mic;
-    String lcode = "en-US";
-    ImageView map;
 
 
     @Override

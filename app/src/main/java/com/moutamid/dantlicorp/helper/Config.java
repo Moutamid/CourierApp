@@ -1,17 +1,14 @@
 package com.moutamid.dantlicorp.helper;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
@@ -20,83 +17,41 @@ import android.media.ExifInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.RetryPolicy;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.moutamid.dantlicorp.R;
 
-import java.io.ByteArrayOutputStream;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.SecureRandom;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.X509TrustManager;
-
 public class Config extends Activity {
-    private static boolean doubleBackToExitPressedOnce;
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
+    public static final String YEAR_FORMAT = "yyyy";
+    public static final String TIME = "hh:mm aa";
+    public static final String DATE = "dd MMM";
     public static Dialog lodingbar;
-
-    public static String encodeImage(Bitmap bm) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
-
-        return encImage;
-    }
-
-
-    public static String getCurrentDay() {
-        DateFormat dateFormat = new SimpleDateFormat("dd");
-        Date date = new Date();
-        return dateFormat.format(date);
-    }
-
-    @SuppressLint("ResourceType")
-    public static void setSystemBarColor(Activity act) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = act.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(Color.parseColor("#f7f8fb"));
-        }
-    }
-
-    public static void setSystemBarLight(Activity act) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            View view = act.findViewById(android.R.id.content);
-            int flags = view.getSystemUiVisibility();
-            flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-            view.setSystemUiVisibility(flags);
-        }
-    }
-
-    public static void showToast(String message, Context context) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-    }
 
     public static void alertDialogue(final Activity context, String message, boolean finish) {
 
@@ -132,62 +87,6 @@ public class Config extends Activity {
             view = new View(activity);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-
-    public static void trustEveryone() {
-        try {
-            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            });
-            SSLContext context = SSLContext.getInstance("TLS");
-            context.init(null, new X509TrustManager[]{new X509TrustManager() {
-                public void checkClientTrusted(X509Certificate[] chain,
-                                               String authType) throws CertificateException {
-                }
-
-                public void checkServerTrusted(X509Certificate[] chain,
-                                               String authType) throws CertificateException {
-                }
-
-                public X509Certificate[] getAcceptedIssuers() {
-                    return new X509Certificate[0];
-                }
-            }}, new SecureRandom());
-            HttpsURLConnection.setDefaultSSLSocketFactory(
-                    context.getSocketFactory());
-        } catch (Exception e) { // should never happen
-            e.printStackTrace();
-        }
-    }
-
-
-    public static Map<String, String> getFirebaseHeaders(Context context) {
-        try {
-            Map<String, String> headers = new HashMap<>();
-            headers.put("Content-Type", "application/json");
-            headers.put("Authorization", "key=AAAAMVVEZKE:APA91bFAN49EtlWpzwy0BZ-Us7Y5CmRdkbrduIFij2Log4cMZgj8HLwJMCIksqsH91LrgW_Y2o54l3bPyARDPmSmOyu5Im6Q8rtyQF2CG3UhnXMoWdzmlqEvS0IcA2pvZZjZIKscdMC8");
-            return headers;
-        } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-
-    public static boolean internetStatus(Activity c) {
-        try {
-            ConnectivityManager cm = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo netInfo = cm.getActiveNetworkInfo();
-            if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            return false;
-        }
     }
 
 
@@ -380,17 +279,64 @@ public class Config extends Activity {
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
 
-    public static void showProgressDialog(Context context){
+    public static void showProgressDialog(Context context) {
         lodingbar = new Dialog(context);
         lodingbar.setContentView(R.layout.loading);
         Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
         lodingbar.setCancelable(false);
         lodingbar.show();
     }
-    public static void dismissProgressDialog(){
+
+    public static void dismissProgressDialog() {
         lodingbar.dismiss();
     }
 
+    public static String getFormatedDate(long date) {
+        return new SimpleDateFormat(DATE_FORMAT, Locale.getDefault()).format(date);
+    }
 
+    public static String getFormatedTime(long date) {
+        return new SimpleDateFormat(TIME, Locale.getDefault()).format(date);
+    }
+
+    public static String getFormatedYear(long date) {
+        return new SimpleDateFormat(YEAR_FORMAT, Locale.getDefault()).format(date);
+    }
+
+    public static String getDate(long date) {
+        return new SimpleDateFormat(DATE, Locale.getDefault()).format(date);
+    }
+
+    public static void sendFCMPush(Context context) {
+        JSONObject notification = new JSONObject();
+        JSONObject notifcationBody = new JSONObject();
+        try {
+            notifcationBody.put("title", "DANTLI CORP");
+            notifcationBody.put("message", "Welcome to the Team");
+            notification.put("to", "/topics/" + "general");
+            notification.put("data", notifcationBody);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, Constants.NOTIFICATIONAPIURL, notification,
+                response -> {
+                },
+                error -> {
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", "key=" + Constants.ServerKey);
+                params.put("Content-Type", "application/json");
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        int socketTimeout = 1000 * 60;// 60 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsObjRequest.setRetryPolicy(policy);
+        requestQueue.add(jsObjRequest);
+    }
 
 }

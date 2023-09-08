@@ -1,6 +1,7 @@
 package com.moutamid.dantlicorp.Activities.Home;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,16 +14,19 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 
 
 public class VideoPlayActivity extends AppCompatActivity {
-    String video_id = "Hce74cEAAaE";
+    String video_id;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_play);
+        video_id = getIntent().getStringExtra("url");
+        Log.d("data", video_id+"");
+
+         video_id = video_id.substring(32, 43);
+         Log.d("data", video_id+"");
         final YouTubePlayerView youTubePlayerView = findViewById(R.id.videoPlayer);
-//        youTubePlayerView.enterFullScreen();
-//        youTubePlayerView.toggleFullScreen();
         getLifecycle().addObserver(youTubePlayerView);
 //        youTubePlayerView.getPlayerUiController();
         youTubePlayerView.enterFullScreen();

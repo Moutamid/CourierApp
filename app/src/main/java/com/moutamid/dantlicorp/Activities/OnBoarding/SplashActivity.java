@@ -13,12 +13,16 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fxn.stash.Stash;
 import com.moutamid.dantlicorp.Activities.Authentication.LoginActivity;
+import com.moutamid.dantlicorp.MainActivity;
+import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
+import com.moutamid.dantlicorp.helper.Constants;
 
 
 public class SplashActivity extends AppCompatActivity {
-    int SPLASH_TIME = 4000;
+    int SPLASH_TIME = 2500;
     LinearLayout linearLayout;
     ImageView imageViewLogo;
     Animation animation;
@@ -33,7 +37,13 @@ public class SplashActivity extends AppCompatActivity {
             SharedPreferences shared = getSharedPreferences("Record", MODE_PRIVATE);
             String boarding_view = (shared.getString("boarding_view", ""));
             if (!boarding_view.isEmpty()) {
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+//                UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+                if (Constants.auth().getCurrentUser()!= null) {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                } else {
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+
+                }
             } else {
                 startActivity(new Intent(SplashActivity.this, OnBoardingActivity.class));
             }

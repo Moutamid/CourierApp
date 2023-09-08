@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.moutamid.dantlicorp.MainActivity;
 import com.moutamid.dantlicorp.R;
+import com.moutamid.dantlicorp.helper.Config;
 
 public class GetSocialLinksActivity extends AppCompatActivity {
     Button continue_btn;
@@ -21,6 +22,7 @@ public class GetSocialLinksActivity extends AppCompatActivity {
         continue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Config.sendFCMPush(GetSocialLinksActivity.this);
                 Intent intent = new Intent(GetSocialLinksActivity.this, MainActivity.class);
                 startActivity(intent);
             }

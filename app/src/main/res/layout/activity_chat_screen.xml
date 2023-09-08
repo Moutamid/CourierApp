@@ -31,7 +31,6 @@
             android:layout_height="44dp"
             android:layout_marginStart="15sp"
             android:padding="12sp"
-            android:visibility="gone"
             android:src="@drawable/ic_back" />
 
     </RelativeLayout>
@@ -63,7 +62,6 @@
             android:hint="Your Message..."
             android:inputType="textMultiLine"
             android:maxHeight="100sp"
-            android:textSize="14dp"
             android:padding="12sp" />
 
         <ImageButton

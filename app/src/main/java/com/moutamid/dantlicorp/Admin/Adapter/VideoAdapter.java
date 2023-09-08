@@ -1,9 +1,8 @@
-package com.moutamid.dantlicorp.Adapter;
+package com.moutamid.dantlicorp.Admin.Adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.moutamid.dantlicorp.Activities.Home.VideoPlayActivity;
 import com.moutamid.dantlicorp.Admin.Video.AddVideo;
 import com.moutamid.dantlicorp.Model.VideoModel;
 import com.moutamid.dantlicorp.R;

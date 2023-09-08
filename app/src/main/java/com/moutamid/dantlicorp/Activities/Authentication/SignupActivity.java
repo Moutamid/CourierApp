@@ -1,44 +1,41 @@
 package com.moutamid.dantlicorp.Activities.Authentication;
 
-import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.single.PermissionListener;
+import com.fxn.stash.Stash;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.moutamid.dantlicorp.MainActivity;
+import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
+import com.moutamid.dantlicorp.helper.Constants;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 public class SignupActivity extends AppCompatActivity {
-    boolean isCard;
-    private Uri ImageUri;
+    private static final int PICK_IMAGE_GALLERY = 111;
     ImageView profile_pic;
     Calendar myCalendar = Calendar.getInstance();
-    EditText name, dob, email, password, confirm_password, phone_number, cnic;
-    String image_str, image_profile_str;
+    EditText name, dob, email, password, phone_number, cnic;
+    Uri image_profile_str = null;
 
 
     @Override
@@ -70,7 +67,6 @@ public class SignupActivity extends AppCompatActivity {
         dob = findViewById(R.id.dob);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
-        confirm_password = findViewById(R.id.confirm_password);
         phone_number = findViewById(R.id.phone_number);
         cnic = findViewById(R.id.cnic_number);
     }
@@ -89,22 +85,10 @@ public class SignupActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK && data != null) {
-                ImageUri = result.getUri();
-                InputStream imageStream = null;
-                try {
-                    imageStream = getContentResolver().openInputStream(ImageUri);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-
-                image_profile_str = Config.compressImage(ImageUri + "", this);
-                profile_pic.setImageURI(ImageUri);
-            }
+        if (requestCode == PICK_IMAGE_GALLERY && resultCode == RESULT_OK) {
+            image_profile_str = data.getData();
+            profile_pic.setImageURI(image_profile_str);
+            profile_pic.setVisibility(View.VISIBLE);
         }
     }
 
@@ -112,54 +96,54 @@ public class SignupActivity extends AppCompatActivity {
 
     private void registerRequest() {
         Config.showProgressDialog(SignupActivity.this);
-//        JSONObject parameters = new JSONObject();
-//        try {
-//            parameters.put("name", name.getText().toString());
-//            parameters.put("birth_date", dob.getText().toString());
-//            parameters.put("email", email.getText().toString());
-//            parameters.put("phone", phone_number.getText().toString());
-//            parameters.put("password", password.getText().toString());
-//             parameters.put("cnic", cnic.getText().toString());
-//            parameters.put("profile_pic", image_profile_str);
-//            Log.d("TAG", "Params: " + parameters);
-//
-//            ApiRequest.Call_Api(Request.Method.POST, SignupActivity.this, Config.REGISTER, parameters, new com.moutamid.DANTLI CORP.Networking.Callback() {
-//                @Override
-//                public void Responce(String resp) {
-//                    Config.dismissProgressDialog();
-//                    Log.d("TAG", "Signup: " + resp);
-////                    Config.showToast(SignupActivity.this, resp);
-//                    if (!resp.isEmpty()) {
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(resp);
-//                            String success = jsonObject.getString("success");
-//                            if (success.equals("true")) {
-//                                Config.alertDialogue(SignupActivity.this, "Successfully Registered, PLease Verify to Login", true);
-//                                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-//                                finish();
-//                            } else {
-//                                Config.alertDialogue(SignupActivity.this, jsonObject.getString("message"), false);
-//                            }
-//
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    } else {
-//                        Config.showToast(SignupActivity.this, "Something went wrong");
-//                    }
-//                }
-//            });
-//
-//        } catch (JSONException e) {
-//            Config.dismissProgressDialog();
 
-//            e.printStackTrace();
-//        }
+        String filePathName = "users/";
+        final String timestamp = "" + System.currentTimeMillis();
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathName + timestamp);
+        UploadTask urlTask = storageReference.putFile(image_profile_str);
+        Task<Uri> uriTask = urlTask.continueWithTask(task -> {
+            if (!task.isSuccessful()) {
+                Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            return storageReference.getDownloadUrl();
+        }).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Uri downloadImageUri = task.getResult();
+                if (downloadImageUri != null) {
+                    Constants.auth().createUserWithEmailAndPassword(
+                            email.getText().toString(),
+                            password.getText().toString()
+                    ).addOnCompleteListener(authResult -> {
+                        UserModel userModel = new UserModel();
+                        userModel.name = name.getText().toString();
+                        userModel.dob = dob.getText().toString();
+                        userModel.email = email.getText().toString();
+                        userModel.phone_number = phone_number.getText().toString();
+                        userModel.cnic = cnic.getText().toString();
+                        userModel.image_url = downloadImageUri.toString();
+                        Constants.UserReference.child(Constants.auth().getUid()).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Stash.put("UserDetails", userModel);
+                                Config.dismissProgressDialog();
+                                startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                finish();
+                            }
+                        });
+                    }).addOnFailureListener(e -> {
+                        Config.dismissProgressDialog();
+                        Toast.makeText(this, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }
+
+        });
+
     }
 
     private boolean validation() {
-        if (image_profile_str == null || image_profile_str.isEmpty()) {
+        if (image_profile_str == null) {
             Config.showToast(this, "Please select your profile picture");
             return false;
 
@@ -173,7 +157,6 @@ public class SignupActivity extends AppCompatActivity {
             dob.setError("Select Date of Birth");
             dob.requestFocus();
             Config.openKeyboard(this);
-
             return false;
 
         } else if (password.getText().toString().isEmpty()) {
@@ -196,10 +179,6 @@ public class SignupActivity extends AppCompatActivity {
             Config.openKeyboard(this);
             return false;
 
-        } else if (image_str == null || image_str.isEmpty()) {
-            Config.showToast(this, "Please select your CNIC picture");
-            return false;
-
         } else if (!Config.isNetworkAvailable(this)) {
             Config.showToast(this, "You are not connected to network");
             return false;
@@ -210,30 +189,9 @@ public class SignupActivity extends AppCompatActivity {
 
     public void profile_image(View view) {
 
-        Dexter.withActivity(SignupActivity.this)
-                .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        isCard = false;
-                        CropImage.activity().setAspectRatio(4, 4)
-                                .setRequestedSize(500, 500)
-                                .setGuidelines(CropImageView.Guidelines.ON)
-                                .start(SignupActivity.this);
-                    }
-
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(com.karumi.dexter.listener.PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                        permissionToken.continuePermissionRequest();
-
-                    }
-
-                }).check();
-
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_GALLERY);
     }
 }

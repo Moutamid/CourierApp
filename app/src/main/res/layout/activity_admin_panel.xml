@@ -3,22 +3,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Admin.AdminPanel">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn"
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="70dp"
+        android:background="@color/app_color">
 
-        android:layout_margin="20dp"
-        android:background="@drawable/btn_bg"
-        android:gravity="center"
-        android:onClick="add_details"
-        android:padding="6dp"
-        android:text="Add Video"
-        android:textColor="@color/white"
-        android:textSize="16dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:text="Admin Panel"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+    </androidx.appcompat.widget.Toolbar>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/employees_btn"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg"
+
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="Employees"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/notification_btn"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg"
+
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="Notification"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      >
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg"
+
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:onClick="add_details"
+            android:padding="6dp"
+            android:text="Add Video"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/inbox_btn"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg"
+
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:onClick="inbox"
+            android:padding="6dp"
+            android:text="Inbox"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+    </LinearLayout>
 
 </LinearLayout>

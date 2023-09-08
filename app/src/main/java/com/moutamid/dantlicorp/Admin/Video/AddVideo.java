@@ -1,12 +1,9 @@
 package com.moutamid.dantlicorp.Admin.Video;
 
-import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -19,26 +16,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.PermissionListener;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
-import java.util.Map;
 
 public class AddVideo extends AppCompatActivity {
     private static final int PICK_IMAGE_GALLERY = 111;
@@ -49,7 +34,7 @@ public class AddVideo extends AppCompatActivity {
     String thumbnail = "";
     String url = "";
     String key = "";
-
+    String edt_url_str;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,11 +62,18 @@ public class AddVideo extends AppCompatActivity {
             if (edt_url.getText().toString().isEmpty()) {
                 edt_url.setError("Please Enter");
             } else {
-                if (Config.isNetworkAvailable(AddVideo.this)) {
-                    uploadvideo();
+                if (edt_url.getText().toString().contains("https://youtu.be/")) {
+                    edt_url_str = edt_url.getText().toString().replace("https://youtu.be/", "https://www.youtube.com/watch?v=");
                 } else {
-                    Toast.makeText(AddVideo.this, "No network connection available", Toast.LENGTH_SHORT).show();
+
+                    edt_url_str = edt_url.getText().toString();
                 }
+                if (Config.isNetworkAvailable(AddVideo.this)) {
+                        uploadvideo();
+                    } else {
+                        Toast.makeText(AddVideo.this, "No network connection available", Toast.LENGTH_SHORT).show();
+                    }
+
             }
         });
 
@@ -203,25 +195,11 @@ public class AddVideo extends AppCompatActivity {
     }
 
     public void image_Select() {
-        Dexter.withActivity(AddVideo.this)
-                .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        Intent pickPhoto = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                        startActivityForResult(pickPhoto, PICK_IMAGE_GALLERY);
-                    }
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_GALLERY);
 
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-
-                    }
-
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        token.continuePermissionRequest();
-                    }
-                }).check();
     }
 
 }

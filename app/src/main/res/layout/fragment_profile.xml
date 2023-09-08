@@ -40,22 +40,34 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="120dp">
 
-                    <ImageView
-                        android:id="@+id/profile_img"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:layout_gravity="center_vertical"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/girl3" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="210dp"
+                        android:layout_height="210dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="12dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardUseCompatPadding="true">
+
+                        <ImageView
+                            android:id="@+id/profile_pic"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/defualt_image" />
+
+                    </androidx.cardview.widget.CardView>
 
                     <ImageView
-                        android:id="@+id/upload_img"
+                        android:id="@+id/profile_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
                         android:layout_gravity="center_vertical"
                         android:scaleType="fitXY"
+                        android:visibility="gone"
+
                         android:src="@drawable/camera" />
 
                 </RelativeLayout>
@@ -111,40 +123,6 @@
                     android:textColor="@color/textColor"
                     android:textColorHint="@color/textColor"
                     android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="25dp"
-                    android:background="@drawable/edit_bg"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:padding="12dp"
-                    android:textColor="@color/textColor"
-                    android:textColorHint="@color/textColor"
-                    android:textSize="15dp" />
-
-                <TextView
-                    android:id="@+id/confirm_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="25dp"
-                    android:background="@drawable/edit_bg"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Confirm Password"
-                    android:inputType="textPassword"
-                    android:padding="12dp"
-                    android:textColor="@color/textColor"
-                    android:textColorHint="@color/textColor"
-                    android:textSize="15dp"
-                    android:visibility="gone"/>
-
 
                 <TextView
                     android:id="@+id/phone_number"
