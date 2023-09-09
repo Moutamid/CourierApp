@@ -15,13 +15,13 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.fxn.stash.Stash;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.moutamid.dantlicorp.Activities.Adapter.ChatAdapter;
+import com.moutamid.dantlicorp.Admin.Adapter.AdminChatAdapter;
 import com.moutamid.dantlicorp.Model.ChatModel;
+import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Constants;
 
@@ -38,10 +38,7 @@ public class ChatScreenActivity extends AppCompatActivity {
     ImageView back;
     ImageButton send;
     EditText message;
-    String receiver_ID=ADMIN_UID;
-    String name;
-    String ID;
-
+    String ID, userName ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +50,17 @@ public class ChatScreenActivity extends AppCompatActivity {
         send = findViewById(R.id.send);
         message = findViewById(R.id.message);
         ID = Stash.getString("userID");
-        name = Stash.getString("userName");
-        chatName.setText(name);
+        userName = Stash.getString("userName");
+
+        chatName.setText(userName);
+
         list = new ArrayList<>();
-        back.setOnClickListener(v -> {
-            finish();
-        });
 
 
         recyler.setLayoutManager(new LinearLayoutManager(this));
         recyler.setHasFixedSize(false);
 
-//        Constants.databaseReference().child(Constants.USER).child(receiver_ID)
+//        Constants.databaseReference().child(Constants.USER).child(   "admin123")
 //                .get().addOnSuccessListener(dataSnapshot -> {
 //                    if (dataSnapshot.exists()){
 //                        loginUser = dataSnapshot.getValue(UserModel.class);
@@ -75,49 +71,50 @@ public class ChatScreenActivity extends AppCompatActivity {
 
         send.setOnClickListener(v -> {
             if (!message.getText().toString().isEmpty()) {
+                String message_str = message.getText().toString();
+                message.setText("");
                 long date = new Date().getTime();
                 ChatModel conversation = new ChatModel(
-                        message.getText().toString(),
-                        receiver_ID,
+                        message_str,
+                        "admin123",
                         ID,
                         date,
-                        name
+                        userName
                 );
-                Constants.ChatReference.child(receiver_ID)
+                Constants.ChatReference.child("admin123")
                         .child(ID)
                         .push()
                         .setValue(conversation)
                         .addOnSuccessListener(unused -> {
-                            reciver(ID, date);
+                            reciver(ID, date, message_str);
                         }).addOnFailureListener(e -> {
 
                         });
             }
         });
-
+        
     }
 
-    private void reciver(String ID, long date) {
+    private void reciver(String ID, long date, String message_str) {
         ChatModel conversation = new ChatModel(
-                message.getText().toString(),
-                receiver_ID,
+                message_str,
+                "admin123",
                 ID,
                 date,
                 "Admin"
         );
         Constants.ChatReference.child(ID)
-                .child(receiver_ID)
+                .child("admin123")
                 .push()
                 .setValue(conversation)
                 .addOnSuccessListener(unused -> {
                     Map<String, Object> map = new HashMap<>();
-                    map.put("name", "Admin");
-                    map.put("message", message.getText().toString());
+                    map.put("name", userName);
+                    map.put("message", message_str);
                     map.put("timeStamp", date);
-                    message.setText("");
-                    Constants.ChatListReference.child(ID).child(receiver_ID).updateChildren(map)
+                    Constants.ChatListReference.child(ID).child("admin123").updateChildren(map)
                             .addOnSuccessListener(unused1 -> {
-                                Constants.ChatListReference.child(receiver_ID).child(ID).updateChildren(map)
+                                Constants.ChatListReference.child("admin123").child(ID).updateChildren(map)
                                         .addOnSuccessListener(unused4 -> {
 //                                            new FcmNotificationsSender(
 //                                                    "/topics/" + ID, "Fiza",
@@ -131,7 +128,7 @@ public class ChatScreenActivity extends AppCompatActivity {
     }
 
     private void getChat(String id) {
-        Constants.ChatReference.child(receiver_ID)
+        Constants.ChatReference.child("admin123")
                 .child(id)
                 .addChildEventListener(new ChildEventListener() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -141,7 +138,7 @@ public class ChatScreenActivity extends AppCompatActivity {
                             ChatModel conversation = snapshot.getValue(ChatModel.class);
                             list.add(conversation);
                             list.sort(Comparator.comparing(ChatModel::getTimestamps));
-                            ChatAdapter adapter = new ChatAdapter(ChatScreenActivity.this, list);
+                            AdminChatAdapter adapter = new AdminChatAdapter(getApplicationContext(), list);
                             recyler.setAdapter(adapter);
                             recyler.scrollToPosition(list.size() - 1);
                             adapter.notifyItemInserted(list.size() - 1);

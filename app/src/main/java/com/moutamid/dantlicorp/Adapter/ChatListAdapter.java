@@ -1,7 +1,8 @@
-package com.moutamid.dantlicorp.Activities.Adapter;
+package com.moutamid.dantlicorp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
         Glide.with(context).load(model.getImage()).placeholder(R.drawable.profile_icon).into(holder.imageView);
         holder.name.setText(model.getName());
         holder.message.setText(model.getMessage());
-
         String today = Config.getFormatedDate(new Date().getTime());
         String message = Config.getFormatedDate(model.getTimeStamp());
         String time = Config.getFormatedTime(new Date().getTime());
@@ -56,11 +56,13 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
         } else {
             holder.date.setText(Config.getDate(model.getTimeStamp()));
         }
+        Log.d("listSize", "ee : "+model.getID());
+
 
         holder.itemView.setOnClickListener(v -> {
-            Stash.put("userID", model.getID());
-            Stash.put("userName", model.getName());
-            context.startActivity(new Intent(context, ChatScreenActivity.class));
+//            Stash.put("userID", model.getID());
+//            Stash.put("userName", model.getName());
+//            context.startActivity(new Intent(context, ChatScreenActivity.class));
         });
 
     }

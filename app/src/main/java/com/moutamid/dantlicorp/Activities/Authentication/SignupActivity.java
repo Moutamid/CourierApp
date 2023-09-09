@@ -29,6 +29,7 @@ import com.moutamid.dantlicorp.helper.Constants;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 public class SignupActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_GALLERY = 111;
@@ -122,7 +123,7 @@ public class SignupActivity extends AppCompatActivity {
                         userModel.phone_number = phone_number.getText().toString();
                         userModel.cnic = cnic.getText().toString();
                         userModel.image_url = downloadImageUri.toString();
-                        Constants.UserReference.child(Constants.auth().getUid()).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        Constants.UserReference.child(Objects.requireNonNull(Constants.auth().getUid())).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
                                 Stash.put("UserDetails", userModel);

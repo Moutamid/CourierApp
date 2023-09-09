@@ -7,6 +7,11 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Constants {
     public static String db_path = "DantliCorp";
     public static String ADMIN_UID = "admin123";
+    public static String TIME_SHEET = "time_sheet";
+    public static double cur_lat =0.0;
+    public static double cur_lng =0.0;
+    public static boolean is_journey_start =false;
+
     public static String NOTIFICATIONAPIURL = "https://fcm.googleapis.com/fcm/send";
     public static String ServerKey = "AAAAzzvbhX8:APA91bGavDjgYZn9tdcqZCSxPEZtmvOxUSRbNxSrpakLAvMAZ8uZ5pmaqBxo4AVmpued6aKR-Nwkj8pngfV_yhNvdAytaTh_8wuGcZ-ueTYe90LFF_zgwzVXtEyYLQv42JJae9SWdHC9";
 

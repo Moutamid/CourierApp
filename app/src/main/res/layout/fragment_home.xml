@@ -1,9 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.HomeFragment">
+    android:background="#F1F1F1"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@color/app_color"
+        android:fontFamily="@font/poppins_extrabold"
+        android:padding="20dp"
+        android:text="Dashboard"
+        android:textColor="@color/white"
+        android:textSize="35dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/btn_bg"
+        android:backgroundTint="@color/white"
+        android:elevation="5dp"
+        android:orientation="vertical"
+        android:padding="25dp">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_bolditalic"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="Date"
+            android:textColor="@color/black"
+            android:textSize="18dp" />
+
+        <LinearLayout
+            android:id="@+id/start_journey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:backgroundTint="#1BF59FC1"
+
+            >
+
+            <TextView
+                android:id="@+id/journey_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:padding="20dp"
+                android:text="Start Journey"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="12dp"
+                android:rotation="180"
+                android:src="@drawable/ic_back" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/add_check_in_lyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_bg"
+            android:backgroundTint="#1BF59FC1"
+
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:padding="20dp"
+                android:text="Add Check In"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="12dp"
+                android:rotation="180"
+                android:src="@drawable/ic_back" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/add_check_out_lyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_bg"
+            android:backgroundTint="#1BF59FC1"
+
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:padding="20dp"
+                android:text="Add Check Out"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="12dp"
+                android:rotation="180"
+                android:src="@drawable/ic_back" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/add_time_submission_lyt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_bg"
+            android:backgroundTint="#1BF59FC1"
+
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:padding="20dp"
+                android:text="Timesheet Submission"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="12dp"
+                android:rotation="180"
+                android:src="@drawable/ic_back" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_bg"
+            android:backgroundTint="#1BF59FC1"
+
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:padding="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Show Map"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="12dp"
+                android:rotation="180"
+                android:src="@drawable/ic_back" />
+
+
+        </LinearLayout>
+    </LinearLayout>
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -12,4 +202,5 @@
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+
+</RelativeLayout>

@@ -23,7 +23,7 @@ import com.fxn.stash.Stash;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.moutamid.dantlicorp.Activities.Adapter.ChatAdapter;
+import com.moutamid.dantlicorp.Adapter.ChatAdapter;
 import com.moutamid.dantlicorp.Model.ChatModel;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
@@ -54,7 +54,7 @@ UserModel userModel;
         back = view.findViewById(R.id.back);
         send = view.findViewById(R.id.send);
         message = view.findViewById(R.id.message);
-        String name = "Admin";
+        String name = "Chat with Admin";
         chatName.setText(name);
         userModel= (UserModel) Stash.getObject("UserDetails", UserModel.class);
 
@@ -75,20 +75,22 @@ UserModel userModel;
 
         send.setOnClickListener(v -> {
             if (!message.getText().toString().isEmpty()) {
+                String message_str = message.getText().toString();
+                message.setText("");
                 long date = new Date().getTime();
                 ChatModel conversation = new ChatModel(
-                        message.getText().toString(),
+                        message_str,
                         Constants.auth().getUid(),
                         ID,
                         date,
                         userModel.name
                 );
-                Constants.ChatReference.child(   Constants.auth().getUid())
+                Constants.ChatReference.child(Constants.auth().getUid())
                         .child(ID)
                         .push()
                         .setValue(conversation)
                         .addOnSuccessListener(unused -> {
-                            reciver(ID, date);
+                            reciver(ID, date, message_str);
                         }).addOnFailureListener(e -> {
 
                         });
@@ -97,9 +99,9 @@ UserModel userModel;
         return view;
     }
 
-    private void reciver(String ID, long date) {
+    private void reciver(String ID, long date, String message_str) {
         ChatModel conversation = new ChatModel(
-                message.getText().toString(),
+                message_str,
                    Constants.auth().getUid(),
                 ID,
                 date,
@@ -112,9 +114,8 @@ UserModel userModel;
                 .addOnSuccessListener(unused -> {
                     Map<String, Object> map = new HashMap<>();
                     map.put("name", userModel.name);
-                    map.put("message", message.getText().toString());
+                    map.put("message", message_str);
                     map.put("timeStamp", date);
-                    message.setText("");
                     Constants.ChatListReference.child(ID).child(   Constants.auth().getUid()).updateChildren(map)
                             .addOnSuccessListener(unused1 -> {
                                 Constants.ChatListReference.child(   Constants.auth().getUid()).child(ID).updateChildren(map)

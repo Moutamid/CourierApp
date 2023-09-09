@@ -6,13 +6,17 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.moutamid.dantlicorp.Admin.AdminPanel;
+import com.moutamid.dantlicorp.MainActivity;
 import com.moutamid.dantlicorp.R;
+import com.moutamid.dantlicorp.helper.Config;
+import com.moutamid.dantlicorp.helper.Constants;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -71,7 +75,18 @@ public class LoginActivity extends AppCompatActivity {
 
                 startActivity(new Intent(this, AdminPanel.class));
             } else {
-                startActivity(new Intent(this, GetSocialLinksActivity.class));
+                Config.showProgressDialog(LoginActivity.this);
+                Constants.auth().signInWithEmailAndPassword(
+                        email.getText().toString(),
+                        password.getText().toString()
+                ).addOnSuccessListener(authResult -> {
+                    Config.dismissProgressDialog();
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
+                }).addOnFailureListener(e -> {
+                    Config.dismissProgressDialog();
+                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
             }
 
 

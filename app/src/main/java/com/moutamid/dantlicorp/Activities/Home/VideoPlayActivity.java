@@ -30,8 +30,8 @@ public class VideoPlayActivity extends AppCompatActivity {
         getLifecycle().addObserver(youTubePlayerView);
 //        youTubePlayerView.getPlayerUiController();
         youTubePlayerView.enterFullScreen();
-//        youTubePlayerView.toggleFullScreen();
-//        youTubePlayerView.getPlayerUiController();
+        youTubePlayerView.toggleFullScreen();
+        youTubePlayerView.getPlayerUiController();
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
