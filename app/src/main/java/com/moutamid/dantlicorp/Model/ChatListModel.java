@@ -1,7 +1,7 @@
 package com.moutamid.dantlicorp.Model;
 
 public class ChatListModel {
-    String ID, image, name, message;
+    String ID, image, name, message, chat_id;
     long timeStamp;
 
     public ChatListModel() {
@@ -53,5 +53,13 @@ public class ChatListModel {
 
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public String getChat_id() {
+        return chat_id;
+    }
+
+    public void setChat_id(String chat_id) {
+        this.chat_id = chat_id;
     }
 }

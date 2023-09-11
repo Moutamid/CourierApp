@@ -3,7 +3,7 @@ package com.moutamid.dantlicorp.Model;
 import android.net.Uri;
 
 public class UserModel {
-   public String name, dob, email, phone_number, cnic;
+   public String name, dob, email, phone_number, cnic, id;
    public String image_url;
 
     public UserModel() {
@@ -49,5 +49,21 @@ public class UserModel {
 
     public void setCnic(String cnic) {
         this.cnic = cnic;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 }

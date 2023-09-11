@@ -60,9 +60,9 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
 
 
         holder.itemView.setOnClickListener(v -> {
-//            Stash.put("userID", model.getID());
-//            Stash.put("userName", model.getName());
-//            context.startActivity(new Intent(context, ChatScreenActivity.class));
+            Stash.put("userID", model.getChat_id());
+            Stash.put("userName", model.getName());
+            context.startActivity(new Intent(context, ChatScreenActivity.class));
         });
 
     }

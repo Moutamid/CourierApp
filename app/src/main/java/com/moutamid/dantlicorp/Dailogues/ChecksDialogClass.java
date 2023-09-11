@@ -19,6 +19,10 @@ import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class ChecksDialogClass extends Dialog {
 
     public Activity c;
@@ -57,12 +61,19 @@ public class ChecksDialogClass extends Dialog {
                     Toast.makeText(c, "Please enter details.", Toast.LENGTH_SHORT).show();
                 } else {
                     Config.showProgressDialog(c);
+                    String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+
                     ChecksModel checksModel = new ChecksModel();
                     checksModel.name = name_str;
                     checksModel.box = box_str;
-                     checksModel.lat = Constants.cur_lat ;
-                     checksModel.lng = (Constants.cur_lng);
-
+                    checksModel.lat = Constants.cur_lat;
+                    checksModel.lng = (Constants.cur_lng);
+                    checksModel.date = date;
+                    if (type.equals("Check In")) {
+                        type = "check_in";
+                    } else {
+                        type = "check_out";
+                    }
                     Constants.UserReference.child(Constants.auth().getUid()).child(type).child(Constants.UserReference.push().getKey()).setValue(checksModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

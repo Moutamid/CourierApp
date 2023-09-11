@@ -60,6 +60,9 @@
             android:background="@drawable/edit_bg"
             android:fontFamily="@font/poppins_medium"
             android:hint="Your Message..."
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+
             android:inputType="textMultiLine"
             android:maxHeight="100sp"
             android:padding="12sp" />

@@ -49,11 +49,13 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="20dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+
                 android:background="@drawable/stroke_bg"
                 android:fontFamily="@font/poppins_medium"
                 android:hint="Name"
                 android:padding="10dp"
-                android:textColorHint="#C3BDBD"
 
                 />
 
@@ -81,10 +83,12 @@
                 android:background="@drawable/stroke_bg"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="top"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+
                 android:hint="Number of Box you deliver"
                 android:inputType="number"
-                android:padding="8dp"
-                android:textColorHint="#C3BDBD" />
+                android:padding="8dp" />
 
             <TextView
                 android:id="@+id/buttonSubmit"

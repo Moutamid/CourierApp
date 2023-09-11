@@ -6,6 +6,7 @@ public class ChecksModel {
     public double lng;
     public String name;
     public String box;
+    public String date;
 
     public ChecksModel() {
     }

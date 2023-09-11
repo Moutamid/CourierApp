@@ -52,7 +52,8 @@
                 android:fontFamily="@font/poppins_medium"
                 android:hint="Date"
                 android:padding="10dp"
-                android:textColorHint="#C3BDBD"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"
 
                 />
 
@@ -82,8 +83,9 @@
                 android:gravity="top"
                 android:hint="No# of hours you work"
                 android:inputType="number"
-                android:padding="8dp"
-                android:textColorHint="#C3BDBD" />
+                android:padding="8dp"  android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+ />
 
             <TextView
 
@@ -111,8 +113,9 @@
                 android:gravity="top"
                 android:hint="No# of days you work"
                 android:inputType="number"
-                android:padding="8dp"
-                android:textColorHint="#C3BDBD" />
+                android:padding="8dp"  android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+ />
 
             <TextView
 
@@ -140,8 +143,9 @@
                 android:gravity="top"
                 android:hint="Total Pay for work"
                 android:inputType="number"
-                android:padding="8dp"
-                android:textColorHint="#C3BDBD" />
+                android:padding="8dp"  android:textColor="@color/black"
+                android:textColorHint="@color/grey"
+ />
 
             <TextView
                 android:id="@+id/buttonSubmit"

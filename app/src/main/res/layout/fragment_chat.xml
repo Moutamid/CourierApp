@@ -58,6 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/edit_bg"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
             android:fontFamily="@font/poppins_medium"
             android:hint="Your Message..."
             android:inputType="textMultiLine"

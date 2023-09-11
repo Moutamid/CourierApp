@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="12sp"
     android:layout_marginEnd="35sp"
-    android:gravity="center_vertical"
-    android:background="@color/white">
+    android:gravity="center_vertical">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile"
@@ -29,6 +28,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             android:textSize="14sp"
+
             android:textColor="@color/black"
             android:text="@string/message" />
 

@@ -114,6 +114,7 @@ UserModel userModel;
                 .addOnSuccessListener(unused -> {
                     Map<String, Object> map = new HashMap<>();
                     map.put("name", userModel.name);
+                    map.put("chat_id", userModel.id);
                     map.put("message", message_str);
                     map.put("timeStamp", date);
                     Constants.ChatListReference.child(ID).child(   Constants.auth().getUid()).updateChildren(map)

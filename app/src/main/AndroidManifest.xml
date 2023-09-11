@@ -27,7 +27,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CourierApp"
         tools:targetApi="31">
-
+        <activity
+            android:name=".Admin.Activities.UserDetailsActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

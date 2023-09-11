@@ -123,6 +123,7 @@ public class SignupActivity extends AppCompatActivity {
                         userModel.phone_number = phone_number.getText().toString();
                         userModel.cnic = cnic.getText().toString();
                         userModel.image_url = downloadImageUri.toString();
+                        userModel.id = Constants.auth().getUid();
                         Constants.UserReference.child(Objects.requireNonNull(Constants.auth().getUid())).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
