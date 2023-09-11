@@ -31,6 +31,7 @@ import com.moutamid.dantlicorp.Fragments.ChatFragment;
 import com.moutamid.dantlicorp.Fragments.HomeFragment;
 import com.moutamid.dantlicorp.Fragments.ProfileFragment;
 import com.moutamid.dantlicorp.Fragments.VideosFragment;
+import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import me.ibrahimsn.lib.OnItemSelectedListener;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new HomeFragment());
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
-
+        Config.checkApp(MainActivity.this);
         bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public boolean onItemSelect(int i) {
