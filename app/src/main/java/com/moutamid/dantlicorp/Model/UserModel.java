@@ -1,14 +1,19 @@
 package com.moutamid.dantlicorp.Model;
 
-import android.net.Uri;
-
 public class UserModel {
-   public String name, dob, email, phone_number, cnic, id;
-   public String image_url;
+    public String name, dob, email, phone_number, cnic, id;
+    public String image_url;
+    public double lat, lng;
 
     public UserModel() {
     }
 
+    public UserModel(double lat, double lng, String image_url, String name) {
+        this.name = name;
+        this.image_url = image_url;
+        this.lat = lat;
+        this.lng = lng;
+    }
 
     public String getName() {
         return name;

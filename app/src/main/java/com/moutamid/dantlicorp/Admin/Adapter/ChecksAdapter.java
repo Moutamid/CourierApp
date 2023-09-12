@@ -45,16 +45,17 @@ public class ChecksAdapter extends RecyclerView.Adapter<ChecksAdapter.ChatVH> {
         holder.map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (model.lat > -90 && model.lat < 90 && model.lng > -180 && model.lng < 180) {
-//                    Intent intent = new Intent(context, MapsActivity.class);
-//                    intent.putExtra("lat", current_resturantModel.getLat());
-//                    intent.putExtra("lng", current_resturantModel.getLng());
-//                    intent.putExtra("name", current_resturantModel.getName());
-//                    context.startActivity(intent);
-//
-//                } else {
-//                    Toast.makeText(context, "Invalid Coordinates to show marker", Toast.LENGTH_SHORT).show();
-//                }
+                if (model.lat > -90 && model.lat < 90 && model.lng > -180 && model.lng < 180) {
+                    Intent intent = new Intent(context, MapsActivity.class);
+                    intent.putExtra("lat", model.lat);
+                    intent.putExtra("lng", model.lng);
+                    intent.putExtra("name", model.name);
+                    intent.putExtra("box", model.box);
+                    context.startActivity(intent);
+
+                } else {
+                    Toast.makeText(context, "Invalid Coordinates to show marker", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

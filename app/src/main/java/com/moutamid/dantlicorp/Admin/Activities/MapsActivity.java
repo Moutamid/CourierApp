@@ -1,7 +1,6 @@
-package com.moutamid.dantlicorp.Activities.Home;
+package com.moutamid.dantlicorp.Admin.Activities;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
@@ -40,7 +39,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        locationModels = Stash.getArrayList("CheckIn", ChecksModel.class);
+        locationModels = Stash.getArrayList("CheckOut", ChecksModel.class);
 
         // in below line we are initializing our array list.
         locationArrayList = new ArrayList<>();

@@ -23,7 +23,6 @@ public class VideoPlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video_play);
         video_id = getIntent().getStringExtra("url");
         Log.d("data", video_id+"");
-
          video_id = video_id.substring(32, 43);
          Log.d("data", video_id+"");
         final YouTubePlayerView youTubePlayerView = findViewById(R.id.videoPlayer);

@@ -1,10 +1,12 @@
 package com.moutamid.dantlicorp.Admin.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import com.fxn.stash.Stash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.moutamid.dantlicorp.Activities.Home.MapsActivity;
 import com.moutamid.dantlicorp.Admin.Adapter.ChecksAdapter;
 import com.moutamid.dantlicorp.Model.ChecksModel;
 import com.moutamid.dantlicorp.R;
@@ -31,7 +34,7 @@ public class CheckinFragment extends Fragment {
     RecyclerView recyclerView;
     String userID;
     ChecksAdapter adapter;
-
+    Button all_check_in;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,10 +42,22 @@ public class CheckinFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_check_in, container, false);
         userID = Stash.getString("userID");
         recyclerView = view.findViewById(R.id.recycler);
+        all_check_in = view.findViewById(R.id.all_check_in);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(false);
         list = new ArrayList<>();
+        list.clear();
+        Stash.put("CheckIn", list);
+
         getData();
+
+        all_check_in.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), MapsActivity.class));
+
+            }
+        });
         return view;
 
 
@@ -62,6 +77,9 @@ public class CheckinFragment extends Fragment {
                         }
                     }
 
+
+                    Stash.put("CheckIn", list);
+
                     Log.d("listSize", "ee : " + list.get(0).name);
 
                 }
@@ -79,6 +97,7 @@ public class CheckinFragment extends Fragment {
                 Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 }

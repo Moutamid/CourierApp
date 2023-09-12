@@ -64,11 +64,10 @@ public class UserDetailsDialogClass extends Dialog {
                     timeSheetModel.days = days_str;
                     timeSheetModel.hours = hours_str;
                     timeSheetModel.pay = pay_str;
-                    Constants.UserReference.child(Constants.auth().getUid()).child(Constants.TIME_SHEET).setValue(timeSheetModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    Constants.UserReference.child(Constants.auth().getUid()).child(Constants.TIME_SHEET).push().setValue(timeSheetModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isComplete()) {
-
                                 dismiss();
                                 Toast.makeText(c, "Successfully Submitted", Toast.LENGTH_SHORT).show();
                                 Config.dismissProgressDialog();
@@ -76,7 +75,6 @@ public class UserDetailsDialogClass extends Dialog {
                                 dismiss();
                                 Toast.makeText(c, "Something went wrong", Toast.LENGTH_SHORT).show();
                                 Config.dismissProgressDialog();
-
                             }
                         }
                     });

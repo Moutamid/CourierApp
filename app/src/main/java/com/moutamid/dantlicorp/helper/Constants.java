@@ -30,4 +30,5 @@ public class Constants {
     public static DatabaseReference VideosReference = FirebaseDatabase.getInstance().getReference(db_path).child("videos");
     public static DatabaseReference ChatReference = FirebaseDatabase.getInstance().getReference(db_path).child("chats");
     public static DatabaseReference ChatListReference = FirebaseDatabase.getInstance().getReference(db_path).child("chats_list");
+    public static DatabaseReference LocationReference = FirebaseDatabase.getInstance().getReference(db_path).child("location");
 }

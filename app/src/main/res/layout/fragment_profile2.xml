@@ -277,55 +277,11 @@
 
                         android:textSize="18dp" />
                 </LinearLayout>
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/content_rcv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp">
-
-                    <TextView
-                        android:id="@+id/date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins_medium"
-                        android:gravity="center"
-                        android:text="----"
-                        android:textSize="13dp" />
-
-                    <TextView
-                        android:id="@+id/days"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins_medium"
-                        android:gravity="center"
-                        android:text="----"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:id="@+id/hours"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins_medium"
-                        android:gravity="center"
-                        android:text="----"
-                        android:textSize="15dp" />
-
-                    <TextView
-                        android:id="@+id/pay"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/poppins_medium"
-                        android:gravity="center"
-                        android:text="----"
-                        android:textSize="15dp" />
-                </LinearLayout>
+                android:layout_margin="20dp" />
 
             </LinearLayout>
 

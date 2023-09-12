@@ -29,13 +29,20 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.moutamid.dantlicorp.Activities.Home.AllUserLocationActivity;
 import com.moutamid.dantlicorp.Admin.AdminPanel;
 import com.moutamid.dantlicorp.Dailogues.ChecksDialogClass;
 import com.moutamid.dantlicorp.Dailogues.UserDetailsDialogClass;
+import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
+import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -44,11 +51,13 @@ import java.util.Locale;
 public class HomeFragment extends Fragment {
     TextView admin;
     TextView date_txt;
-    LinearLayout add_check_in_lyt, add_check_out_lyt, add_time_submission_lyt, start_journey_lyt;
+    LinearLayout add_check_in_lyt, add_check_out_lyt, add_time_submission_lyt, start_journey_lyt, show_map_lyt;
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
 
     TextView journey_txt;
+    ArrayList<UserModel> userArrayList = new ArrayList<>();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,9 +70,9 @@ public class HomeFragment extends Fragment {
         add_time_submission_lyt = view.findViewById(R.id.add_time_submission_lyt);
         start_journey_lyt = view.findViewById(R.id.start_journey);
         journey_txt = view.findViewById(R.id.journey_txt);
+        show_map_lyt = view.findViewById(R.id.show_map_lyt);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
         getLastLocation();
-
         getDate();
         start_journey_lyt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +115,33 @@ public class HomeFragment extends Fragment {
                 cdd.show();
             }
         });
+        show_map_lyt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Config.showProgressDialog(getContext());
+                Constants.LocationReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            UserModel userModel = ds.getValue(UserModel.class);
+                            userArrayList.add(new UserModel(userModel.lat, userModel.lng, userModel.image_url, userModel.name));
+                        }
+                        Stash.put("AllUserLocation", userArrayList);
+                        startActivity(new Intent(getContext(), AllUserLocationActivity.class));
+                        Config.dismissProgressDialog();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Config.dismissProgressDialog();
+
+                    }
+                });
+            }
+        });
+
+
         return view;
     }
 
@@ -172,10 +208,16 @@ public class HomeFragment extends Fragment {
                         if (location == null) {
                             requestNewLocationData();
                         } else {
+                            UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
 
                             Constants.cur_lat = location.getLatitude();
                             Constants.cur_lng = location.getLongitude();
-
+                            UserModel userModel = new UserModel();
+                            userModel.lat = Constants.cur_lat;
+                            userModel.lng = Constants.cur_lng;
+                            userModel.name = userNew.name;
+                            userModel.image_url = userNew.image_url;
+                            Constants.LocationReference.child(Constants.auth().getUid()).setValue(userModel);
                         }
                     }
                 });

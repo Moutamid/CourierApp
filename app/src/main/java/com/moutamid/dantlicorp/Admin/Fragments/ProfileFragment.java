@@ -7,24 +7,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.fxn.stash.Stash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.moutamid.dantlicorp.Admin.Adapter.TimesheetAdapter;
 import com.moutamid.dantlicorp.Model.TimeSheetModel;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
+import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileFragment extends Fragment {
     ImageView profile_img;
     TextView name, dob, email, phone_number, cnic_number;
-    TextView date, days, hours, pay;
+    RecyclerView content_rcv;
+    public List<TimeSheetModel> productModelList = new ArrayList<>();
+    TimesheetAdapter timesheetAdapter;
+    String userID;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,11 +48,7 @@ public class ProfileFragment extends Fragment {
         email = view.findViewById(R.id.email);
         phone_number = view.findViewById(R.id.phone_number);
         cnic_number = view.findViewById(R.id.cnic_number);
-        date = view.findViewById(R.id.date);
-        days = view.findViewById(R.id.days);
-        hours = view.findViewById(R.id.hours);
-        pay = view.findViewById(R.id.pay);
-        String userID = Stash.getString("userID");
+         userID = Stash.getString("userID");
         Log.d("user", "dtaa" + userID);
 
         Constants.UserReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -62,24 +69,45 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-        Constants.UserReference.child(userID).child(Constants.TIME_SHEET).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    TimeSheetModel timeSheetModel = snapshot.getValue(TimeSheetModel.class);
 
-                    date.setText(timeSheetModel.date);
-                    days.setText(timeSheetModel.days);
-                    hours.setText(timeSheetModel.hours);
-                    pay.setText(timeSheetModel.pay);
+        content_rcv = view.findViewById(R.id.content_rcv);
+        content_rcv.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        timesheetAdapter = new TimesheetAdapter(getContext(), productModelList);
+        content_rcv.setAdapter(timesheetAdapter);
+
+        if (Config.isNetworkAvailable(getContext())) {
+            getProducts();
+        } else {
+            Toast.makeText(getContext(), "No network connection available.", Toast.LENGTH_SHORT).show();
+        }
+
+
+        return view;
+    }
+
+    private void getProducts() {
+//        Config.showProgressDialog(getContext());
+        Constants.UserReference.child(userID).child(Constants.TIME_SHEET).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                productModelList.clear();
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    TimeSheetModel herbsModel = ds.getValue(TimeSheetModel.class);
+                    productModelList.add(herbsModel);
                 }
+                timesheetAdapter.notifyDataSetChanged();
+//                Config.dismissProgressDialog();
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Config.dismissProgressDialog();
 
             }
+
+
         });
-        return view;
     }
+
 }
