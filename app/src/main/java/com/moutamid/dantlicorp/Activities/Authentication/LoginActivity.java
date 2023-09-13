@@ -8,12 +8,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fxn.stash.Stash;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.moutamid.dantlicorp.Admin.AdminPanel;
 import com.moutamid.dantlicorp.MainActivity;
+import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
@@ -80,9 +86,26 @@ public class LoginActivity extends AppCompatActivity {
                         email.getText().toString(),
                         password.getText().toString()
                 ).addOnSuccessListener(authResult -> {
-                    Config.dismissProgressDialog();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish();
+
+                    Constants.UserReference.child(authResult.getUser().getUid()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists())
+                            {
+                                UserModel userModel= snapshot.getValue(UserModel.class);
+                                Stash.put("UserDetails", userModel);
+                                Config.dismissProgressDialog();
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                 }).addOnFailureListener(e -> {
                     Config.dismissProgressDialog();
                     Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();

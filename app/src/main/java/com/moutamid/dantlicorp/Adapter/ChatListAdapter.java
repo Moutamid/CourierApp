@@ -41,7 +41,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
     @Override
     public void onBindViewHolder(@NonNull ChatListVH holder, int position) {
         ChatListModel model = list.get(holder.getAdapterPosition());
-        Glide.with(context).load(model.getImage()).placeholder(R.drawable.profile_icon).into(holder.imageView);
+        Glide.with(context).load(model.getImage_url()).placeholder(R.drawable.profile_icon).into(holder.imageView);
         holder.name.setText(model.getName());
         holder.message.setText(model.getMessage());
         String today = Config.getFormatedDate(new Date().getTime());
@@ -56,12 +56,13 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
         } else {
             holder.date.setText(Config.getDate(model.getTimeStamp()));
         }
-        Log.d("listSize", "ee : "+model.getID());
+        Log.d("listSize", "ee : "+model.getToken());
 
 
         holder.itemView.setOnClickListener(v -> {
             Stash.put("userID", model.getChat_id());
             Stash.put("userName", model.getName());
+            Stash.put("usertoken", model.getToken());
             context.startActivity(new Intent(context, ChatScreenActivity.class));
         });
 

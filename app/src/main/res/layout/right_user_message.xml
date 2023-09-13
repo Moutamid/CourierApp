@@ -44,14 +44,6 @@
         android:layout_width="26sp"
         android:layout_height="26sp"
         android:src="@drawable/profile_icon"
-        android:layout_gravity="bottom"
-        android:visibility="gone" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_img"
-        android:layout_width="26sp"
-        android:layout_height="26sp"
-        android:layout_gravity="bottom"
-        android:src="@drawable/profile_icon" />
+        android:layout_gravity="bottom" />
 
 </LinearLayout>

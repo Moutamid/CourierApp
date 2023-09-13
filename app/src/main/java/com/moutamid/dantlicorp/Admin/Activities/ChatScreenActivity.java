@@ -1,13 +1,13 @@
 package com.moutamid.dantlicorp.Admin.Activities;
 
-import static com.moutamid.dantlicorp.helper.Constants.ADMIN_UID;
-
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,21 +15,32 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.RetryPolicy;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.fxn.stash.Stash;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.moutamid.dantlicorp.Admin.Adapter.AdminChatAdapter;
 import com.moutamid.dantlicorp.Model.ChatModel;
-import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Constants;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class ChatScreenActivity extends AppCompatActivity {
     ArrayList<ChatModel> list;
@@ -38,7 +49,7 @@ public class ChatScreenActivity extends AppCompatActivity {
     ImageView back;
     ImageButton send;
     EditText message;
-    String ID, userName ;
+    String ID, userName, usertoken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +62,7 @@ public class ChatScreenActivity extends AppCompatActivity {
         message = findViewById(R.id.message);
         ID = Stash.getString("userID");
         userName = Stash.getString("userName");
+        usertoken = Stash.getString("usertoken");
 
         chatName.setText(userName);
 
@@ -116,10 +128,7 @@ public class ChatScreenActivity extends AppCompatActivity {
                             .addOnSuccessListener(unused1 -> {
                                 Constants.ChatListReference.child("admin123").child(ID).updateChildren(map)
                                         .addOnSuccessListener(unused4 -> {
-//                                            new FcmNotificationsSender(
-//                                                    "/topics/" + ID, "Fiza",
-//                                                    map.get("message").toString(), getApplicationContext(),
-//                                                    ChatScreenActivity.this).SendNotifications();
+                                            sendFCMPush(usertoken);
                                         });
                             });
                 }).addOnFailureListener(e -> {
@@ -172,4 +181,44 @@ public class ChatScreenActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void sendFCMPush(String token) {
+        JSONObject notification = new JSONObject();
+        JSONObject notifcationBody = new JSONObject();
+        try {
+            notifcationBody.put("title", "Admin");
+            notifcationBody.put("message", "Send a new message");
+            notification.put("to", token);
+            notification.put("data", notifcationBody);
+            Log.e("DATAAAAAA", notification.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, Constants.NOTIFICATIONAPIURL, notification,
+                response -> {
+                    Log.e("True", response + "");
+//                    Toast.makeText(BookingActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                    Log.d("Responce", response.toString());
+                },
+                error -> {
+                    Log.e("False", error + "");
+                    Toast.makeText(ChatScreenActivity.this, "error", Toast.LENGTH_SHORT).show();
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", "key=" + Constants.ServerKey);
+                params.put("Content-Type", "application/json");
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        int socketTimeout = 1000 * 60;// 60 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsObjRequest.setRetryPolicy(policy);
+        requestQueue.add(jsObjRequest);
+    }
+
 }

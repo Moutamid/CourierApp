@@ -33,25 +33,44 @@ public class GetSocialLinksActivity extends AppCompatActivity {
         reddit_url_edt = findViewById(R.id.reddit);
         pinterest_url_edt = findViewById(R.id.pinterest);
         linkedIn_url_edt = findViewById(R.id.linked_in);
-
+        SocialModel socialModel = (SocialModel) Stash.getObject("UserLinks", SocialModel.class);
+        if (socialModel != null) {
+            facebook_url_edt.setText(socialModel.facebook_url);
+            twitter_url_edt.setText(socialModel.twitter_url);
+            instagram_url_edt.setText(socialModel.instagram_url);
+            reddit_url_edt.setText(socialModel.reddit_url);
+            pinterest_url_edt.setText(socialModel.pinterest_url);
+            linkedIn_url_edt.setText(socialModel.linkedIn_url);
+        }
         continue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (facebook_url_edt.getText().toString().isEmpty()) {
-                    facebook_url_str = "no added yet";
-                } else if (twitter_url_edt.getText().toString().isEmpty()) {
-                    twitter_url_str = "no added yet";
-                } else if (instagram_url_edt.getText().toString().isEmpty()) {
-                    instagram_url_str = "no added yet";
-                } else if (reddit_url_edt.getText().toString().isEmpty()) {
-                    reddit_url_str = "no added yet";
-                } else if (pinterest_url_edt.getText().toString().isEmpty()) {
-                    pinterest_url_str = "no added yet";
-                } else if (linkedIn_url_edt.getText().toString().isEmpty()) {
-                    linkedIn_url_str = "no added yet";
+                Config.showProgressDialog(GetSocialLinksActivity.this);
+                if (!facebook_url_edt.getText().toString().isEmpty()) {
+                    facebook_url_str = facebook_url_edt.getText().toString();
+
+                }
+                if (!twitter_url_edt.getText().toString().isEmpty()) {
+                    twitter_url_str = twitter_url_edt.getText().toString();
+
+                }
+                if (!instagram_url_edt.getText().toString().isEmpty()) {
+
+                    instagram_url_str = instagram_url_edt.getText().toString();
+
+                }
+                if (!reddit_url_edt.getText().toString().isEmpty()) {
+                    reddit_url_str = reddit_url_edt.getText().toString();
+
+                }
+                if (!pinterest_url_edt.getText().toString().isEmpty()) {
+                    pinterest_url_str = pinterest_url_edt.getText().toString();
+
+                }
+                if (!linkedIn_url_edt.getText().toString().isEmpty()) {
+                    linkedIn_url_str = linkedIn_url_edt.getText().toString();
                 }
 
-                Config.sendFCMPush(GetSocialLinksActivity.this);
                 SocialModel socialModel = new SocialModel();
                 socialModel.facebook_url = facebook_url_str;
                 socialModel.twitter_url = twitter_url_str;

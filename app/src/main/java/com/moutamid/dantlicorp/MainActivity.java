@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.fxn.stash.Stash;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     String type, data;
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new HomeFragment());
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
-        Config.checkApp(MainActivity.this);
         bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public boolean onItemSelect(int i) {
@@ -82,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         }
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                String result = task.getResult();
+                Stash.put("token", result);
+            }
+        });
+
     }
 
 

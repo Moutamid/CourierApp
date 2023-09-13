@@ -36,6 +36,7 @@ import com.moutamid.dantlicorp.Activities.Home.AllUserLocationActivity;
 import com.moutamid.dantlicorp.Admin.AdminPanel;
 import com.moutamid.dantlicorp.Dailogues.ChecksDialogClass;
 import com.moutamid.dantlicorp.Dailogues.UserDetailsDialogClass;
+import com.moutamid.dantlicorp.Model.SocialModel;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
@@ -140,7 +141,21 @@ public class HomeFragment extends Fragment {
                 });
             }
         });
+        Constants.UserReference.child(Constants.auth().getUid()).child("social_links").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists())
+                {
+                    SocialModel socialModel= snapshot.getValue(SocialModel.class);
+                    Stash.put("UserLinks", socialModel);
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         return view;
     }
@@ -149,7 +164,6 @@ public class HomeFragment extends Fragment {
         String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
-
         switch (day) {
             case Calendar.SUNDAY:
                 date_txt.setText("Sunday  " + date);
@@ -159,24 +173,25 @@ public class HomeFragment extends Fragment {
                 break;
             case Calendar.TUESDAY:
                 date_txt.setText("Tuesday  " + date);
+                break;
+
             case Calendar.WEDNESDAY:
                 date_txt.setText("Wednesday  " + date);
+                break;
+
             case Calendar.THURSDAY:
                 date_txt.setText("Thursday  " + date);
+                break;
+
             case Calendar.FRIDAY:
                 date_txt.setText("Friday  " + date);
+                break;
+
             case Calendar.SATURDAY:
                 date_txt.setText("Saturday  " + date);
                 break;
         }
-        if (Stash.getBoolean("journey_start")) {
-             journey_txt.setText("Journey Stop");
-        }
-        else
-        {
-            journey_txt.setText("Journey Start");
 
-        }
     }
 
 

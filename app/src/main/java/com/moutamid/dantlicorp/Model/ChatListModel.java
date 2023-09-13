@@ -1,18 +1,26 @@
 package com.moutamid.dantlicorp.Model;
 
 public class ChatListModel {
-    String ID, image, name, message, chat_id;
+    String ID, image_url, name, message, chat_id, token;
     long timeStamp;
 
     public ChatListModel() {
     }
 
-    public ChatListModel(String ID, String image, String name, String message, long timeStamp) {
-        this.ID = ID;
-        this.image = image;
-        this.name = name;
-        this.message = message;
-        this.timeStamp = timeStamp;
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
     public String getID() {
@@ -23,13 +31,6 @@ public class ChatListModel {
         this.ID = ID;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public String getName() {
         return name;

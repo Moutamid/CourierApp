@@ -73,7 +73,6 @@ public class UserDetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    Toast.makeText(UserDetailsActivity.this, ""+snapshot.child("lat").getValue().toString(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(UserDetailsActivity.this, UserLocationActivity.class);
                     intent.putExtra("lat", snapshot.child("lat").getValue().toString());
                     intent.putExtra("lng", snapshot.child("lng").getValue().toString());

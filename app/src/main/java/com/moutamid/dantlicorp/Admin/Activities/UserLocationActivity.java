@@ -47,7 +47,6 @@ public class UserLocationActivity extends FragmentActivity implements OnMapReady
         lat = Double.parseDouble(getIntent().getStringExtra("lat"));
         lng = Double.parseDouble(getIntent().getStringExtra("lng"));
         name = getIntent().getStringExtra("name");
-        Toast.makeText(this, ""+lat+" "+ lng, Toast.LENGTH_SHORT).show();
 
         if (lat != 0.0) {
             LatLng sydney = new LatLng(lat, lng);

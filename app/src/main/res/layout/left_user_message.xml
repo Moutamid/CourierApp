@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="35sp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12sp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile"
+        android:layout_width="26sp"
+        android:layout_height="26sp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/profile_icon"
+        android:visibility="gone" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_img"
+        android:layout_width="26sp"
+        android:layout_height="26sp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/profile_icon" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8sp"
+        android:background="@drawable/left_message"
+        android:orientation="vertical"
+        android:padding="12sp">
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/message"
+
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="4sp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="12/12/1222"
+            android:textColor="#6E6161"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+</LinearLayout>

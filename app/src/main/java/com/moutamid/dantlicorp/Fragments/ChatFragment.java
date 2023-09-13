@@ -117,14 +117,16 @@ UserModel userModel;
                     map.put("chat_id", userModel.id);
                     map.put("message", message_str);
                     map.put("timeStamp", date);
+                    map.put("image_url", userModel.image_url);
+                    map.put("token", Stash.getString("token"));
                     Constants.ChatListReference.child(ID).child(   Constants.auth().getUid()).updateChildren(map)
                             .addOnSuccessListener(unused1 -> {
                                 Constants.ChatListReference.child(   Constants.auth().getUid()).child(ID).updateChildren(map)
                                         .addOnSuccessListener(unused4 -> {
 //                                            new FcmNotificationsSender(
-//                                                    "/topics/" + ID, "Fiza",
+//                                                    "/topics/" + ID, userModel.name,
 //                                                    map.get("message").toString(), getApplicationContext(),
-//                                                    ChatScreenActivity.this).SendNotifications();
+//                                                    getActivity()).SendNotifications();
                                         });
                             });
                 }).addOnFailureListener(e -> {

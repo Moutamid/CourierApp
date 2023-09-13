@@ -124,12 +124,15 @@ public class SignupActivity extends AppCompatActivity {
                         userModel.cnic = cnic.getText().toString();
                         userModel.image_url = downloadImageUri.toString();
                         userModel.id = Constants.auth().getUid();
+
                         Constants.UserReference.child(Objects.requireNonNull(Constants.auth().getUid())).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
+                                Config.sendFCMPush(SignupActivity.this);
                                 Stash.put("UserDetails", userModel);
+                                Stash.put("is_first", true);
                                 Config.dismissProgressDialog();
-                                startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                startActivity(new Intent(SignupActivity.this, GetSocialLinksActivity.class));
                                 finish();
                             }
                         });
