@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.fxn.stash.Stash;
+import com.google.firebase.auth.FirebaseAuth;
 import com.moutamid.dantlicorp.Activities.Authentication.GetSocialLinksActivity;
+import com.moutamid.dantlicorp.Activities.Authentication.LoginActivity;
 import com.moutamid.dantlicorp.Model.SocialModel;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
@@ -22,7 +24,7 @@ public class ProfileFragment extends Fragment {
     ImageView profile_img;
     TextView name, dob, email, phone_number, cnic_number;
     TextView facebook_url_txt, twitter_url_txt, instagram_url_txt, reddit_url_txt, pinterest_url_txt, linkedIn_url_txt;
-    ImageView edit_lyt;
+    ImageView edit_lyt, logout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +44,7 @@ public class ProfileFragment extends Fragment {
         email = view.findViewById(R.id.email);
         phone_number = view.findViewById(R.id.phone_number);
         cnic_number = view.findViewById(R.id.cnic_number);
+        logout = view.findViewById(R.id.logout);
         UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
         SocialModel socialModel = (SocialModel) Stash.getObject("UserLinks", SocialModel.class);
         name.setText(userNew.name);
@@ -49,7 +52,16 @@ public class ProfileFragment extends Fragment {
         email.setText(userNew.email);
         phone_number.setText(userNew.phone_number);
         cnic_number.setText(userNew.cnic);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                FirebaseAuth.getInstance().signOut();
+                Stash.clear("UserDetails");
+                startActivity(new Intent(getContext(), LoginActivity.class));
+                getActivity().finishAffinity();
+            }
+        });
 
         if (socialModel != null) {
             facebook_url_txt.setText(socialModel.facebook_url);

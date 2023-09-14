@@ -37,13 +37,13 @@ public class SplashActivity extends AppCompatActivity {
             SharedPreferences shared = getSharedPreferences("Record", MODE_PRIVATE);
             String boarding_view = (shared.getString("boarding_view", ""));
             if (!boarding_view.isEmpty()) {
-//                UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
-//                if (Constants.auth().getUid()!= null) {
+                UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+                if (userNew!=null) {
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
-//                } else {
-//                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-//
-//                }
+                } else {
+                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+
+                }
             } else {
                 startActivity(new Intent(SplashActivity.this, OnBoardingActivity.class));
             }
