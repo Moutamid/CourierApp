@@ -10,11 +10,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -31,18 +34,22 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.moutamid.dantlicorp.Fragments.ChatFragment;
 import com.moutamid.dantlicorp.Fragments.HomeFragment;
 import com.moutamid.dantlicorp.Fragments.ProfileFragment;
+import com.moutamid.dantlicorp.Fragments.TimeSheetFragment;
 import com.moutamid.dantlicorp.Fragments.VideosFragment;
-import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import me.ibrahimsn.lib.OnItemSelectedListener;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
 public class MainActivity extends AppCompatActivity {
+
     SmoothBottomBar bottomBar;
     String type, data;
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
+    public DrawerLayout drawerLayout;
+    public ActionBarDrawerToggle actionBarDrawerToggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new HomeFragment());
 
                 } else if (i == 1) {
-                    replaceFragment(new ChatFragment());
+                    replaceFragment(new TimeSheetFragment());
 
                 } else if (i == 2) {
                     replaceFragment(new VideosFragment());
@@ -216,5 +223,14 @@ public class MainActivity extends AppCompatActivity {
         if (checkPermissions()) {
             getLastLocation();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

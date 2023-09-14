@@ -133,7 +133,7 @@ public class SignupActivity extends AppCompatActivity {
                                 Stash.put("is_first", true);
                                 Config.dismissProgressDialog();
                                 startActivity(new Intent(SignupActivity.this, GetSocialLinksActivity.class));
-                                finish();
+                                finishAffinity();
                             }
                         });
                     }).addOnFailureListener(e -> {

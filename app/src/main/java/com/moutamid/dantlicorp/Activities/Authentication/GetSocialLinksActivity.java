@@ -93,4 +93,12 @@ public class GetSocialLinksActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(GetSocialLinksActivity.this, LoginActivity.class));
+
+        finishAffinity();
+    }
 }

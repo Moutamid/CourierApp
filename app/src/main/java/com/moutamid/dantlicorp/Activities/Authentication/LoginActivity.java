@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Stash.put("UserDetails", userModel);
                                 Config.dismissProgressDialog();
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                                finish();
+                                finishAffinity();
                             }
                         }
 

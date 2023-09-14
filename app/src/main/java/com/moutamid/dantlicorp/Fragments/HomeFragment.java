@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -33,71 +35,72 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.moutamid.dantlicorp.Activities.Home.AllUserLocationActivity;
-import com.moutamid.dantlicorp.Admin.AdminPanel;
+import com.moutamid.dantlicorp.Activities.Home.ChatActivity;
 import com.moutamid.dantlicorp.Dailogues.ChecksDialogClass;
-import com.moutamid.dantlicorp.Dailogues.UserDetailsDialogClass;
 import com.moutamid.dantlicorp.Model.SocialModel;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 
 public class HomeFragment extends Fragment {
     TextView admin;
     TextView date_txt;
-    LinearLayout add_check_in_lyt, add_check_out_lyt, add_time_submission_lyt, start_journey_lyt, show_map_lyt;
+    LinearLayout add_check_in_lyt, add_check_out_lyt, chat_Admin, start_journey_lyt;
+    TextView show_map_lyt;
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
 
     TextView journey_txt;
     ArrayList<UserModel> userArrayList = new ArrayList<>();
 
+    TextView location_txt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for   getContext() fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        date_txt = view.findViewById(R.id.date);
+//        date_txt = view.findViewById(R.id.date);
         add_check_in_lyt = view.findViewById(R.id.add_check_in_lyt);
         add_check_out_lyt = view.findViewById(R.id.add_check_out_lyt);
-        add_time_submission_lyt = view.findViewById(R.id.add_time_submission_lyt);
-        start_journey_lyt = view.findViewById(R.id.start_journey);
-        journey_txt = view.findViewById(R.id.journey_txt);
+        location_txt = view.findViewById(R.id.location);
+        location_txt.setSelected(true);
+        chat_Admin = view.findViewById(R.id.chat_Admin);
+//        start_journey_lyt = view.findViewById(R.id.start_journey);
+//        journey_txt = view.findViewById(R.id.journey_txt);
         show_map_lyt = view.findViewById(R.id.show_map_lyt);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
         getLastLocation();
-        getDate();
-        start_journey_lyt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Toast.makeText(getContext(), ""+Stash.getBoolean("journey_start"), Toast.LENGTH_SHORT).show();
-//                if (Stash.getBoolean("journey_start")) {
-//                    Stash.put("journey_start", false);
-//                    journey_txt.setText("Journey Stop");
-//                }
-//                else
-//                {
-//                    Stash.put("journey_start", true);
-//                    journey_txt.setText("Journey Start");
-//
-                startActivity(new Intent(getContext(), AdminPanel.class));
-//                }
-            }
-        });
-        add_time_submission_lyt.setOnClickListener(new View.OnClickListener() {
+//        getDate();
+//        start_journey_lyt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                Toast.makeText(getContext(), ""+Stash.getBoolean("journey_start"), Toast.LENGTH_SHORT).show();
+////                if (Stash.getBoolean("journey_start")) {
+////                    Stash.put("journey_start", false);
+////                    journey_txt.setText("Journey Stop");
+////                }
+////                else
+////                {
+////                    Stash.put("journey_start", true);
+////                    journey_txt.setText("Journey Start");
+////
+//                startActivity(new Intent(getContext(), AdminPanel.class));
+////                }
+//            }
+//        });
+        chat_Admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                UserDetailsDialogClass cdd = new UserDetailsDialogClass(getActivity());
-                cdd.show();
+                startActivity(new Intent(getContext(), ChatActivity.class));
             }
         });
         add_check_out_lyt.setOnClickListener(new View.OnClickListener() {
@@ -160,41 +163,42 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    public void getDate() {
-        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-        Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
-        switch (day) {
-            case Calendar.SUNDAY:
-                date_txt.setText("Sunday  " + date);
-                break;
-            case Calendar.MONDAY:
-                date_txt.setText("Monday  " + date);
-                break;
-            case Calendar.TUESDAY:
-                date_txt.setText("Tuesday  " + date);
-                break;
-
-            case Calendar.WEDNESDAY:
-                date_txt.setText("Wednesday  " + date);
-                break;
-
-            case Calendar.THURSDAY:
-                date_txt.setText("Thursday  " + date);
-                break;
-
-            case Calendar.FRIDAY:
-                date_txt.setText("Friday  " + date);
-                break;
-
-            case Calendar.SATURDAY:
-                date_txt.setText("Saturday  " + date);
-                break;
-        }
-
-    }
-
-
+    //
+//    public void getDate() {
+//        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+//        Calendar calendar = Calendar.getInstance();
+//        int day = calendar.get(Calendar.DAY_OF_WEEK);
+//        switch (day) {
+//            case Calendar.SUNDAY:
+//                date_txt.setText("Sunday  " + date);
+//                break;
+//            case Calendar.MONDAY:
+//                date_txt.setText("Monday  " + date);
+//                break;
+//            case Calendar.TUESDAY:
+//                date_txt.setText("Tuesday  " + date);
+//                break;
+//
+//            case Calendar.WEDNESDAY:
+//                date_txt.setText("Wednesday  " + date);
+//                break;
+//
+//            case Calendar.THURSDAY:
+//                date_txt.setText("Thursday  " + date);
+//                break;
+//
+//            case Calendar.FRIDAY:
+//                date_txt.setText("Friday  " + date);
+//                break;
+//
+//            case Calendar.SATURDAY:
+//                date_txt.setText("Saturday  " + date);
+//                break;
+//        }
+//
+//    }
+//
+//
     private void getLastLocation() {
         // check if permissions are given
         if (checkPermissions()) {
@@ -224,7 +228,19 @@ public class HomeFragment extends Fragment {
                             requestNewLocationData();
                         } else {
                             UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+                            Geocoder geocoder;
+                            List<Address> addresses;
+                            geocoder = new Geocoder(getContext(), Locale.getDefault());
 
+                            try {
+                                addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            String address = addresses.get(0).getAddressLine(0);
+                            location_txt.setText(address);
+//                            Toast.makeText(getContext(), "" + address, Toast.LENGTH_SHORT).show();
                             Constants.cur_lat = location.getLatitude();
                             Constants.cur_lng = location.getLongitude();
                             UserModel userModel = new UserModel();

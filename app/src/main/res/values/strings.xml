@@ -5,5 +5,7 @@
     <string name="messages">Messages</string>
     <string name="message">Hi Jake, how are you? I saw on the app that we have crossed paths several times this week</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close\n</string>
 
 </resources>
