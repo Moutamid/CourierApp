@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.moutamid.dantlicorp.Admin.Fragments.CheckinFragment;
 import com.moutamid.dantlicorp.Admin.Fragments.CheckoutFragment;
 import com.moutamid.dantlicorp.Admin.Fragments.ProfileFragment;
+import com.moutamid.dantlicorp.Admin.Fragments.SocialFragment;
 
 public class MyAdapter extends FragmentPagerAdapter {
 
@@ -30,9 +31,12 @@ public class MyAdapter extends FragmentPagerAdapter {
                 ProfileFragment profileFragment = new ProfileFragment();
                 return profileFragment;
             case 1:
+                SocialFragment socialFragment = new SocialFragment();
+                return socialFragment;
+           case 2:
                 CheckinFragment checkinFragment = new CheckinFragment();
                 return checkinFragment;
-            case 2:
+            case 3:
                 CheckoutFragment checkoutFragment = new CheckoutFragment();
                 return checkoutFragment;
             default:

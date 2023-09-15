@@ -78,8 +78,10 @@ public class LoginActivity extends AppCompatActivity {
         } else {
 
             if (email.getText().toString().equals("admin@gmail.com") && password.getText().toString().equals("admin123")) {
-
+                Stash.put("admin_login", 1);
                 startActivity(new Intent(this, AdminPanel.class));
+                finish();
+
             } else {
                 Config.showProgressDialog(LoginActivity.this);
                 Constants.auth().signInWithEmailAndPassword(

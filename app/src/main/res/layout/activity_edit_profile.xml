@@ -9,398 +9,382 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="match_parent"
-  >
+    android:layout_height="match_parent">
 
   <LinearLayout
+      android:id="@+id/toolbar"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="25dp"
-      android:layout_marginTop="20dp"
-      android:layout_marginRight="25dp"
+      android:layout_height="50dp"
+      android:background="#FBFBFB"
       android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_regular"
-        android:hint="Name"
-        android:padding="12dp"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/textColor"
-        android:textSize="15dp"
-        android:textStyle="bold" />
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="15dp"
+        android:onClick="backPress"
+        android:src="@drawable/ic_back"
+        app:tint="@color/app_color" />
 
     <TextView
-        android:id="@+id/name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:fontFamily="@font/poppins_regular"
-        android:hint="Full Name"
-        android:padding="12dp"
-        android:textColor="#615454"
-
-        android:textSize="15dp" />
-
+        android:layout_height="match_parent"
+        android:fontFamily="@font/poppins_bold"
+        android:gravity="center_vertical"
+        android:text="Edit Profile"
+        android:textSize="20dp" />
 
   </LinearLayout>
 
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginLeft="25dp"
-      android:layout_marginTop="10dp"
-      android:layout_marginRight="25dp"
-      android:orientation="horizontal">
+      android:layout_below="@+id/toolbar"
+      android:orientation="vertical">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="210dp"
+        android:layout_height="210dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardUseCompatPadding="true">
+
+      <ImageView
+          android:id="@+id/profile_pic"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:onClick="profile_image"
+          android:scaleType="centerCrop"
+          android:src="@drawable/defualt_image" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/poppins_regular"
+
+        android:hint="Name"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/textColor"
+        android:padding="12dp"
+
+        android:textColorHint="@color/textColor"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+
+        android:background="@drawable/edit_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Full Name"
+        android:padding="12dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textSize="15dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
         android:hint="DOB "
         android:padding="12dp"
+        android:layout_marginLeft="20dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
         android:textSize="15dp"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
         android:id="@+id/dob"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_bg"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:fontFamily="@font/poppins_regular"
-        android:hint="DOB"
+        android:hint="Date of Birth"
         android:padding="12dp"
-        android:textColor="#6E6B6B"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:textSize="15dp" />
-
-
-  </LinearLayout>
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="25dp"
-      android:layout_marginTop="10dp"
-      android:layout_marginRight="25dp"
-      android:orientation="horizontal">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
         android:hint="Email "
+
         android:padding="12dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
         android:textSize="15dp"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
         android:hint="Email"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+
+        android:inputType="textEmailAddress"
         android:padding="12dp"
-        android:textColor="#6E6B6B"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:textSize="15dp" />
-
-
-  </LinearLayout>
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="25dp"
-      android:layout_marginTop="10dp"
-      android:layout_marginRight="25dp"
-      android:orientation="horizontal">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
         android:hint="Phone Number "
+
         android:padding="12dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
         android:textSize="15dp"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
         android:id="@+id/phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Phone"
+        android:hint="Phone Number"
+        android:inputType="phone"
         android:padding="12dp"
-        android:textColor="#6E6B6B"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:textSize="15dp" />
-
-
-  </LinearLayout>
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="25dp"
-      android:layout_marginTop="10dp"
-      android:layout_marginRight="25dp"
-      android:orientation="horizontal">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
         android:hint="CNIC "
         android:padding="12dp"
+
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
         android:textSize="15dp"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
         android:id="@+id/cnic_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
         android:hint="CNIC"
         android:padding="12dp"
-        android:textColor="#6E6B6B"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:textSize="15dp" />
 
-
-  </LinearLayout>
-
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Social Links"
-        android:textSize="25dp" />
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Facebook "
+        android:padding="12dp"
 
-    <ImageView
-        android:id="@+id/edit_lyt"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        android:src="@drawable/outline_edit_location_alt_24" />
-  </RelativeLayout>
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textSize="15dp"
+        android:textStyle="bold" />
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="25dp"
-      android:layout_marginTop="20dp"
-      android:layout_marginRight="25dp"
-      android:orientation="horizontal">
-
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/facebook"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
         android:hint="Facebook"
         android:padding="12dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
-        android:textSize="15dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/facebook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:fontFamily="@font/poppins_regular"
-        android:hint="not added yet"
-        android:padding="12dp"
-        android:textColor="#615454"
-
         android:textSize="15dp" />
-
-
-  </LinearLayout>
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="25dp"
-      android:layout_marginTop="10dp"
-      android:layout_marginRight="25dp"
-      android:orientation="horizontal">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
         android:hint="Twitter "
         android:padding="12dp"
+
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
         android:textSize="15dp"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
         android:id="@+id/twitter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
-        android:hint="not added yet"
+        android:hint="Twitter"
         android:padding="12dp"
-        android:textColor="#6E6B6B"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:textSize="15dp" />
-
-
-  </LinearLayout>
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="25dp"
-      android:layout_marginTop="10dp"
-      android:layout_marginRight="25dp"
-      android:orientation="horizontal">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Instagram "
+        android:hint="Reddit"
         android:padding="12dp"
+
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
         android:textSize="15dp"
         android:textStyle="bold" />
 
+    <EditText
+        android:id="@+id/raddit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Reddit"
+        android:padding="12dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textSize="15dp" />
+
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="Instagram"
+        android:padding="12dp"
+
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <EditText
         android:id="@+id/instagram"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
-        android:hint="not added yet"
+        android:hint="Instagram"
         android:padding="12dp"
-        android:textColor="#6E6B6B"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:textSize="15dp" />
-
-
-  </LinearLayout>
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="25dp"
-      android:layout_marginTop="10dp"
-      android:layout_marginRight="25dp"
-      android:orientation="horizontal">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Reddit "
+        android:hint="Pinterest"
         android:padding="12dp"
+
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
         android:textSize="15dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/reddit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:fontFamily="@font/poppins_regular"
-        android:hint="not added yet"
-        android:padding="12dp"
-        android:textColor="#6E6B6B"
-        android:textSize="15dp" />
-
-
-  </LinearLayout>
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="25dp"
-      android:layout_marginTop="10dp"
-      android:layout_marginRight="25dp"
-      android:orientation="horizontal">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_regular"
-        android:hint="Pinterest "
-        android:padding="12dp"
-        android:textColor="@color/textColor"
-        android:textColorHint="@color/textColor"
-        android:textSize="15dp"
-        android:textStyle="bold" />
-
-    <TextView
+    <EditText
         android:id="@+id/pinterest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
-        android:hint="not added yet"
+        android:hint="Pinterest"
         android:padding="12dp"
-        android:textColor="#6E6B6B"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:textSize="15dp" />
-
-
-  </LinearLayout>
-
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="25dp"
-      android:layout_marginTop="10dp"
-      android:layout_marginRight="25dp"
-      android:orientation="horizontal">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Linked in "
+        android:hint="Linked In"
         android:padding="12dp"
+
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
         android:textSize="15dp"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
         android:id="@+id/linked_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
-        android:hint="not added yet"
+        android:hint="Linked In"
         android:padding="12dp"
-        android:textColor="#6E6B6B"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
         android:textSize="15dp" />
 
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/btn_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:onClick="sign_up"
+        android:text="Update Profile"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white" />
 
   </LinearLayout>
 

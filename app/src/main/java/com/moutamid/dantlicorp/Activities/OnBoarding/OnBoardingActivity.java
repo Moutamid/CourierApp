@@ -47,7 +47,7 @@ public class OnBoardingActivity extends AppCompatActivity {
         viewPager.setAdapter(new PagerAdapter() {
             @Override
             public int getCount() {
-                return 3;
+                return 2;
             }
 
             @Override
@@ -99,7 +99,7 @@ public class OnBoardingActivity extends AppCompatActivity {
                     }
                 });
 
-                if (position == 2) {
+                if (position == 1) {
                     cvBtn.setVisibility(View.INVISIBLE);
                     btnGetStart.setVisibility(View.VISIBLE);
                 }
@@ -154,11 +154,11 @@ public class OnBoardingActivity extends AppCompatActivity {
     }
 
     void prepareBoardingData() {
-        OnBoardingModel bm = new OnBoardingModel("The process of the delivery of products from the seller's warehouse to the customer's location", "Door to Door Delivery", R.drawable.boarding1);
+        OnBoardingModel bm = new OnBoardingModel("Stay updated so Company can get location easily", "Easy Tracking", R.drawable.boarding2);
         listBoarding.add(bm);
-        bm = new OnBoardingModel("Stay updated on parcel status with our reliable parcel tracking platform", "Easy Tracking", R.drawable.boarding2);
-        listBoarding.add(bm);
-        bm = new OnBoardingModel("We help you to save your time and money.", "Price Comparison", R.drawable.boarding3);
+//         bm = new OnBoardingModel("Stay updated with location", "Easy Tracking", R.drawable.boarding2);
+//        listBoarding.add(bm);
+        bm = new OnBoardingModel("We help you in training through videos and assignments your time and money.", "Video Training", R.drawable.boarding3);
         listBoarding.add(bm);
     }
 }

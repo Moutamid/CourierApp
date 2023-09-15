@@ -2,19 +2,20 @@ package com.moutamid.dantlicorp.Activities.Home;
 
 import static com.moutamid.dantlicorp.helper.Constants.ADMIN_UID;
 
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Build;
-import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.fxn.stash.Stash;
 import com.google.firebase.database.ChildEventListener;
@@ -56,7 +57,12 @@ public class ChatActivity extends AppCompatActivity {
         userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
 
         list = new ArrayList<>();
-
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         recyler.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
         recyler.setHasFixedSize(false);

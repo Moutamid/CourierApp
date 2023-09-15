@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.moutamid.dantlicorp.Activities.Home.MapsActivity;
 import com.moutamid.dantlicorp.Admin.Adapter.MyAdapter;
+import com.moutamid.dantlicorp.Dailogues.ChecksDialogClass;
+import com.moutamid.dantlicorp.Dailogues.UserDetailsDialogClass;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
@@ -37,6 +39,7 @@ public class UserDetailsActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
         tabLayout.addTab(tabLayout.newTab().setText("Profile"));
+        tabLayout.addTab(tabLayout.newTab().setText("Social Links"));
         tabLayout.addTab(tabLayout.newTab().setText("Check In"));
         tabLayout.addTab(tabLayout.newTab().setText("Check Out"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -103,5 +106,11 @@ public class UserDetailsActivity extends AppCompatActivity {
 //        } else {
 //            Toast.makeText(context, "Invalid Coordinates to show marker", Toast.LENGTH_SHORT).show();
 //        }
+    }
+
+    public void timeline(View view) {
+        UserDetailsDialogClass cdd = new UserDetailsDialogClass(UserDetailsActivity.this);
+        cdd.show();
+
     }
 }

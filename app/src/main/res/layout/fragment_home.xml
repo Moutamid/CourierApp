@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
             android:layout_marginTop="115dp"
-
+            android:textColor="#7C7070"
             android:layout_toRightOf="@+id/title"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"

@@ -31,6 +31,7 @@
             android:layout_height="44dp"
             android:layout_marginStart="15sp"
             android:padding="12sp"
+            android:onClick="backPress"
             android:src="@drawable/ic_back" />
 
     </RelativeLayout>

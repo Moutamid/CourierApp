@@ -1,83 +1,116 @@
 package com.moutamid.dantlicorp.Fragments;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
 import com.fxn.stash.Stash;
 import com.google.firebase.auth.FirebaseAuth;
-import com.moutamid.dantlicorp.Activities.Authentication.GetSocialLinksActivity;
 import com.moutamid.dantlicorp.Activities.Authentication.LoginActivity;
-import com.moutamid.dantlicorp.Model.SocialModel;
+import com.moutamid.dantlicorp.Activities.Home.EditProfileActivity;
+import com.moutamid.dantlicorp.Activities.Home.WebViewActivity;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 
 
 public class ProfileFragment extends Fragment {
-    ImageView profile_img;
-    TextView name, dob, email, phone_number, cnic_number;
-    TextView facebook_url_txt, twitter_url_txt, instagram_url_txt, reddit_url_txt, pinterest_url_txt, linkedIn_url_txt;
-    ImageView edit_lyt, logout;
-
+       RelativeLayout profile;
+    TextView name_txt, name_latter, textView7;
+    RelativeLayout rlShare, rlRate, delete_data, privacy;
+    UserModel userModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-//        profile_img = view.findViewById(R.id.profile_pic);
-//        facebook_url_txt = view.findViewById(R.id.facebook);
-//        twitter_url_txt = view.findViewById(R.id.twitter);
-//        instagram_url_txt = view.findViewById(R.id.instagram);
-//        reddit_url_txt = view.findViewById(R.id.reddit);
-//        pinterest_url_txt = view.findViewById(R.id.pinterest);
-//        linkedIn_url_txt = view.findViewById(R.id.linked_in);
-//        edit_lyt = view.findViewById(R.id.edit_lyt);
-//        name = view.findViewById(R.id.name);
-//        dob = view.findViewById(R.id.dob);
-//        email = view.findViewById(R.id.email);
-//        phone_number = view.findViewById(R.id.phone_number);
-//        cnic_number = view.findViewById(R.id.cnic_number);
-//        logout = view.findViewById(R.id.logout);
-//        UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
-//        SocialModel socialModel = (SocialModel) Stash.getObject("UserLinks", SocialModel.class);
-//        name.setText(userNew.name);
-//        dob.setText(userNew.dob);
-//        email.setText(userNew.email);
-//        phone_number.setText(userNew.phone_number);
-//        cnic_number.setText(userNew.cnic);
-//        logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
+        userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+
+        textView7 = view.findViewById(R.id.textView7);
+        name_txt = view.findViewById(R.id.textView6);
+        rlShare = view.findViewById(R.id.rlShare);
+        rlRate = view.findViewById(R.id.rlRate);
+        privacy = view.findViewById(R.id.privacy);
+        delete_data = view.findViewById(R.id.delete_data);
+        name_latter = view.findViewById(R.id.textView5);
+        profile = view.findViewById(R.id.profile);
+        name_txt.setText(userModel.name);
+
+        textView7.setText(userModel.email);
+        char c = userModel.name.charAt(0);
+        name_latter.setText(c + "");
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), EditProfileActivity.class));
+            }
+        });
+        delete_data.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FirebaseAuth.getInstance().signOut();
+                Stash.clear("UserDetails");
+                startActivity(new Intent(getContext(), LoginActivity.class));
+                getActivity().finishAffinity();
+            }
+        });
+        privacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), WebViewActivity.class));
+            }
+        });
 //
-//                FirebaseAuth.getInstance().signOut();
-//                Stash.clear("UserDetails");
-//                startActivity(new Intent(getContext(), LoginActivity.class));
-//                getActivity().finishAffinity();
-//            }
-//        });
-//
-//        if (socialModel != null) {
-//            facebook_url_txt.setText(socialModel.facebook_url);
-//            twitter_url_txt.setText(socialModel.twitter_url);
-//            instagram_url_txt.setText(socialModel.instagram_url);
-//            reddit_url_txt.setText(socialModel.reddit_url);
-//            pinterest_url_txt.setText(socialModel.pinterest_url);
-//            linkedIn_url_txt.setText(socialModel.linkedIn_url);
-//        }
-//        Glide.with(getContext()).load(userNew.image_url).into(profile_img);
 //        edit_lyt.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //                startActivity(new Intent(getContext(), GetSocialLinksActivity.class));
 //            }
 //        });
+
+        rlShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+                    String shareMessage = userModel.name + " found a helpful application, Here is the link\n\n";
+
+
+                    shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + getActivity().getPackageName() + "\n\n";
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                    startActivity(Intent.createChooser(shareIntent, "Choose one"));
+                } catch (Exception e) {
+                    //e.toString();
+                }
+            }
+        });
+        rlRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri uri = Uri.parse("market://details?id=" + getActivity().getPackageName());
+                Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                try {
+                    getActivity().startActivity(goToMarket);
+                } catch (ActivityNotFoundException e) {
+                    getActivity().startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("http://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
+                }
+            }
+        });
         return view;
     }
 }

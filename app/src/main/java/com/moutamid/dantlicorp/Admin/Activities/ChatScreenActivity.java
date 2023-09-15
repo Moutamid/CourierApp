@@ -3,6 +3,7 @@ package com.moutamid.dantlicorp.Admin.Activities;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -221,4 +222,7 @@ public class ChatScreenActivity extends AppCompatActivity {
         requestQueue.add(jsObjRequest);
     }
 
+    public void backPress(View view) {
+        onBackPressed();
+    }
 }

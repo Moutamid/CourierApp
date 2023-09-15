@@ -47,12 +47,12 @@ public class AdminChatAdapter extends RecyclerView.Adapter<AdminChatAdapter.Chat
     @Override
     public void onBindViewHolder(@NonNull ChatVH holder, int position) {
         ChatModel model = list.get(holder.getAdapterPosition());
-        UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
-
+//        UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
         holder.message.setText(model.getMessage());
         holder.time.setText(Config.getFormatedTime(model.getTimestamps()));
-        Glide.with(context).load(userNew.image_url).placeholder(R.drawable.profile_icon).into(holder.imageView);
-
+//        if (!userNew.image_url.isEmpty()) {
+            Glide.with(context).load(model.getImage()).placeholder(R.drawable.profile_icon).into(holder.imageView);
+//        }
     }
 
     @Override

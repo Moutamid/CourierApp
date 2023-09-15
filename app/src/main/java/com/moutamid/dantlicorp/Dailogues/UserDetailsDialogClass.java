@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.fxn.stash.Stash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.moutamid.dantlicorp.Model.TimeSheetModel;
@@ -64,7 +65,9 @@ public class UserDetailsDialogClass extends Dialog {
                     timeSheetModel.days = days_str;
                     timeSheetModel.hours = hours_str;
                     timeSheetModel.pay = pay_str;
-                    Constants.UserReference.child(Constants.auth().getUid()).child(Constants.TIME_SHEET).push().setValue(timeSheetModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    String userID = Stash.getString("userID");
+
+                    Constants.UserReference.child(userID).child(Constants.TIME_SHEET).push().setValue(timeSheetModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isComplete()) {

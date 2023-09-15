@@ -4,15 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.fxn.stash.Stash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.moutamid.dantlicorp.Activities.Authentication.LoginActivity;
 import com.moutamid.dantlicorp.Activities.Home.AllUserLocationActivity;
 import com.moutamid.dantlicorp.Admin.Activities.EmployeeActivity;
 import com.moutamid.dantlicorp.Admin.Activities.InboxActivity;
@@ -26,9 +27,9 @@ import com.moutamid.dantlicorp.helper.Constants;
 import java.util.ArrayList;
 
 public class AdminPanel extends AppCompatActivity {
-    Button add_vide_btn, inbox_btn, notification_btn, employee_btn, show_map;
+    CardView add_vide_btn, inbox_btn, notification_btn, show_map;
     ArrayList<UserModel> userArrayList = new ArrayList<>();
-
+    CardView employee_btn, logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class AdminPanel extends AppCompatActivity {
         inbox_btn = findViewById(R.id.inbox_btn);
         notification_btn = findViewById(R.id.notification_btn);
         show_map = findViewById(R.id.show_map);
+        logout = findViewById(R.id.logout);
         show_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +86,14 @@ public class AdminPanel extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AdminPanel.this, NotifcationsActivity.class));
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Stash.put("admin_login", 0);
+                startActivity(new Intent(AdminPanel.this, LoginActivity.class));
+                finishAffinity();
             }
         });
     }

@@ -15,10 +15,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fxn.stash.Stash;
 import com.moutamid.dantlicorp.Activities.Authentication.LoginActivity;
+import com.moutamid.dantlicorp.Admin.AdminPanel;
 import com.moutamid.dantlicorp.MainActivity;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
-import com.moutamid.dantlicorp.helper.Constants;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -34,21 +34,30 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         initViews();
         new Handler().postDelayed(() -> {
-            SharedPreferences shared = getSharedPreferences("Record", MODE_PRIVATE);
-            String boarding_view = (shared.getString("boarding_view", ""));
-            if (!boarding_view.isEmpty()) {
-                UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
-                if (userNew!=null) {
-                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                } else {
-                    startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            int adminLogin = Stash.getInt("admin_login");
+            if (adminLogin != 1) {
+                SharedPreferences shared = getSharedPreferences("Record", MODE_PRIVATE);
+                String boarding_view = (shared.getString("boarding_view", ""));
+                if (!boarding_view.isEmpty()) {
+                    UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+                    if (userNew != null) {
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    } else {
+                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
 
+                    }
+                } else {
+                    startActivity(new Intent(SplashActivity.this, OnBoardingActivity.class));
                 }
-            } else {
-                startActivity(new Intent(SplashActivity.this, OnBoardingActivity.class));
+            }
+            else
+            {
+                startActivity(new Intent(SplashActivity.this, AdminPanel.class));
+
             }
             finish();
         }, SPLASH_TIME);
+
     }
 
     private void initViews() {

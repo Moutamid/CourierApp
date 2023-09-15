@@ -21,11 +21,12 @@
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:text="User Details"
-            android:onClick="map"
             android:textColor="@color/white"
             android:textSize="22dp" />
 
         <ImageView
+            android:id="@+id/map"
+            android:onClick="map"
             android:layout_width="24dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -33,12 +34,23 @@
             android:src="@drawable/baseline_map_24"
             android:tint="@color/white" />
 
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="timeline"
+            android:tooltipText="Time Sheet"
+            android:layout_marginRight="-10dp"
+            android:layout_toLeftOf="@+id/map"
+            android:src="@drawable/baseline_timeline_24"
+            android:tint="@color/white" />
+
     </RelativeLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:background="@color/app_color"
         app:tabIndicatorColor="@color/white"
         app:tabIndicatorFullWidth="true"
