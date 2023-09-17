@@ -37,7 +37,7 @@ public class AllVideo extends AppCompatActivity {
         videoAdapter = new VideoAdapter(this, videoModelList);
         content_rcv.setAdapter(videoAdapter);
         if (Config.isNetworkAvailable(AllVideo.this)) {
-            getHerbs();
+            getVideos();
         } else {
             Toast.makeText(AllVideo.this, "No network connection available.", Toast.LENGTH_SHORT).show();
         }
@@ -52,7 +52,7 @@ public class AllVideo extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void getHerbs() {
+    private void getVideos() {
 //        Config.showProgressDialog(AllVideo.this);
         Constants.VideosReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -78,7 +78,7 @@ public class AllVideo extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (Config.isNetworkAvailable(AllVideo.this)) {
-            getHerbs();
+            getVideos();
         } else {
             Toast.makeText(AllVideo.this, "No network connection available.", Toast.LENGTH_SHORT).show();
         }

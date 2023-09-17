@@ -63,7 +63,7 @@ public class EditProfileActivity extends AppCompatActivity {
         email.setText(userNew.email);
         phone_number.setText(userNew.phone_number);
         cnic_number.setText(userNew.cnic);
-        image_profile_str = Uri.parse(userNew.image_url);
+
         facebook_url_edt = findViewById(R.id.facebook);
         twitter_url_edt = findViewById(R.id.twitter);
         instagram_url_edt = findViewById(R.id.instagram);
@@ -103,7 +103,7 @@ public class EditProfileActivity extends AppCompatActivity {
             image_profile_str = data.getData();
             profile_img.setImageURI(image_profile_str);
             profile_img.setVisibility(View.VISIBLE);
-            Log.d("data", image_profile_str + "  " + Uri.parse(userNew.image_url));
+            Log.d("data_image", image_profile_str + "  " + Uri.parse(userNew.image_url));
 
         }
     }
@@ -112,16 +112,15 @@ public class EditProfileActivity extends AppCompatActivity {
     private void registerRequest() {
 
         Config.showProgressDialog(EditProfileActivity.this);
-        if (image_profile_str == Uri.parse(userNew.image_url)) {
+        if (image_profile_str != null) {
             String filePathName = "users/";
             final String timestamp = "" + System.currentTimeMillis();
-
             StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathName + timestamp);
             UploadTask urlTask = storageReference.putFile(image_profile_str);
             Task<Uri> uriTask = urlTask.continueWithTask(task -> {
                 if (!task.isSuccessful()) {
-                    Log.d("data", image_profile_str + "  " + Uri.parse(userNew.image_url) + "  " + task.getException().getMessage());
-
+//                    Log.d("data", image_profile_str + "  " + Uri.parse(userNew.image_url) + "  " + task.getException().getMessage());
+                    Config.dismissProgressDialog();
                     Toast.makeText(EditProfileActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 return storageReference.getDownloadUrl();
@@ -156,7 +155,7 @@ public class EditProfileActivity extends AppCompatActivity {
             userModel.email = email.getText().toString();
             userModel.phone_number = phone_number.getText().toString();
             userModel.cnic = cnic_number.getText().toString();
-            userModel.image_url = image_profile_str.toString();
+            userModel.image_url = userNew.image_url;
             userModel.id = Constants.auth().getUid();
             Constants.UserReference.child(Objects.requireNonNull(Constants.auth().getUid())).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
@@ -177,11 +176,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     private boolean validation() {
-        if (image_profile_str == null) {
-            Config.showToast(this, "Please select your profile picture");
-            return false;
-
-        } else if (name.getText().toString().isEmpty()) {
+        if (name.getText().toString().isEmpty()) {
             name.setError("Enter Name");
             name.requestFocus();
             Config.openKeyboard(this);
