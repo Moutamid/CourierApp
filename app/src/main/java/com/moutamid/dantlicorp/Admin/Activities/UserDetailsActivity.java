@@ -26,7 +26,6 @@ import com.moutamid.dantlicorp.helper.Constants;
 public class UserDetailsActivity extends AppCompatActivity {
 
 
-    FrameLayout simpleFrameLayout;
     TabLayout tabLayout;
     ViewPager viewPager;
 

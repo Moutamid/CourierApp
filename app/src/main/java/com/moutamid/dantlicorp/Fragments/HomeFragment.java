@@ -144,22 +144,23 @@ public class HomeFragment extends Fragment {
                 });
             }
         });
-        Constants.UserReference.child(Constants.auth().getUid()).child("social_links").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists())
-                {
-                    SocialModel socialModel= snapshot.getValue(SocialModel.class);
-                    Stash.put("UserLinks", socialModel);
+        UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+        if (userNew.id != null) {
+            Constants.UserReference.child(userNew.id).child("social_links").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        SocialModel socialModel = snapshot.getValue(SocialModel.class);
+                        Stash.put("UserLinks", socialModel);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
+                }
+            });
+        }
         return view;
     }
 
