@@ -1,7 +1,7 @@
 package com.moutamid.dantlicorp.Model;
 
 public class UserModel {
-    public String name, dob, email, phone_number, cnic, id;
+    public String name, dob, email, phone_number, id;
     public String image_url;
     public double lat, lng;
 
@@ -48,13 +48,7 @@ public class UserModel {
         this.phone_number = phone_number;
     }
 
-    public String getCnic() {
-        return cnic;
-    }
 
-    public void setCnic(String cnic) {
-        this.cnic = cnic;
-    }
 
     public String getId() {
         return id;

@@ -50,10 +50,10 @@ public class AdminChatAdapter extends RecyclerView.Adapter<AdminChatAdapter.Chat
 //        UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
         holder.message.setText(model.getMessage());
         holder.time.setText(Config.getFormatedTime(model.getTimestamps()));
-        if (!model.getImage().isEmpty()) {
-
-            Glide.with(context).load(model.getImage()).placeholder(R.drawable.profile_icon).into(holder.imageView);
-        }
+//        if (!model.getImage().isEmpty()) {
+//
+//            Glide.with(context).load(model.getImage()).placeholder(R.drawable.profile_icon).into(holder.imageView);
+//        }
     }
 
     @Override

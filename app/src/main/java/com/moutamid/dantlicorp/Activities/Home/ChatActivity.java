@@ -67,7 +67,7 @@ public class ChatActivity extends AppCompatActivity {
         recyler.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
         recyler.setHasFixedSize(false);
 
-//        Constants.databaseReference().child(Constants.USER).child(   Constants.auth().getUid())
+//        Constants.databaseReference().child(Constants.USER).child(  userModel.id)
 //                .get().addOnSuccessListener(dataSnapshot -> {
 //                    if (dataSnapshot.exists()){
 //                        loginUser = dataSnapshot.getValue(UserModel.class);
@@ -83,12 +83,12 @@ public class ChatActivity extends AppCompatActivity {
                 long date = new Date().getTime();
                 ChatModel conversation = new ChatModel(
                         message_str,
-                        Constants.auth().getUid(),
+                        userModel.id,
                         ID,
                         date,
                         userModel.name
                 );
-                Constants.ChatReference.child(Constants.auth().getUid())
+                Constants.ChatReference.child(userModel.id)
                         .child(ID)
                         .push()
                         .setValue(conversation)
@@ -104,13 +104,13 @@ public class ChatActivity extends AppCompatActivity {
     private void reciver(String ID, long date, String message_str) {
         ChatModel conversation = new ChatModel(
                 message_str,
-                Constants.auth().getUid(),
+                userModel.id,
                 ID,
                 date,
                 "Admin"
         );
         Constants.ChatReference.child(ID)
-                .child(Constants.auth().getUid())
+                .child(userModel.id)
                 .push()
                 .setValue(conversation)
                 .addOnSuccessListener(unused -> {
@@ -121,9 +121,9 @@ public class ChatActivity extends AppCompatActivity {
                     map.put("timeStamp", date);
                     map.put("image_url", userModel.image_url);
                     map.put("token", Stash.getString("token"));
-                    Constants.ChatListReference.child(ID).child(Constants.auth().getUid()).updateChildren(map)
+                    Constants.ChatListReference.child(ID).child(userModel.id).updateChildren(map)
                             .addOnSuccessListener(unused1 -> {
-                                Constants.ChatListReference.child(Constants.auth().getUid()).child(ID).updateChildren(map)
+                                Constants.ChatListReference.child(userModel.id).child(ID).updateChildren(map)
                                         .addOnSuccessListener(unused4 -> {
 //                                            new FcmNotificationsSender(
 //                                                    "/topics/" + ID, userModel.name,
@@ -137,7 +137,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void getChat(String id) {
-        Constants.ChatReference.child(Constants.auth().getUid())
+        Constants.ChatReference.child(                       userModel.id)
                 .child(id)
                 .addChildEventListener(new ChildEventListener() {
                     @RequiresApi(api = Build.VERSION_CODES.N)

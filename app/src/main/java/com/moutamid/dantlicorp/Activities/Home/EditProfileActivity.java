@@ -36,7 +36,7 @@ import java.util.Objects;
 
 public class EditProfileActivity extends AppCompatActivity {
     ImageView profile_img;
-    TextView name, dob, email, phone_number, cnic_number;
+    TextView name, dob, email, phone_number;
     private static final int PICK_IMAGE_GALLERY = 111;
     Calendar myCalendar = Calendar.getInstance();
     Uri image_profile_str = null;
@@ -55,14 +55,12 @@ public class EditProfileActivity extends AppCompatActivity {
         dob = findViewById(R.id.dob);
         email = findViewById(R.id.email);
         phone_number = findViewById(R.id.phone_number);
-        cnic_number = findViewById(R.id.cnic_number);
         userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
         SocialModel socialModel = (SocialModel) Stash.getObject("UserLinks", SocialModel.class);
         name.setText(userNew.name);
         dob.setText(userNew.dob);
         email.setText(userNew.email);
         phone_number.setText(userNew.phone_number);
-        cnic_number.setText(userNew.cnic);
 
         facebook_url_edt = findViewById(R.id.facebook);
         twitter_url_edt = findViewById(R.id.twitter);
@@ -133,11 +131,10 @@ public class EditProfileActivity extends AppCompatActivity {
                         userModel.dob = dob.getText().toString();
                         userModel.email = email.getText().toString();
                         userModel.phone_number = phone_number.getText().toString();
-                        userModel.cnic = cnic_number.getText().toString();
                         userModel.image_url = downloadImageUri.toString();
-                        userModel.id = Constants.auth().getUid();
+                        userModel.id = userNew.id;
 
-                        Constants.UserReference.child(Objects.requireNonNull(Constants.auth().getUid())).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        Constants.UserReference.child(userNew.id).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
                                 Stash.put("UserDetails", userModel);
@@ -154,10 +151,9 @@ public class EditProfileActivity extends AppCompatActivity {
             userModel.dob = dob.getText().toString();
             userModel.email = email.getText().toString();
             userModel.phone_number = phone_number.getText().toString();
-            userModel.cnic = cnic_number.getText().toString();
             userModel.image_url = userNew.image_url;
-            userModel.id = Constants.auth().getUid();
-            Constants.UserReference.child(Objects.requireNonNull(Constants.auth().getUid())).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+            userModel.id = userNew.id;
+            Constants.UserReference.child(userNew.id).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
 
@@ -195,13 +191,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             return false;
 
-        } else if (cnic_number.getText().toString().isEmpty()) {
-            cnic_number.setError("Enter CNIC");
-            cnic_number.requestFocus();
-            Config.openKeyboard(this);
-            return false;
-
-        } else if (!Config.isNetworkAvailable(this)) {
+        }else if (!Config.isNetworkAvailable(this)) {
             Config.showToast(this, "You are not connected to network");
             return false;
         } else {
@@ -250,7 +240,7 @@ public class EditProfileActivity extends AppCompatActivity {
         socialModel.reddit_url = reddit_url_str;
         socialModel.pinterest_url = pinterest_url_str;
         socialModel.linkedIn_url = linkedIn_url_str;
-        Constants.UserReference.child(Constants.auth().getUid()).child("social_links").setValue(socialModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+        Constants.UserReference.child(userNew.id).child("social_links").setValue(socialModel).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Stash.put("UserLinks", socialModel);

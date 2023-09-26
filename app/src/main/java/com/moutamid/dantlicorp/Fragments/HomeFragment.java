@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 
 public class HomeFragment extends Fragment {
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment {
     ArrayList<UserModel> userArrayList = new ArrayList<>();
 
     TextView location_txt;
-
+    UserModel userNew;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -73,6 +74,8 @@ public class HomeFragment extends Fragment {
         location_txt = view.findViewById(R.id.location);
         location_txt.setSelected(true);
         chat_Admin = view.findViewById(R.id.chat_Admin);
+        userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+
 //        start_journey_lyt = view.findViewById(R.id.start_journey);
 //        journey_txt = view.findViewById(R.id.journey_txt);
         show_map_lyt = view.findViewById(R.id.show_map_lyt);
@@ -144,7 +147,6 @@ public class HomeFragment extends Fragment {
                 });
             }
         });
-        UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
         if (userNew.id != null) {
             Constants.UserReference.child(userNew.id).child("social_links").addValueEventListener(new ValueEventListener() {
                 @Override
@@ -249,7 +251,9 @@ public class HomeFragment extends Fragment {
                             userModel.lng = Constants.cur_lng;
                             userModel.name = userNew.name;
                             userModel.image_url = userNew.image_url;
-                            Constants.LocationReference.child(Constants.auth().getUid()).setValue(userModel);
+                            if (userNew.id != null) {
+                                Constants.LocationReference.child(userNew.id).setValue(userModel);
+                            }
                         }
                     }
                 });

@@ -65,13 +65,13 @@
             android:textSize="18dp" />
 
     </androidx.cardview.widget.CardView>
-  <androidx.cardview.widget.CardView
-      android:id="@+id/btn"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-      android:layout_marginTop="20dp"
+        android:layout_marginTop="20dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="10dp">
 
@@ -87,13 +87,13 @@
             android:textSize="18dp" />
 
     </androidx.cardview.widget.CardView>
-  <androidx.cardview.widget.CardView
-      android:id="@+id/inbox_btn"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inbox_btn"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-      android:layout_marginTop="20dp"
+        android:layout_marginTop="20dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="10dp">
 
@@ -109,13 +109,13 @@
             android:textSize="18dp" />
 
     </androidx.cardview.widget.CardView>
-  <androidx.cardview.widget.CardView
-      android:id="@+id/show_map"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/show_map"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-      android:layout_marginTop="20dp"
+        android:layout_marginTop="20dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="10dp">
 
@@ -131,13 +131,13 @@
             android:textSize="18dp" />
 
     </androidx.cardview.widget.CardView>
-  <androidx.cardview.widget.CardView
-      android:id="@+id/logout"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-      android:layout_marginTop="20dp"
+        android:layout_marginTop="20dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="10dp">
 

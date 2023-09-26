@@ -32,7 +32,7 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment {
     ImageView profile_img;
-    TextView name, dob, email, phone_number, cnic_number;
+    TextView name, dob, email, phone_number;
      String userID;
 
     @Override
@@ -45,7 +45,6 @@ public class ProfileFragment extends Fragment {
         dob = view.findViewById(R.id.dob);
         email = view.findViewById(R.id.email);
         phone_number = view.findViewById(R.id.phone_number);
-        cnic_number = view.findViewById(R.id.cnic_number);
         userID = Stash.getString("userID");
 
         Constants.UserReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -57,7 +56,6 @@ public class ProfileFragment extends Fragment {
                 dob.setText(userNew.dob);
                 email.setText(userNew.email);
                 phone_number.setText(userNew.phone_number);
-                cnic_number.setText(userNew.cnic);
                 Glide.with(getContext()).load(userNew.image_url).into(profile_img);
             }
 

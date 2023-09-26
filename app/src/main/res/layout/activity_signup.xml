@@ -156,20 +156,6 @@
                 android:textColorHint="@color/textColor"
                 android:textSize="15dp" />
 
-            <EditText
-                android:id="@+id/cnic_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/edit_bg"
-                android:fontFamily="@font/poppins_regular"
-                android:hint="CNIC"
-                android:padding="12dp"
-                android:textColor="@color/textColor"
-                android:textColorHint="@color/textColor"
-                android:textSize="15dp" />
 
 
 

@@ -35,7 +35,7 @@ public class SignupActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_GALLERY = 111;
     ImageView profile_pic;
     Calendar myCalendar = Calendar.getInstance();
-    EditText name, dob, email, password, phone_number, cnic;
+    EditText name, dob, email, password, phone_number;
     Uri image_profile_str = null;
 
 
@@ -69,7 +69,6 @@ public class SignupActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         phone_number = findViewById(R.id.phone_number);
-        cnic = findViewById(R.id.cnic_number);
     }
 
     public void login(View view) {
@@ -121,7 +120,6 @@ public class SignupActivity extends AppCompatActivity {
                         userModel.dob = dob.getText().toString();
                         userModel.email = email.getText().toString();
                         userModel.phone_number = phone_number.getText().toString();
-                        userModel.cnic = cnic.getText().toString();
                         userModel.image_url = downloadImageUri.toString();
                         userModel.id = Constants.auth().getUid();
 
@@ -164,6 +162,12 @@ public class SignupActivity extends AppCompatActivity {
             Config.openKeyboard(this);
             return false;
 
+        } else if (email.getText().toString().isEmpty()) {
+            email.setError("Enter");
+            email.requestFocus();
+            Config.openKeyboard(this);
+            return false;
+
         } else if (password.getText().toString().isEmpty()) {
             password.setError("Enter Password");
             password.requestFocus();
@@ -178,13 +182,7 @@ public class SignupActivity extends AppCompatActivity {
 
             return false;
 
-        } else if (cnic.getText().toString().isEmpty()) {
-            cnic.setError("Enter CNIC");
-            cnic.requestFocus();
-            Config.openKeyboard(this);
-            return false;
-
-        } else if (!Config.isNetworkAvailable(this)) {
+        }  else if (!Config.isNetworkAvailable(this)) {
             Config.showToast(this, "You are not connected to network");
             return false;
         } else {
