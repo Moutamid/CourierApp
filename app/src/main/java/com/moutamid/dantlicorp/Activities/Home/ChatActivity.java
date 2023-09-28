@@ -137,48 +137,50 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void getChat(String id) {
-        Constants.ChatReference.child(                       userModel.id)
-                .child(id)
-                .addChildEventListener(new ChildEventListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        if (snapshot.exists()) {
-                            ChatModel conversation = snapshot.getValue(ChatModel.class);
-                            list.add(conversation);
-                            list.sort(Comparator.comparing(ChatModel::getTimestamps));
-                            ChatAdapter adapter = new ChatAdapter(ChatActivity.this, list);
-                            recyler.setAdapter(adapter);
-                            recyler.scrollToPosition(list.size() - 1);
-                            adapter.notifyItemInserted(list.size() - 1);
+        if (userModel.id != null) {
+            Constants.ChatReference.child(userModel.id)
+                    .child(id)
+                    .addChildEventListener(new ChildEventListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.N)
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            if (snapshot.exists()) {
+                                ChatModel conversation = snapshot.getValue(ChatModel.class);
+                                list.add(conversation);
+                                list.sort(Comparator.comparing(ChatModel::getTimestamps));
+                                ChatAdapter adapter = new ChatAdapter(ChatActivity.this, list);
+                                recyler.setAdapter(adapter);
+                                recyler.scrollToPosition(list.size() - 1);
+                                adapter.notifyItemInserted(list.size() - 1);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        if (snapshot.exists()) {
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            if (snapshot.exists()) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            if (snapshot.exists()) {
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-
-                        }
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        if (snapshot.exists()) {
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                    });
+        }
     }
 }

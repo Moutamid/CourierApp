@@ -12,6 +12,7 @@ import com.fxn.stash.Stash;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.moutamid.dantlicorp.MainActivity;
 import com.moutamid.dantlicorp.Model.SocialModel;
+import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
@@ -78,7 +79,9 @@ public class GetSocialLinksActivity extends AppCompatActivity {
                 socialModel.reddit_url = reddit_url_str;
                 socialModel.pinterest_url = pinterest_url_str;
                 socialModel.linkedIn_url = linkedIn_url_str;
-                Constants.UserReference.child(Constants.auth().getUid()).child("social_links").setValue(socialModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+         UserModel       userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+
+                Constants.UserReference.child(userModel.id).child("social_links").setValue(socialModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Stash.put("UserLinks", socialModel);

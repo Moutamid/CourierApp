@@ -12,9 +12,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.fxn.stash.Stash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.moutamid.dantlicorp.Model.ChecksModel;
+import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
@@ -74,7 +76,9 @@ public class ChecksDialogClass extends Dialog {
                     } else {
                         type = "check_out";
                     }
-                    Constants.UserReference.child(Constants.auth().getUid()).child(type).child(Constants.UserReference.push().getKey()).setValue(checksModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                   UserModel userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+
+                    Constants.UserReference.child(userModel.id).child(type).child(Constants.UserReference.push().getKey()).setValue(checksModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isComplete()) {

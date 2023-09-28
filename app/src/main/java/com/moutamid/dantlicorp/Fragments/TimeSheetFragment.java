@@ -12,12 +12,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fxn.stash.Stash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.moutamid.dantlicorp.Adapter.VideoAdapter;
 import com.moutamid.dantlicorp.Admin.Adapter.TimesheetAdapter;
 import com.moutamid.dantlicorp.Model.TimeSheetModel;
+import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.Model.VideoModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
@@ -56,7 +58,9 @@ public class TimeSheetFragment extends Fragment {
 
     private void getProducts() {
 //        Config.showProgressDialog(getContext());
-        Constants.UserReference.child(Constants.auth().getUid()).child(Constants.TIME_SHEET).addValueEventListener(new ValueEventListener() {
+     UserModel   userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+
+        Constants.UserReference.child(userModel.id).child(Constants.TIME_SHEET).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productModelList.clear();

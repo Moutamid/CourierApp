@@ -65,8 +65,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatVH> {
     @Override
     public int getItemViewType(int position) {
         //get currently signed in user
+        UserModel   userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
 
-        return Constants.auth().getUid().equals(list.get(position).getSenderID()) ? MSG_TYPE_RIGHT : MSG_TYPE_LEFT;
+        return userModel.id.equals(list.get(position).getSenderID()) ? MSG_TYPE_RIGHT : MSG_TYPE_LEFT;
     }
 
 
