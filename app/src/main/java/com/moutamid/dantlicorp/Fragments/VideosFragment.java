@@ -1,5 +1,8 @@
 package com.moutamid.dantlicorp.Fragments;
 
+import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +25,7 @@ import com.moutamid.dantlicorp.helper.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class VideosFragment extends Fragment {
 
@@ -51,8 +55,11 @@ public class VideosFragment extends Fragment {
 
 
     private void getProducts() {
-        Config.showProgressDialog(getContext());
-        Constants.VideosReference.addValueEventListener(new ValueEventListener() {
+        Dialog lodingbar = new Dialog(getContext());
+        lodingbar.setContentView(R.layout.loading);
+        Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+        lodingbar.setCancelable(false);
+        lodingbar.show();        Constants.VideosReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productModelList.clear();
@@ -60,15 +67,12 @@ public class VideosFragment extends Fragment {
                     VideoModel herbsModel = ds.getValue(VideoModel.class);
                     productModelList.add(herbsModel);
                 }
-                videoAdapter.notifyDataSetChanged();
-                Config.dismissProgressDialog();
-            }
+lodingbar.dismiss();lodingbar.dismiss();            }
 
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Config.dismissProgressDialog();
-
+lodingbar.dismiss();
             }
 
 

@@ -30,6 +30,9 @@
         <activity
             android:name=".Activities.Home.ChatActivity"
             android:exported="false" />
+       <activity
+            android:name=".Admin.Activities.CourierDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".Activities.Home.WebViewActivity"
             android:exported="false" />

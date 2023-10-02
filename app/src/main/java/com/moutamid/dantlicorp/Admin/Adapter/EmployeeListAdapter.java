@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.fxn.stash.Stash;
 import com.moutamid.dantlicorp.Admin.Activities.ChatScreenActivity;
+import com.moutamid.dantlicorp.Admin.Activities.CourierDetailsActivity;
 import com.moutamid.dantlicorp.Admin.Activities.UserDetailsActivity;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
@@ -44,28 +45,36 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
         holder.name.setText(model.getName());
 
         holder.itemView.setOnClickListener(v -> {
-
             Stash.put("userID", model.getId());
             Stash.put("userName", model.getName());
-            context.startActivity(new Intent(context, UserDetailsActivity.class));
-        });
+            if (model.is_courier != null) {
+               if (model.is_courier.equals("Yes")) {
+                    context.startActivity(new Intent(context, CourierDetailsActivity.class));
+                } else {
+                    context.startActivity(new Intent(context, UserDetailsActivity.class));
+
+                }
+            } else {
+                    context.startActivity(new Intent(context, CourierDetailsActivity.class));
+                }
+            });
+
+        }
+
+        @Override
+        public int getItemCount () {
+            return list.size();
+        }
+
+        public class ChatListVH extends RecyclerView.ViewHolder {
+            CircleImageView imageView;
+            TextView name;
+
+            public ChatListVH(@NonNull View itemView) {
+                super(itemView);
+                imageView = itemView.findViewById(R.id.profile);
+                name = itemView.findViewById(R.id.name);
+            }
+        }
 
     }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
-
-    public class ChatListVH extends RecyclerView.ViewHolder {
-        CircleImageView imageView;
-        TextView name;
-
-        public ChatListVH(@NonNull View itemView) {
-            super(itemView);
-            imageView = itemView.findViewById(R.id.profile);
-            name = itemView.findViewById(R.id.name);
-         }
-    }
-
-}

@@ -46,12 +46,10 @@ public class ProfileFragment extends Fragment {
         email = view.findViewById(R.id.email);
         phone_number = view.findViewById(R.id.phone_number);
         userID = Stash.getString("userID");
-
         Constants.UserReference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserModel userNew = snapshot.getValue(UserModel.class);
-                Log.d("user", "dtaa" + snapshot.child("name").getValue().toString());
                 name.setText(userNew.getName());
                 dob.setText(userNew.dob);
                 email.setText(userNew.email);

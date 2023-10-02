@@ -1,6 +1,9 @@
 package com.moutamid.dantlicorp.Admin.Fragments;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +29,7 @@ import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class CheckinFragment extends Fragment {
@@ -64,8 +68,11 @@ public class CheckinFragment extends Fragment {
     }
 
     private void getData() {
-        Config.showProgressDialog(getContext());
-        Constants.UserReference.child(userID).child("check_in").addValueEventListener(new ValueEventListener() {
+        Dialog lodingbar = new Dialog(getContext());
+        lodingbar.setContentView(R.layout.loading);
+        Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+        lodingbar.setCancelable(false);
+        lodingbar.show();        Constants.UserReference.child(userID).child("check_in").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -87,14 +94,12 @@ public class CheckinFragment extends Fragment {
                 recyclerView.setAdapter(adapter);
 
                 adapter.notifyDataSetChanged();
-                Config.dismissProgressDialog();
-
+lodingbar.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Config.dismissProgressDialog();
-                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+lodingbar.dismiss();                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

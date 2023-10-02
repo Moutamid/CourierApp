@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
-
     android:layout_height="match_parent"
+
+    android:background="@color/white"
     tools:context=".Activities.Authentication.SignupActivity">
 
     <RelativeLayout
@@ -26,7 +26,6 @@
                 android:layout_margin="15dp"
                 android:onClick="login"
                 android:src="@drawable/ic_back" />
-
 
 
         </LinearLayout>
@@ -137,7 +136,7 @@
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
                 android:textSize="15dp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
 
             <EditText
@@ -155,7 +154,44 @@
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
                 android:textSize="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
 
+                android:text="Are you Courier?"
+                android:textColor="@color/textColor"
+                android:textSize="12dp" />
+            <RadioGroup
+                android:id="@+id/courier_type"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="25dp"
+
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:buttonTint="@color/app_color"
+                    android:layout_weight="1"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/app_color"
+android:fontFamily="@font/poppins_regular"
+                    android:text="No" />
+            </RadioGroup>
 
 
 
@@ -163,11 +199,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="25dp"
                 android:background="@drawable/btn_bg"
                 android:fontFamily="@font/poppins_regular"
                 android:onClick="sign_up"
-                android:layout_marginTop="20dp"
                 android:text="SIGN UP"
                 android:textColor="@color/white" />
 

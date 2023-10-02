@@ -1,5 +1,8 @@
 package com.moutamid.dantlicorp.Admin.Activities;
 
+import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -12,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.moutamid.dantlicorp.Activities.Home.EditProfileActivity;
 import com.moutamid.dantlicorp.Adapter.ChatListAdapter;
 import com.moutamid.dantlicorp.Model.ChatListModel;
 import com.moutamid.dantlicorp.R;
@@ -19,6 +23,7 @@ import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class InboxActivity extends AppCompatActivity {
     ArrayList<ChatListModel> list;
@@ -38,7 +43,12 @@ public class InboxActivity extends AppCompatActivity {
 
     }
     private void getData() {
-        Config.showProgressDialog(InboxActivity.this);
+        Dialog lodingbar = new Dialog(InboxActivity.this);
+        lodingbar.setContentView(R.layout.loading);
+        Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+        lodingbar.setCancelable(false);
+        lodingbar.show();
+
         Constants.ChatListReference.child("admin123")
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -53,15 +63,13 @@ public class InboxActivity extends AppCompatActivity {
                             Log.d("listSize", "ee : "+ snapshot.getChildrenCount());
 
                         }
-                        Config.dismissProgressDialog();
-                        ChatListAdapter adapter = new ChatListAdapter(InboxActivity.this, list);
+lodingbar.dismiss();                        ChatListAdapter adapter = new ChatListAdapter(InboxActivity.this, list);
                         recyclerView.setAdapter(adapter);
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Config.dismissProgressDialog();
-                        Toast.makeText(InboxActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+lodingbar.dismiss();                        Toast.makeText(InboxActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

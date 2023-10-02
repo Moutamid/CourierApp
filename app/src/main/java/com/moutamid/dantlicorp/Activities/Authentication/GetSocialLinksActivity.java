@@ -1,6 +1,9 @@
 package com.moutamid.dantlicorp.Activities.Authentication;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +19,8 @@ import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
+
+import java.util.Objects;
 
 public class GetSocialLinksActivity extends AppCompatActivity {
     Button continue_btn;
@@ -46,8 +51,11 @@ public class GetSocialLinksActivity extends AppCompatActivity {
         continue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Config.showProgressDialog(GetSocialLinksActivity.this);
-                if (!facebook_url_edt.getText().toString().isEmpty()) {
+                Dialog lodingbar = new Dialog(GetSocialLinksActivity.this);
+                lodingbar.setContentView(R.layout.loading);
+                Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+                lodingbar.setCancelable(false);
+                lodingbar.show();                if (!facebook_url_edt.getText().toString().isEmpty()) {
                     facebook_url_str = facebook_url_edt.getText().toString();
 
                 }
@@ -79,14 +87,13 @@ public class GetSocialLinksActivity extends AppCompatActivity {
                 socialModel.reddit_url = reddit_url_str;
                 socialModel.pinterest_url = pinterest_url_str;
                 socialModel.linkedIn_url = linkedIn_url_str;
-         UserModel       userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+         UserModel    userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
 
-                Constants.UserReference.child(userModel.id).child("social_links").setValue(socialModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                Constants.UserReference.child(Constants.auth().getCurrentUser().getUid()).child("social_links").setValue(socialModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Stash.put("UserLinks", socialModel);
-                        Config.dismissProgressDialog();
-                        Intent intent = new Intent(GetSocialLinksActivity.this, MainActivity.class);
+lodingbar.dismiss();                        Intent intent = new Intent(GetSocialLinksActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }

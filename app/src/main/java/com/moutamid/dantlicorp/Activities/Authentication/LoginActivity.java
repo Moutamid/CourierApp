@@ -1,6 +1,9 @@
 package com.moutamid.dantlicorp.Activities.Authentication;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,6 +26,8 @@ import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
+
+import java.util.Objects;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -83,8 +88,11 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
 
             } else {
-                Config.showProgressDialog(LoginActivity.this);
-                Constants.auth().signInWithEmailAndPassword(
+                Dialog lodingbar = new Dialog(LoginActivity.this);
+                lodingbar.setContentView(R.layout.loading);
+                Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+                lodingbar.setCancelable(false);
+                lodingbar.show();                Constants.auth().signInWithEmailAndPassword(
                         email.getText().toString(),
                         password.getText().toString()
                 ).addOnSuccessListener(authResult -> {
@@ -96,8 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                             {
                                 UserModel userModel= snapshot.getValue(UserModel.class);
                                 Stash.put("UserDetails", userModel);
-                                Config.dismissProgressDialog();
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        lodingbar.dismiss();                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finishAffinity();
                             }
                         }
@@ -109,8 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                     });
 
                 }).addOnFailureListener(e -> {
-                    Config.dismissProgressDialog();
-                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+lodingbar.dismiss();                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
             }
 

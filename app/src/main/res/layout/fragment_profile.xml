@@ -96,6 +96,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
             <ImageView
+                android:visibility="gone"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/arrow"

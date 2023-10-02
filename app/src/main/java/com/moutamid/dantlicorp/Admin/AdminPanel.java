@@ -1,6 +1,9 @@
 package com.moutamid.dantlicorp.Admin;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +28,7 @@ import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AdminPanel extends AppCompatActivity {
     CardView add_vide_btn, inbox_btn, notification_btn, show_map;
@@ -43,8 +47,11 @@ public class AdminPanel extends AppCompatActivity {
         show_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Config.showProgressDialog(AdminPanel.this);
-                Constants.LocationReference.addValueEventListener(new ValueEventListener() {
+                Dialog lodingbar = new Dialog(AdminPanel.this);
+                lodingbar.setContentView(R.layout.loading);
+                Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+                lodingbar.setCancelable(false);
+                lodingbar.show();                Constants.LocationReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot ds : snapshot.getChildren()) {
@@ -53,8 +60,7 @@ public class AdminPanel extends AppCompatActivity {
                         }
                         Stash.put("AllUserLocation", userArrayList);
                         startActivity(new Intent(AdminPanel.this, AllUserLocationActivity.class));
-                        Config.dismissProgressDialog();
-                    }
+lodingbar.dismiss();                    }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {

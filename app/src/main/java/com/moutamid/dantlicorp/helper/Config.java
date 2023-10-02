@@ -285,7 +285,7 @@ public class Config extends Activity {
     }
 
     public static void showProgressDialog(Context context) {
-        lodingbar = new Dialog(context);
+    Dialog    lodingbar = new Dialog(context);
         lodingbar.setContentView(R.layout.loading);
         Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
         lodingbar.setCancelable(false);

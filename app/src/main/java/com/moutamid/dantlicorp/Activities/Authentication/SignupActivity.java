@@ -1,13 +1,18 @@
 package com.moutamid.dantlicorp.Activities.Authentication;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -37,13 +42,22 @@ public class SignupActivity extends AppCompatActivity {
     Calendar myCalendar = Calendar.getInstance();
     EditText name, dob, email, password, phone_number;
     Uri image_profile_str = null;
-
+    RadioGroup courier_type;
+    String courier_type_str="select";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         profile_pic = findViewById(R.id.profile_pic);
+        courier_type = findViewById(R.id.courier_type);
+        courier_type.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton radioButton = findViewById(i);
+                courier_type_str = radioButton.getText().toString();
+            }
+        });
         initComponent();
         DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
             // TODO Auto-generated method stub
@@ -93,10 +107,12 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-
     private void registerRequest() {
-        Config.showProgressDialog(SignupActivity.this);
-
+        Dialog lodingbar = new Dialog(SignupActivity.this);
+        lodingbar.setContentView(R.layout.loading);
+        Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+        lodingbar.setCancelable(false);
+        lodingbar.show();
         String filePathName = "users/";
         final String timestamp = "" + System.currentTimeMillis();
 
@@ -121,22 +137,21 @@ public class SignupActivity extends AppCompatActivity {
                         userModel.email = email.getText().toString();
                         userModel.phone_number = phone_number.getText().toString();
                         userModel.image_url = downloadImageUri.toString();
-                        userModel.id = Constants.auth().getUid();
+                        userModel.id = Constants.auth().getCurrentUser().getUid();
+                        userModel.is_courier = courier_type_str;
 
-                        Constants.UserReference.child(Objects.requireNonNull(Constants.auth().getUid())).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        Constants.UserReference.child(Objects.requireNonNull(Constants.auth().getCurrentUser().getUid())).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
                                 Config.sendFCMPush(SignupActivity.this);
                                 Stash.put("UserDetails", userModel);
                                 Stash.put("is_first", true);
-                                Config.dismissProgressDialog();
-                                startActivity(new Intent(SignupActivity.this, GetSocialLinksActivity.class));
+        lodingbar.dismiss();                                startActivity(new Intent(SignupActivity.this, GetSocialLinksActivity.class));
                                 finishAffinity();
                             }
                         });
                     }).addOnFailureListener(e -> {
-                        Config.dismissProgressDialog();
-                        Toast.makeText(this, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+lodingbar.dismiss();                        Toast.makeText(this, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
                 }
             }
@@ -182,7 +197,11 @@ public class SignupActivity extends AppCompatActivity {
 
             return false;
 
-        }  else if (!Config.isNetworkAvailable(this)) {
+        } else if (courier_type_str.equals("select")) {
+            Toast.makeText(this, "Please select Courier option", Toast.LENGTH_SHORT).show();
+            return false;
+
+        } else if (!Config.isNetworkAvailable(this)) {
             Config.showToast(this, "You are not connected to network");
             return false;
         } else {
@@ -191,7 +210,6 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void profile_image(View view) {
-
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);

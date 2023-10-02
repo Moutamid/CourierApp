@@ -1,8 +1,11 @@
 package com.moutamid.dantlicorp.Admin.Adapter;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +26,7 @@ import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.util.List;
+import java.util.Objects;
 
 public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.GalleryPhotosViewHolder> {
 
@@ -60,19 +64,20 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.GalleryPhoto
             dialog.setMessage("Are you sure to delete this video");
             dialog.setPositiveButton("Yes", (dialogInterface, i) -> {
                 dialogInterface.dismiss();
-                Config.showProgressDialog(ctx);
-                Constants.VideosReference.child(videoModel.getKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                Dialog lodingbar = new Dialog(ctx);
+                lodingbar.setContentView(R.layout.loading);
+                Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+                lodingbar.setCancelable(false);
+                lodingbar.show();                Constants.VideosReference.child(videoModel.getKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Config.dismissProgressDialog();
-//                        if (task.isSuccessful()){
+lodingbar.dismiss();//                        if (task.isSuccessful()){
 //                            videoModelList.remove(position);
 //                            notifyDataSetChanged();
 //                        }
                     }
                 }).addOnFailureListener(e -> {
-                    Config.dismissProgressDialog();
-                    Toast.makeText(ctx, "Something went wrong.", Toast.LENGTH_SHORT).show();
+lodingbar.dismiss();                    Toast.makeText(ctx, "Something went wrong.", Toast.LENGTH_SHORT).show();
                 });
             }).setNegativeButton("No", (dialogInterface, i) -> {
                 dialogInterface.dismiss();

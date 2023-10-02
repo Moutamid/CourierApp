@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -21,6 +24,7 @@ import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class EmployeeActivity extends AppCompatActivity {
     ArrayList<UserModel> list;
@@ -39,7 +43,12 @@ public class EmployeeActivity extends AppCompatActivity {
 
     }
     private void getData() {
-        Config.showProgressDialog(EmployeeActivity.this);
+        Dialog lodingbar = new Dialog(EmployeeActivity.this);
+
+        lodingbar.setContentView(R.layout.loading);
+        Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+        lodingbar.setCancelable(false);
+        lodingbar.show();
         Constants.UserReference
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -55,15 +64,13 @@ public class EmployeeActivity extends AppCompatActivity {
 
 
                         }
-                        Config.dismissProgressDialog();
-                        EmployeeListAdapter adapter = new EmployeeListAdapter(EmployeeActivity.this, list);
+                        lodingbar.dismiss();                        EmployeeListAdapter adapter = new EmployeeListAdapter(EmployeeActivity.this, list);
                         recyclerView.setAdapter(adapter);
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Config.dismissProgressDialog();
-                        Toast.makeText(EmployeeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+lodingbar.dismiss();                        Toast.makeText(EmployeeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

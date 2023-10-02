@@ -85,7 +85,7 @@ UserModel userModel;
                         date,
                         userModel.name
                 );
-                Constants.ChatReference.child(Constants.auth().getUid())
+                Constants.ChatReference.child(Constants.auth().getCurrentUser().getUid())
                         .child(ID)
                         .push()
                         .setValue(conversation)

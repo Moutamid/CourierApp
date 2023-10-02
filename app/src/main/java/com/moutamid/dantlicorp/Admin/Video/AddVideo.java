@@ -1,6 +1,9 @@
 package com.moutamid.dantlicorp.Admin.Video;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,6 +27,7 @@ import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class AddVideo extends AppCompatActivity {
     private static final int PICK_IMAGE_GALLERY = 111;
@@ -91,27 +95,28 @@ public class AddVideo extends AppCompatActivity {
 
     public void uploadvideo() {
         if (!key.equals("")) {
-            Config.showProgressDialog(AddVideo.this);
-            if (uri == null) {
+            Dialog    lodingbar = new Dialog(AddVideo.this);
+            lodingbar.setContentView(R.layout.loading);
+            Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+            lodingbar.setCancelable(false);
+            lodingbar.show();            if (uri == null) {
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("thumbnail", "" + thumbnail);
                 hashMap.put("key", key);
                 hashMap.put("url", edt_url.getText().toString());
                 Constants.VideosReference.child(key).setValue(hashMap)
                         .addOnSuccessListener(aVoid -> {
-                            Config.dismissProgressDialog();
-                            Toast.makeText(AddVideo.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
+    lodingbar.dismiss();                            Toast.makeText(AddVideo.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
                             onBackPressed();
                             finish();
                         })
                         .addOnFailureListener(e -> {
-                            Config.dismissProgressDialog();
-                            Toast.makeText(AddVideo.this, "Please try again", Toast.LENGTH_SHORT).show();
+    lodingbar.dismiss();                            Toast.makeText(AddVideo.this, "Please try again", Toast.LENGTH_SHORT).show();
                         });
 
             } else {
-                Config.showProgressDialog(AddVideo.this);
-                String filePathName = "videos/";
+               
+                lodingbar.show();                String filePathName = "videos/";
                 final String timestamp = "" + System.currentTimeMillis();
 
                 StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathName + timestamp);
@@ -131,27 +136,27 @@ public class AddVideo extends AppCompatActivity {
                             hashMap.put("url", edt_url.getText().toString());
                            Constants.VideosReference.child(key).setValue(hashMap)
                                     .addOnSuccessListener(aVoid -> {
-                                        Config.dismissProgressDialog();
-                                        Toast.makeText(this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                lodingbar.dismiss();                                        Toast.makeText(this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
                                         onBackPressed();
                                         finish();
                                     })
                                     .addOnFailureListener(e -> {
-                                        Config.dismissProgressDialog();
-                                        Toast.makeText(this, "Please try again", Toast.LENGTH_SHORT).show();
+                lodingbar.dismiss();                                        Toast.makeText(this, "Please try again", Toast.LENGTH_SHORT).show();
                                     });
                         }
                     }
 
                 }).addOnFailureListener(e -> {
-                    Config.dismissProgressDialog();
-                    Toast.makeText(this, "Failed to upload", Toast.LENGTH_SHORT).show();
+lodingbar.dismiss();                    Toast.makeText(this, "Failed to upload", Toast.LENGTH_SHORT).show();
                 });
             }
         }
         else if (uri != null) {
-            Config.showProgressDialog(AddVideo.this);
-            String filePathName = "videos/";
+            Dialog lodingbar = new Dialog(AddVideo.this);
+            lodingbar.setContentView(R.layout.loading);
+            Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+            lodingbar.setCancelable(false);
+            lodingbar.show();   String filePathName = "videos/";
             final String timestamp = "" + System.currentTimeMillis();
 
             StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathName+timestamp);
@@ -172,21 +177,18 @@ public class AddVideo extends AppCompatActivity {
                         hashMap.put("url", edt_url.getText().toString());
                         Constants.VideosReference.child(key).setValue(hashMap)
                                 .addOnSuccessListener(aVoid -> {
-                                    Config.dismissProgressDialog();
-                                    Toast.makeText(this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
+            lodingbar.dismiss();                                    Toast.makeText(this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
                                     onBackPressed();
                                     finish();
                                 })
                                 .addOnFailureListener(e -> {
-                                    Config.dismissProgressDialog();
-                                    Toast.makeText(this, "Please try again", Toast.LENGTH_SHORT).show();
+            lodingbar.dismiss();                                    Toast.makeText(this, "Please try again", Toast.LENGTH_SHORT).show();
                                 });
                     }
                 }
 
             }).addOnFailureListener(e -> {
-                Config.dismissProgressDialog();
-                Toast.makeText(this, "Failed to upload", Toast.LENGTH_SHORT).show();
+lodingbar.dismiss();                Toast.makeText(this, "Failed to upload", Toast.LENGTH_SHORT).show();
             });
         } else {
             Toast.makeText(this, "Please select Image", Toast.LENGTH_SHORT).show();

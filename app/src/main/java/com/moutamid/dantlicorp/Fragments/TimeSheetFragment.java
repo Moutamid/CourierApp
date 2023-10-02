@@ -1,5 +1,8 @@
 package com.moutamid.dantlicorp.Fragments;
 
+import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,7 @@ import com.moutamid.dantlicorp.helper.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TimeSheetFragment extends Fragment {
 
@@ -57,8 +61,12 @@ public class TimeSheetFragment extends Fragment {
 
 
     private void getProducts() {
-//        Config.showProgressDialog(getContext());
-     UserModel   userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+        Dialog lodingbar = new Dialog(getContext());
+
+        lodingbar.setContentView(R.layout.loading);
+        Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+        lodingbar.setCancelable(false);
+        lodingbar.show();     UserModel   userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
 
         Constants.UserReference.child(userModel.id).child(Constants.TIME_SHEET).addValueEventListener(new ValueEventListener() {
             @Override
@@ -77,14 +85,12 @@ public class TimeSheetFragment extends Fragment {
                     no_text.setVisibility(View.GONE);
                 }
                 timesheetAdapter.notifyDataSetChanged();
-//                Config.dismissProgressDialog();
-            }
+lodingbar.dismiss();            }
 
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Config.dismissProgressDialog();
-
+lodingbar.dismiss();
             }
 
 

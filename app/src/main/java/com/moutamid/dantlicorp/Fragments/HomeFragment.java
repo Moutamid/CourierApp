@@ -2,9 +2,12 @@ package com.moutamid.dantlicorp.Fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -99,6 +102,18 @@ public class HomeFragment extends Fragment {
 ////                }
 //            }
 //        });
+
+        if(userNew.is_courier.equals("Yse"))
+        {
+            add_check_in_lyt.setVisibility(View.VISIBLE);
+            add_check_out_lyt.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            add_check_in_lyt.setVisibility(View.GONE);
+            add_check_out_lyt.setVisibility(View.GONE);
+
+        }
         chat_Admin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,8 +140,11 @@ public class HomeFragment extends Fragment {
         show_map_lyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Config.showProgressDialog(getContext());
-                Constants.LocationReference.addValueEventListener(new ValueEventListener() {
+                Dialog lodingbar = new Dialog(getContext());
+                lodingbar.setContentView(R.layout.loading);
+                Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+                lodingbar.setCancelable(false);
+                lodingbar.show();                Constants.LocationReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -136,13 +154,11 @@ public class HomeFragment extends Fragment {
                         }
                         Stash.put("AllUserLocation", userArrayList);
                         startActivity(new Intent(getContext(), AllUserLocationActivity.class));
-                        Config.dismissProgressDialog();
-                    }
+lodingbar.dismiss();                    }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        Config.dismissProgressDialog();
-
+lodingbar.dismiss();
                     }
                 });
             }

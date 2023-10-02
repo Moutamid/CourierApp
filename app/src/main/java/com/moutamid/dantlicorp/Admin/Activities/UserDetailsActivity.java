@@ -1,6 +1,9 @@
 package com.moutamid.dantlicorp.Admin.Activities;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -17,11 +20,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.moutamid.dantlicorp.Activities.Home.MapsActivity;
 import com.moutamid.dantlicorp.Admin.Adapter.MyAdapter;
+import com.moutamid.dantlicorp.Admin.Adapter.UserAdapter;
 import com.moutamid.dantlicorp.Dailogues.ChecksDialogClass;
 import com.moutamid.dantlicorp.Dailogues.UserDetailsDialogClass;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
+
+import java.util.Objects;
 
 public class UserDetailsActivity extends AppCompatActivity {
 
@@ -39,11 +45,9 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         tabLayout.addTab(tabLayout.newTab().setText("Profile"));
         tabLayout.addTab(tabLayout.newTab().setText("Social Links"));
-        tabLayout.addTab(tabLayout.newTab().setText("Check In"));
-        tabLayout.addTab(tabLayout.newTab().setText("Check Out"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final MyAdapter adapter = new MyAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());
+        final UserAdapter adapter = new UserAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -70,8 +74,11 @@ public class UserDetailsActivity extends AppCompatActivity {
     public void map(View view) {
 
         String userID = Stash.getString("userID");
-        Config.showProgressDialog(UserDetailsActivity.this);
-        Constants.LocationReference.child(userID).addValueEventListener(new ValueEventListener() {
+        Dialog lodingbar = new Dialog(UserDetailsActivity.this);
+        lodingbar.setContentView(R.layout.loading);
+        Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+        lodingbar.setCancelable(false);
+        lodingbar.show();        Constants.LocationReference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -79,21 +86,18 @@ public class UserDetailsActivity extends AppCompatActivity {
                     intent.putExtra("lat", snapshot.child("lat").getValue().toString());
                     intent.putExtra("lng", snapshot.child("lng").getValue().toString());
                     intent.putExtra("name", snapshot.child("name").getValue().toString());
-                    Config.dismissProgressDialog();
-                    startActivity(intent);
+lodingbar.dismiss();                    startActivity(intent);
                 }
                 else
                 {
-                    Config.dismissProgressDialog();
-                    Toast.makeText(UserDetailsActivity.this, "User location is not active", Toast.LENGTH_SHORT).show();
+lodingbar.dismiss();                    Toast.makeText(UserDetailsActivity.this, "User location is not active", Toast.LENGTH_SHORT).show();
                 }
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Config.dismissProgressDialog();
-                Toast.makeText(UserDetailsActivity.this, "User location is not active", Toast.LENGTH_SHORT).show();
+lodingbar.dismiss();                Toast.makeText(UserDetailsActivity.this, "User location is not active", Toast.LENGTH_SHORT).show();
 
 
 

@@ -4,6 +4,7 @@ package com.moutamid.dantlicorp.Dailogues;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +20,8 @@ import com.moutamid.dantlicorp.Model.TimeSheetModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
+
+import java.util.Objects;
 
 public class UserDetailsDialogClass extends Dialog {
 
@@ -59,8 +62,11 @@ public class UserDetailsDialogClass extends Dialog {
                     // Display an error message if the edit text fields are empty.
                     Toast.makeText(c, "Please enter details", Toast.LENGTH_SHORT).show();
                 } else {
-                    Config.showProgressDialog(c);
-                    TimeSheetModel timeSheetModel = new TimeSheetModel();
+                    Dialog    lodingbar = new Dialog(c);
+                    lodingbar.setContentView(R.layout.loading);
+                    Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+                    lodingbar.setCancelable(false);
+                    lodingbar.show();                    TimeSheetModel timeSheetModel = new TimeSheetModel();
                     timeSheetModel.date = date_str;
                     timeSheetModel.days = days_str;
                     timeSheetModel.hours = hours_str;
@@ -73,12 +79,10 @@ public class UserDetailsDialogClass extends Dialog {
                             if (task.isComplete()) {
                                 dismiss();
                                 Toast.makeText(c, "Successfully Submitted", Toast.LENGTH_SHORT).show();
-                                Config.dismissProgressDialog();
-                            } else {
+lodingbar.dismiss();                            } else {
                                 dismiss();
                                 Toast.makeText(c, "Something went wrong", Toast.LENGTH_SHORT).show();
-                                Config.dismissProgressDialog();
-                            }
+lodingbar.dismiss();                            }
                         }
                     });
                 }

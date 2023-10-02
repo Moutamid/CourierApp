@@ -4,6 +4,7 @@ package com.moutamid.dantlicorp.Dailogues;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ import com.moutamid.dantlicorp.helper.Constants;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ChecksDialogClass extends Dialog {
 
@@ -62,8 +64,11 @@ public class ChecksDialogClass extends Dialog {
                     // Display an error message if the edit text fields are empty.
                     Toast.makeText(c, "Please enter details.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Config.showProgressDialog(c);
-                    String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+                    Dialog    lodingbar = new Dialog(c);
+                    lodingbar.setContentView(R.layout.loading);
+                    Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+                    lodingbar.setCancelable(false);
+                    lodingbar.show();  String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
 
                     ChecksModel checksModel = new ChecksModel();
                     checksModel.name = name_str;
@@ -85,12 +90,10 @@ public class ChecksDialogClass extends Dialog {
 
                                 dismiss();
                                 Toast.makeText(c, "Successfully Submitted", Toast.LENGTH_SHORT).show();
-                                Config.dismissProgressDialog();
-                            } else {
+        lodingbar.dismiss();                            } else {
                                 dismiss();
                                 Toast.makeText(c, "Something went wrong", Toast.LENGTH_SHORT).show();
-                                Config.dismissProgressDialog();
-
+        lodingbar.dismiss();
                             }
                         }
                     });

@@ -1,7 +1,10 @@
 package com.moutamid.dantlicorp.Activities.Home;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.lang.UCharacter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,6 +46,7 @@ public class EditProfileActivity extends AppCompatActivity {
     UserModel userNew;
     EditText facebook_url_edt, twitter_url_edt, instagram_url_edt, reddit_url_edt, pinterest_url_edt, linkedIn_url_edt;
     String facebook_url_str, twitter_url_str, instagram_url_str, reddit_url_str, pinterest_url_str, linkedIn_url_str;
+    Dialog lodingbar;
 
 
     @Override
@@ -61,6 +65,7 @@ public class EditProfileActivity extends AppCompatActivity {
         dob.setText(userNew.dob);
         email.setText(userNew.email);
         phone_number.setText(userNew.phone_number);
+        lodingbar = new Dialog(EditProfileActivity.this);
 
         facebook_url_edt = findViewById(R.id.facebook);
         twitter_url_edt = findViewById(R.id.twitter);
@@ -109,7 +114,10 @@ public class EditProfileActivity extends AppCompatActivity {
 
     private void registerRequest() {
 
-        Config.showProgressDialog(EditProfileActivity.this);
+         lodingbar.setContentView(R.layout.loading);
+        Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+        lodingbar.setCancelable(false);
+        lodingbar.show();
         if (image_profile_str != null) {
             String filePathName = "users/";
             final String timestamp = "" + System.currentTimeMillis();
@@ -118,7 +126,7 @@ public class EditProfileActivity extends AppCompatActivity {
             Task<Uri> uriTask = urlTask.continueWithTask(task -> {
                 if (!task.isSuccessful()) {
 //                    Log.d("data", image_profile_str + "  " + Uri.parse(userNew.image_url) + "  " + task.getException().getMessage());
-                    Config.dismissProgressDialog();
+                    lodingbar.dismiss();
                     Toast.makeText(EditProfileActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 return storageReference.getDownloadUrl();
@@ -191,7 +199,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             return false;
 
-        }else if (!Config.isNetworkAvailable(this)) {
+        } else if (!Config.isNetworkAvailable(this)) {
             Config.showToast(this, "You are not connected to network");
             return false;
         } else {
@@ -244,7 +252,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 Stash.put("UserLinks", socialModel);
-                Config.dismissProgressDialog();
+                lodingbar.dismiss();
                 onBackPressed();
             }
         });

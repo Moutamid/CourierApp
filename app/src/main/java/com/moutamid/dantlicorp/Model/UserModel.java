@@ -2,6 +2,7 @@ package com.moutamid.dantlicorp.Model;
 
 public class UserModel {
     public String name, dob, email, phone_number, id;
+    public String is_courier;
     public String image_url;
     public double lat, lng;
 
@@ -47,7 +48,6 @@ public class UserModel {
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
-
 
 
     public String getId() {
