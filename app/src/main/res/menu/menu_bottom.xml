@@ -13,11 +13,15 @@
 
     <item
         android:id="@+id/item2"
-        android:title="Training"
-        android:icon="@drawable/video"/>
-
+        android:title="Human Resource"
+        android:icon="@drawable/teamwork"/>
     <item
         android:id="@+id/item3"
+        android:icon="@drawable/video"
+        android:title="Training" />
+
+    <item
+        android:id="@+id/item4"
         android:title="Profile"
         android:icon="@drawable/profile"/>
 

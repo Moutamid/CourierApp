@@ -92,7 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                 lodingbar.setContentView(R.layout.loading);
                 Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
                 lodingbar.setCancelable(false);
-                lodingbar.show();                Constants.auth().signInWithEmailAndPassword(
+                lodingbar.show();
+                Constants.auth().signInWithEmailAndPassword(
                         email.getText().toString(),
                         password.getText().toString()
                 ).addOnSuccessListener(authResult -> {
@@ -100,11 +101,11 @@ public class LoginActivity extends AppCompatActivity {
                     Constants.UserReference.child(authResult.getUser().getUid()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.exists())
-                            {
-                                UserModel userModel= snapshot.getValue(UserModel.class);
+                            if (snapshot.exists()) {
+                                UserModel userModel = snapshot.getValue(UserModel.class);
                                 Stash.put("UserDetails", userModel);
-        lodingbar.dismiss();                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                lodingbar.dismiss();
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                                 finishAffinity();
                             }
                         }
@@ -116,7 +117,8 @@ public class LoginActivity extends AppCompatActivity {
                     });
 
                 }).addOnFailureListener(e -> {
-lodingbar.dismiss();                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    lodingbar.dismiss();
+                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
             }
 

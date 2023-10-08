@@ -33,6 +33,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.moutamid.dantlicorp.Fragments.ChatFragment;
 import com.moutamid.dantlicorp.Fragments.HomeFragment;
+import com.moutamid.dantlicorp.Fragments.HumanResourceFragment;
 import com.moutamid.dantlicorp.Fragments.ProfileFragment;
 import com.moutamid.dantlicorp.Fragments.TimeSheetFragment;
 import com.moutamid.dantlicorp.Fragments.VideosFragment;
@@ -68,9 +69,13 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new TimeSheetFragment());
 
                 } else if (i == 2) {
-                    replaceFragment(new VideosFragment());
+                    replaceFragment(new HumanResourceFragment());
+
 
                 } else if (i == 3) {
+                    replaceFragment(new VideosFragment());
+
+                } else if (i == 4) {
                     replaceFragment(new ProfileFragment());
 
                 }

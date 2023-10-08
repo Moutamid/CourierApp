@@ -55,7 +55,8 @@ public class GetSocialLinksActivity extends AppCompatActivity {
                 lodingbar.setContentView(R.layout.loading);
                 Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
                 lodingbar.setCancelable(false);
-                lodingbar.show();                if (!facebook_url_edt.getText().toString().isEmpty()) {
+                lodingbar.show();
+                if (!facebook_url_edt.getText().toString().isEmpty()) {
                     facebook_url_str = facebook_url_edt.getText().toString();
 
                 }
@@ -87,13 +88,14 @@ public class GetSocialLinksActivity extends AppCompatActivity {
                 socialModel.reddit_url = reddit_url_str;
                 socialModel.pinterest_url = pinterest_url_str;
                 socialModel.linkedIn_url = linkedIn_url_str;
-         UserModel    userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+                UserModel userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
 
                 Constants.UserReference.child(Constants.auth().getCurrentUser().getUid()).child("social_links").setValue(socialModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Stash.put("UserLinks", socialModel);
-lodingbar.dismiss();                        Intent intent = new Intent(GetSocialLinksActivity.this, MainActivity.class);
+                        lodingbar.dismiss();
+                        Intent intent = new Intent(GetSocialLinksActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }

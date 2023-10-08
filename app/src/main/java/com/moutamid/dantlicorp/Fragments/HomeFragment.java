@@ -66,6 +66,7 @@ public class HomeFragment extends Fragment {
 
     TextView location_txt;
     UserModel userNew;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -102,17 +103,15 @@ public class HomeFragment extends Fragment {
 ////                }
 //            }
 //        });
+        if (userNew.is_courier != null) {
+            if (userNew.is_courier.equals("Yse")) {
+                add_check_in_lyt.setVisibility(View.VISIBLE);
+                add_check_out_lyt.setVisibility(View.VISIBLE);
+            } else {
+                add_check_in_lyt.setVisibility(View.GONE);
+                add_check_out_lyt.setVisibility(View.GONE);
 
-        if(userNew.is_courier.equals("Yse"))
-        {
-            add_check_in_lyt.setVisibility(View.VISIBLE);
-            add_check_out_lyt.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            add_check_in_lyt.setVisibility(View.GONE);
-            add_check_out_lyt.setVisibility(View.GONE);
-
+            }
         }
         chat_Admin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,7 +143,8 @@ public class HomeFragment extends Fragment {
                 lodingbar.setContentView(R.layout.loading);
                 Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
                 lodingbar.setCancelable(false);
-                lodingbar.show();                Constants.LocationReference.addValueEventListener(new ValueEventListener() {
+                lodingbar.show();
+                Constants.LocationReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -154,11 +154,12 @@ public class HomeFragment extends Fragment {
                         }
                         Stash.put("AllUserLocation", userArrayList);
                         startActivity(new Intent(getContext(), AllUserLocationActivity.class));
-lodingbar.dismiss();                    }
+                        lodingbar.dismiss();
+                    }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-lodingbar.dismiss();
+                        lodingbar.dismiss();
                     }
                 });
             }
