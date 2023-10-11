@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="@color/white"
     tools:context=".Activities.Home.WebViewActivity">
 
@@ -41,5 +40,7 @@
         android:id="@+id/webview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:background="@color/white"
+android:paddingTop="-30dp"
         android:layout_below="@id/toolbar" />
 </RelativeLayout>

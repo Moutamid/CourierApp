@@ -88,6 +88,7 @@ public class OnBoardingActivity extends AppCompatActivity {
                         editor.putString("boarding_view", "yes");
                         editor.apply();
                         startActivity(new Intent(OnBoardingActivity.this, LoginActivity.class));
+                        finishAffinity();
                     }
                 });
                 cvBtn.setOnClickListener(new View.OnClickListener() {
@@ -128,8 +129,6 @@ public class OnBoardingActivity extends AppCompatActivity {
         listBoarding = new ArrayList<>();
         viewPager = findViewById(R.id.view_pager);
         prepareBoardingData();
-
-
         viewPager.setOnTouchListener((view, motionEvent) -> true);
 
 

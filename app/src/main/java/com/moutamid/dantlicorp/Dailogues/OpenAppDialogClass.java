@@ -1,9 +1,7 @@
-package com.moutamid.dantlicorp.helper;
+package com.moutamid.dantlicorp.Dailogues;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -13,24 +11,21 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.moutamid.dantlicorp.Activities.OnBoarding.OnBoardingActivity;
 import com.moutamid.dantlicorp.R;
 
-public class DialogClass extends Dialog {
+public class OpenAppDialogClass extends Dialog {
 
     public Activity c;
-    Button button;
-    ImageView imgBack;
-    String name;
-    int i;
+    Button accept;
+    Button deny;
 
-    public DialogClass(Activity a, String name, int i) {
+
+    public OpenAppDialogClass(Activity a) {
         super(a);
         // TODO Auto-generated constructor stub
         this.c = a;
-        this.name = name;
-        this.i = i;
     }
 
     @Override
@@ -38,25 +33,20 @@ public class DialogClass extends Dialog {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        setContentView(R.layout.deposit_dailogue);
-        imgBack = findViewById(R.id.imgBack);
-        button = findViewById(R.id.click_here);
-        TextView name_tx = findViewById(R.id.name);
-        name_tx.setText(name);
-        button.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.open_app_dailogue);
+        accept = findViewById(R.id.accept);
+        deny = findViewById(R.id.deny);
+        accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri = Uri.parse("http://www.google.com"); // missing 'http://' will cause crashed
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                c.startActivity(intent);
+                c.startActivity(new Intent(c, OnBoardingActivity.class));
                 dismiss();
-
             }
         });
-        imgBack.setOnClickListener(new View.OnClickListener() {
+        deny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dismiss();
+                c.finishAffinity();
             }
         });
     }

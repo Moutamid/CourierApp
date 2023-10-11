@@ -259,7 +259,7 @@ public class HomeFragment extends Fragment {
                             }
 
                             String address = addresses.get(0).getAddressLine(0);
-                            location_txt.setText(address);
+//                            location_txt.setText(address);
 //                            Toast.makeText(getContext(), "" + address, Toast.LENGTH_SHORT).show();
                             Constants.cur_lat = location.getLatitude();
                             Constants.cur_lng = location.getLongitude();

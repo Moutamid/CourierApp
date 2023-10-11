@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fxn.stash.Stash;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.moutamid.dantlicorp.Activities.OnBoarding.SplashActivity;
+import com.moutamid.dantlicorp.Dailogues.OpenAppDialogClass;
+import com.moutamid.dantlicorp.Dailogues.WelcomeDialogClass;
 import com.moutamid.dantlicorp.MainActivity;
 import com.moutamid.dantlicorp.Model.SocialModel;
 import com.moutamid.dantlicorp.Model.UserModel;
@@ -24,7 +27,6 @@ import java.util.Objects;
 
 public class GetSocialLinksActivity extends AppCompatActivity {
     Button continue_btn;
-
     EditText facebook_url_edt, twitter_url_edt, instagram_url_edt, reddit_url_edt, pinterest_url_edt, linkedIn_url_edt;
     String facebook_url_str, twitter_url_str, instagram_url_str, reddit_url_str, pinterest_url_str, linkedIn_url_str;
 
@@ -95,22 +97,17 @@ public class GetSocialLinksActivity extends AppCompatActivity {
                     public void onSuccess(Void unused) {
                         Stash.put("UserLinks", socialModel);
                         lodingbar.dismiss();
-                        Intent intent = new Intent(GetSocialLinksActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+                        WelcomeDialogClass cdd = new WelcomeDialogClass(GetSocialLinksActivity.this);
+                        cdd.show();
                     }
                 });
-
-
             }
         });
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(GetSocialLinksActivity.this, LoginActivity.class));
-
         finishAffinity();
     }
 }

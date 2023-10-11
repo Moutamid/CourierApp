@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.fxn.stash.Stash;
 import com.moutamid.dantlicorp.Activities.Authentication.LoginActivity;
 import com.moutamid.dantlicorp.Admin.AdminPanel;
+import com.moutamid.dantlicorp.Dailogues.ChecksDialogClass;
+import com.moutamid.dantlicorp.Dailogues.OpenAppDialogClass;
 import com.moutamid.dantlicorp.MainActivity;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
@@ -42,20 +44,19 @@ public class SplashActivity extends AppCompatActivity {
                     UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
                     if (userNew != null) {
                         startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        finish();
                     } else {
                         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-
+                        finish();
                     }
                 } else {
-                    startActivity(new Intent(SplashActivity.this, OnBoardingActivity.class));
+                    OpenAppDialogClass cdd = new OpenAppDialogClass(SplashActivity.this);
+                    cdd.show();
                 }
-            }
-            else
-            {
+            } else {
                 startActivity(new Intent(SplashActivity.this, AdminPanel.class));
-
+                finish();
             }
-            finish();
         }, SPLASH_TIME);
 
     }

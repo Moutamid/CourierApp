@@ -154,6 +154,36 @@
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
                 android:textSize="15dp" />
+         <EditText
+                android:id="@+id/city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/edit_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="City"
+                android:inputType="phone"
+                android:padding="12dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="15dp" />
+         <EditText
+                android:id="@+id/state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/edit_bg"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="State"
+                android:inputType="phone"
+                android:padding="12dp"
+                android:textColor="@color/textColor"
+                android:textColorHint="@color/textColor"
+                android:textSize="15dp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

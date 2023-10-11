@@ -47,13 +47,10 @@ public class EditProfileActivity extends AppCompatActivity {
     EditText facebook_url_edt, twitter_url_edt, instagram_url_edt, reddit_url_edt, pinterest_url_edt, linkedIn_url_edt;
     String facebook_url_str, twitter_url_str, instagram_url_str, reddit_url_str, pinterest_url_str, linkedIn_url_str;
     Dialog lodingbar;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
-
         profile_img = findViewById(R.id.profile_pic);
         name = findViewById(R.id.name);
         dob = findViewById(R.id.dob);
@@ -66,7 +63,6 @@ public class EditProfileActivity extends AppCompatActivity {
         email.setText(userNew.email);
         phone_number.setText(userNew.phone_number);
         lodingbar = new Dialog(EditProfileActivity.this);
-
         facebook_url_edt = findViewById(R.id.facebook);
         twitter_url_edt = findViewById(R.id.twitter);
         instagram_url_edt = findViewById(R.id.instagram);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#1156C1B7"
     android:orientation="vertical">
 
@@ -10,47 +10,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <ImageView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/lexend_medium"
-            android:text="Dashboard"
-            android:textColor="@color/black"
-            android:textSize="56dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="-60dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="60dp"
+            android:src="@drawable/logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="110dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Current location"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="30dp"
+            android:tint="@color/app_color"
+            android:src="@drawable/baseline_notifications_active_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="95dp"
+            android:layout_marginRight="25dp"
             android:ellipsize="marquee"
-            android:layout_marginTop="115dp"
-            android:textColor="#7C7070"
-            android:layout_toRightOf="@+id/title"
+            android:fontFamily="@font/poppins_regular"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:text="Hello guys !! Welcome to GeeksforGeeks Portal !!"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            android:text="Create an “Amazing” Experience for Everyone You Encounter, Be Creative and Innovative, Do More with Less, Remain Positive, Seek Solutions, Inspire Others, Be Honest With All People, Remain Humble, Love What You Do, Embrace Change"
+            android:textColor="#000000"
+            android:textSize="15sp" />
 
         <LinearLayout
             android:id="@+id/add_location"
@@ -88,171 +86,173 @@
                 android:textSize="15dp" />
 
         </LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_below="@+id/add_location"
-
-    >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Services"
-            android:textColor="@color/black"
-            android:textSize="18dp" />
 
         <LinearLayout
-            android:id="@+id/add_Details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/add_location"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Services"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
 
             <LinearLayout
-                android:id="@+id/add_check_in_lyt"
+                android:id="@+id/add_Details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="22dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_bg"
-                android:backgroundTint="@color/white"
-                android:elevation="10dp"
-                android:orientation="vertical"
-                android:padding="15dp">
+                android:layout_below="@+id/add_location"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-
-                    android:src="@drawable/checkin" />
-
-                <TextView
-                    android:id="@+id/checkin"
+                <LinearLayout
+                    android:id="@+id/add_check_in_lyt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_margin="22dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="center"
-                    android:text="Check In"
-                    android:textColor="@color/black"
-                    android:textSize="15dp" />
+                    android:background="@drawable/btn_bg"
+                    android:backgroundTint="@color/white"
+                    android:elevation="10dp"
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
-                <TextView
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+
+                        android:src="@drawable/checkin" />
+
+                    <TextView
+                        android:id="@+id/checkin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:text="Check In"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:text="Add details here"
+                        android:textColor="#AC9E9E"
+                        android:textSize="12dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/add_check_out_lyt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
+                    android:layout_margin="22dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="center"
-                    android:padding="2dp"
-                    android:text="Add details here"
-                    android:textColor="#AC9E9E"
-                    android:textSize="12dp" />
+                    android:background="@drawable/btn_bg"
+                    android:backgroundTint="@color/white"
+                    android:elevation="10dp"
+                    android:orientation="vertical"
+                    android:padding="15dp">
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+
+                        android:src="@drawable/checkout" />
+
+                    <TextView
+                        android:id="@+id/checkout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:text="Check Out"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:padding="2dp"
+                        android:text="Add details here"
+                        android:textColor="#AC9E9E"
+                        android:textSize="12dp" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/add_check_out_lyt"
+                android:id="@+id/chat_Admin"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="22dp"
-                android:layout_weight="1"
-                android:background="@drawable/btn_bg"
-                android:backgroundTint="@color/white"
-                android:elevation="10dp"
-                android:orientation="vertical"
-                android:padding="15dp">
+                android:layout_below="@+id/add_Details"
+                android:orientation="vertical">
 
-                <ImageView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="22dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/btn_bg"
+                    android:backgroundTint="@color/white"
+                    android:elevation="5dp"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
 
-                    android:src="@drawable/checkout" />
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:src="@drawable/icon" />
 
-                <TextView
-                    android:id="@+id/checkout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="center"
-                    android:text="Check Out"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
+                    <TextView
+                        android:id="@+id/chat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:text="Chat with Admin"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="center"
-                    android:padding="2dp"
-                    android:text="Add details here"
-                    android:textColor="#AC9E9E"
-                    android:textSize="12dp" />
+
+                </LinearLayout>
 
 
             </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/chat_Admin"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/add_Details"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginLeft="22dp"
-                android:layout_marginRight="22dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/btn_bg"
-                android:backgroundTint="@color/white"
-                android:elevation="5dp"
-                android:orientation="horizontal"
-                android:padding="15dp">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
-                    android:src="@drawable/icon" />
-
-                <TextView
-                    android:id="@+id/chat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:gravity="center"
-                    android:text="Chat with Admin"
-                    android:textColor="@color/black"
-                    android:textSize="18dp" />
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-</LinearLayout>
 
 
     </RelativeLayout>

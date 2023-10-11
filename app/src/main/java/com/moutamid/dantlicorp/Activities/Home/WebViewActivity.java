@@ -11,7 +11,6 @@ import com.moutamid.dantlicorp.R;
 
 
 public class WebViewActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,17 +18,15 @@ public class WebViewActivity extends AppCompatActivity {
         WebView browser = (WebView) findViewById(R.id.webview);
         browser.getSettings().setLoadsImagesAutomatically(true);
         browser.setWebViewClient(new MyBrowser());
-
-//        browser.getSettings().setJavaScriptEnabled(true);
-//        browser.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        browser.loadUrl("https://docs.google.com/document/d/1DJz-8OCkQUuxLtROm-l7hF2M0Bbmqrx4WQaKs8K4a_4/edit?usp=sharing");
+//      browser.getSettings().setJavaScriptEnabled(true);
+//      browser.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        browser.loadUrl("https://docs.google.com/document/d/10WnhJNgkaGDGTkeqyubE6nbeCbJJfJmGVkCfCp5qDKE/edit?usp=sharing");
 
     }
 
     public void backPress(View view) {
         onBackPressed();
     }
-
     private class MyBrowser extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {

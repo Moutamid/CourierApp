@@ -26,6 +26,16 @@
         android:textColor="@color/black"
         android:textColorHint="@color/grey"
         android:padding="10dp" />
+    <EditText
+        android:id="@+id/edt_link"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/edit_bg"
+        android:hint="Enter Link"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
+        android:padding="10dp" />
 
     <TextView
         android:id="@+id/upload_video"

@@ -1,7 +1,7 @@
 package com.moutamid.dantlicorp.Model;
 
 public class UserModel {
-    public String name, dob, email, phone_number, id;
+    public String name, dob, email, phone_number, id, city, state;
     public String is_courier;
     public String image_url;
     public double lat, lng;

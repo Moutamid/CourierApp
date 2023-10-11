@@ -40,10 +40,10 @@ public class SignupActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_GALLERY = 111;
     ImageView profile_pic;
     Calendar myCalendar = Calendar.getInstance();
-    EditText name, dob, email, password, phone_number;
+    EditText name, dob, email, password, phone_number, city, state;
     Uri image_profile_str = null;
     RadioGroup courier_type;
-    String courier_type_str="select";
+    String courier_type_str = "select";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +83,8 @@ public class SignupActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         phone_number = findViewById(R.id.phone_number);
+        city = findViewById(R.id.city);
+        state = findViewById(R.id.state);
     }
 
     public void login(View view) {
@@ -115,7 +117,6 @@ public class SignupActivity extends AppCompatActivity {
         lodingbar.show();
         String filePathName = "users/";
         final String timestamp = "" + System.currentTimeMillis();
-
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathName + timestamp);
         UploadTask urlTask = storageReference.putFile(image_profile_str);
         Task<Uri> uriTask = urlTask.continueWithTask(task -> {
@@ -143,15 +144,16 @@ public class SignupActivity extends AppCompatActivity {
                         Constants.UserReference.child(Objects.requireNonNull(Constants.auth().getCurrentUser().getUid())).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-                                Config.sendFCMPush(SignupActivity.this);
                                 Stash.put("UserDetails", userModel);
                                 Stash.put("is_first", true);
-        lodingbar.dismiss();                                startActivity(new Intent(SignupActivity.this, GetSocialLinksActivity.class));
+                                lodingbar.dismiss();
+                                startActivity(new Intent(SignupActivity.this, GetSocialLinksActivity.class));
                                 finishAffinity();
                             }
                         });
                     }).addOnFailureListener(e -> {
-lodingbar.dismiss();                        Toast.makeText(this, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        lodingbar.dismiss();
+                        Toast.makeText(this, "error" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
                 }
             }
@@ -178,7 +180,7 @@ lodingbar.dismiss();                        Toast.makeText(this, "error" + e.get
             return false;
 
         } else if (email.getText().toString().isEmpty()) {
-            email.setError("Enter");
+            email.setError("Enter Email");
             email.requestFocus();
             Config.openKeyboard(this);
             return false;
@@ -197,16 +199,39 @@ lodingbar.dismiss();                        Toast.makeText(this, "error" + e.get
 
             return false;
 
-        } else if (courier_type_str.equals("select")) {
-            Toast.makeText(this, "Please select Courier option", Toast.LENGTH_SHORT).show();
+        } else if (city.getText().toString().isEmpty()) {
+            city.setError("Enter City");
+            city.requestFocus();
+            Config.openKeyboard(this);
+
             return false;
 
-        } else if (!Config.isNetworkAvailable(this)) {
-            Config.showToast(this, "You are not connected to network");
+        } else if (state.getText().toString().isEmpty()) {
+            state.setError("Enter State");
+            state.requestFocus();
+            Config.openKeyboard(this);
+
             return false;
-        } else {
-            return true;
+
+        } else if (courier_type_str.equals("select"))
+        {
+            Toast.makeText(this, "Please select Courier option", Toast.LENGTH_SHORT).show();
+
+            return false;
+
         }
+        else if (!Config.isNetworkAvailable(this))
+        {
+            Config.showToast(this, "You are not connected to network");
+
+            return false;
+        }
+        else {
+
+            return true;
+
+        }
+
     }
 
     public void profile_image(View view) {
