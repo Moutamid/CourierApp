@@ -18,6 +18,7 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,11 +40,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.moutamid.dantlicorp.Activities.Home.AllUserLocationActivity;
 import com.moutamid.dantlicorp.Activities.Home.ChatActivity;
+import com.moutamid.dantlicorp.Activities.Home.NotificationsActivity;
 import com.moutamid.dantlicorp.Dailogues.ChecksDialogClass;
 import com.moutamid.dantlicorp.Model.SocialModel;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
-import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.io.IOException;
@@ -66,20 +67,26 @@ public class HomeFragment extends Fragment {
 
     TextView location_txt;
     UserModel userNew;
-
+    ImageView notification_icon;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for   getContext() fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 //        date_txt = view.findViewById(R.id.date);
+        notification_icon = view.findViewById(R.id.notification_icon);
         add_check_in_lyt = view.findViewById(R.id.add_check_in_lyt);
         add_check_out_lyt = view.findViewById(R.id.add_check_out_lyt);
         location_txt = view.findViewById(R.id.location);
         location_txt.setSelected(true);
         chat_Admin = view.findViewById(R.id.chat_Admin);
         userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
-
+        notification_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), NotificationsActivity.class));
+            }
+        });
 //        start_journey_lyt = view.findViewById(R.id.start_journey);
 //        journey_txt = view.findViewById(R.id.journey_txt);
         show_map_lyt = view.findViewById(R.id.show_map_lyt);
@@ -104,7 +111,7 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
         if (userNew.is_courier != null) {
-            if (userNew.is_courier.equals("Yse")) {
+            if (userNew.is_courier.equals("Yes")) {
                 add_check_in_lyt.setVisibility(View.VISIBLE);
                 add_check_out_lyt.setVisibility(View.VISIBLE);
             } else {

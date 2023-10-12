@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
 
-    android:orientation="vertical"
-    tools:context=".Admin.Video.AllVideo">
+    android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="70dp"
@@ -20,7 +19,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
-            android:text="@string/training"
+            android:text="All Notifications"
             android:textColor="@color/white"
             android:textSize="20dp" />
     </androidx.appcompat.widget.Toolbar>
@@ -28,7 +27,6 @@
         android:id="@+id/content_rcv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn"
         android:layout_alignParentTop="true"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
@@ -36,19 +34,5 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp" />
-
-    <TextView
-        android:id="@+id/btn"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/btn_bg"
-        android:gravity="center"
-        android:onClick="add_details"
-        android:padding="6dp"
-        android:layout_alignParentBottom="true"
-        android:text="@string/add_train"
-        android:textColor="@color/white"
-        android:textSize="16dp" />
 
 </RelativeLayout>

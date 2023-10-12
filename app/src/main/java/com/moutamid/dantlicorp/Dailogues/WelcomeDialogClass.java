@@ -46,7 +46,7 @@ public class WelcomeDialogClass extends Dialog {
         name_person = findViewById(R.id.name_person);
         welcome = findViewById(R.id.welcome);
         userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
-        name_person.setText(userModel.getName() + " " + userModel.city + ", " + userModel.state);
+        name_person.setText(userModel.getName() + " in " + userModel.city + ", " + userModel.state+" welcomes you to the Dantli Corp App!");       ;
         Glide.with(c).load(userModel.image_url).into(profile_img);
         welcome.setOnClickListener(new View.OnClickListener() {
             @Override

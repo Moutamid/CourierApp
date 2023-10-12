@@ -22,7 +22,7 @@
         android:layout_height="50dp"
         android:layout_margin="20dp"
         android:background="@drawable/edit_bg"
-        android:hint="Enter Url"
+        android:hint="@string/enter_url"
         android:textColor="@color/black"
         android:textColorHint="@color/grey"
         android:padding="10dp" />
@@ -32,7 +32,7 @@
         android:layout_height="50dp"
         android:layout_margin="20dp"
         android:background="@drawable/edit_bg"
-        android:hint="Enter Link"
+        android:hint="@string/enter_link"
         android:textColor="@color/black"
         android:textColorHint="@color/grey"
         android:padding="10dp" />
@@ -43,7 +43,7 @@
         android:layout_height="50dp"
         android:background="@drawable/btn_bg"
         android:layout_marginLeft="20dp"
-        android:text="Upload"
+        android:text="@string/upload"
         android:gravity="center"
         android:textSize="20dp"
         android:textColor="@color/white"

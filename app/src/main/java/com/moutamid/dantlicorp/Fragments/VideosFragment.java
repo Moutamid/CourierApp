@@ -59,15 +59,19 @@ public class VideosFragment extends Fragment {
         lodingbar.setContentView(R.layout.loading);
         Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
         lodingbar.setCancelable(false);
-        lodingbar.show();        Constants.VideosReference.addValueEventListener(new ValueEventListener() {
+        lodingbar.show();
+        Constants.VideosReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productModelList.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    VideoModel herbsModel = ds.getValue(VideoModel.class);
-                    productModelList.add(herbsModel);
+                    VideoModel videoModel = ds.getValue(VideoModel.class);
+                    productModelList.add(videoModel);
                 }
-lodingbar.dismiss();lodingbar.dismiss();            }
+                videoAdapter.notifyDataSetChanged();
+                lodingbar.dismiss();
+            }
+
 
 
             @Override

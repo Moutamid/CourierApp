@@ -82,6 +82,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="25dp"
+                android:visibility="gone"
                 android:background="@drawable/edit_bg"
                 android:fontFamily="@font/poppins_regular"
                 android:hint="Enter Reddit url (Optional)"
@@ -119,6 +120,8 @@
                 android:fontFamily="@font/poppins_regular"
                 android:hint="Enter Pinterest url (Optional)"
                 android:padding="12dp"
+                android:visibility="gone"
+
                 android:textColor="@color/textColor"
                 android:textColorHint="#A39A9A"
                 android:textSize="15dp" />

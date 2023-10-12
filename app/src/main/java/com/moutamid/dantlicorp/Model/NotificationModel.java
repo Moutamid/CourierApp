@@ -1,7 +1,7 @@
 package com.moutamid.dantlicorp.Model;
 
 public class NotificationModel {
-    String title, type;
+   public String title, type, message;
 
     public NotificationModel() {
     }

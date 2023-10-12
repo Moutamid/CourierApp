@@ -41,7 +41,6 @@ public class NotifcationsActivity extends AppCompatActivity {
     String type;
     String s;
     ProgressBar progress_bar;
-    NotificationModel notificationModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,6 @@ public class NotifcationsActivity extends AppCompatActivity {
         send_notification = findViewById(R.id.send_notification);
         progress_bar = findViewById(R.id.progress_bar);
         type = "simple";
-        notificationModel = new NotificationModel();
         simple.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -83,8 +81,7 @@ public class NotifcationsActivity extends AppCompatActivity {
                     call_url.setError("Please Enter");
                 } else {
                     s = call_url.getText().toString();
-                    sendFCMPush(edt_message.getText().toString() + " " + call_url.getText().toString());
-
+                    sendFCMPush(edt_message.getText().toString());
                 }
             } else {
                 s = "";
@@ -114,6 +111,8 @@ public class NotifcationsActivity extends AppCompatActivity {
                 response -> {
                     Log.e("True", response + "");
                     Log.d("Responce", response.toString());
+
+
                     progress_bar.setVisibility(View.GONE);
                     Toast.makeText(NotifcationsActivity.this, "Successfully send a notification", Toast.LENGTH_SHORT).show();
 

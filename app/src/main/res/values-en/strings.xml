@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="nav_open">Open</string>
-    <string name="nav_close">Close\n</string>
     <string name="enter_url">Enter Url</string>
     <string name="enter_link">Enter Link</string>
     <string name="upload">Upload</string>

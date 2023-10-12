@@ -137,6 +137,8 @@ public class SignupActivity extends AppCompatActivity {
                         userModel.dob = dob.getText().toString();
                         userModel.email = email.getText().toString();
                         userModel.phone_number = phone_number.getText().toString();
+                        userModel.state = state.getText().toString();
+                        userModel.city = city.getText().toString();
                         userModel.image_url = downloadImageUri.toString();
                         userModel.id = Constants.auth().getCurrentUser().getUid();
                         userModel.is_courier = courier_type_str;

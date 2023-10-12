@@ -10,19 +10,24 @@ import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
+import com.fxn.stash.Stash;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.moutamid.dantlicorp.MainActivity;
+import com.moutamid.dantlicorp.Model.NotificationModel;
 import com.moutamid.dantlicorp.R;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MessagingService  extends FirebaseMessagingService {
 
+    NotificationModel notificationModel;
 
     @Override
     public void onNewToken(String token) {
@@ -35,10 +40,18 @@ public class MessagingService  extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(final RemoteMessage remoteMessage) {
-
+        notificationModel = new NotificationModel();
+        notificationModel.type = remoteMessage.getData().get("type");
+        notificationModel.title = remoteMessage.getData().get("data");
+        notificationModel.message = remoteMessage.getData().get("message");
+        Log.d("Notification", notificationModel.type+" | "+notificationModel.title+" | "+notificationModel.message+" notification");
+        ArrayList<NotificationModel> notificationModelArrayList = Stash.getArrayList("Notification", NotificationModel.class);
+        notificationModelArrayList.add(notificationModel);
+        Stash.put("Notification", notificationModelArrayList);
         final Intent intent = new Intent(MessagingService.this, MainActivity.class);
         intent.putExtra("type", remoteMessage.getData().get("type"));
         intent.putExtra("data", remoteMessage.getData().get("data"));
+        intent.putExtra("message", remoteMessage.getData().get("message"));
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         int notificationID = new Random().nextInt(3000);
 
@@ -60,7 +73,8 @@ public class MessagingService  extends FirebaseMessagingService {
                 .setContentTitle(remoteMessage.getData().get("title"))
 //                .setContentTitle("Booking message")
 //                .setContentText("You have a new Appointment. Click to check for details")
-                .setContentText(remoteMessage.getData().get("message"))
+                .setContentText(remoteMessage.getData().get("message")+"\n"+remoteMessage.getData().get("data"))
+
                 .setAutoCancel(true)
                 .setSound(notificationSoundUri)
                 .setContentIntent(pendingIntent);

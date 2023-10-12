@@ -80,8 +80,12 @@
             android:exported="true" />
         <activity
             android:name=".Admin.AdminPanel"
-            android:exported="true" >
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Activities.Home.VideoPlayActivity"
@@ -116,6 +120,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/Base.Theme.AppCompat"
             tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".Activities.Home.NotificationsActivity"
+            android:exported="true"/>
 
         <service
             android:name=".helper.MessagingService"

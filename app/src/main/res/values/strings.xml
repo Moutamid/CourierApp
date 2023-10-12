@@ -7,5 +7,17 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close\n</string>
+    <string name="enter_url">Enter Url</string>
+    <string name="enter_link">Enter Link</string>
+    <string name="upload">Upload</string>
+    <string name="admin_panel">Admin Panel</string>
+    <string name="all_employees_details">All Employees Details</string>
+    <string name="send_notifications">Send Notifications</string>
+    <string name="add_training">Add Training</string>
+    <string name="live_chats">Live Chats</string>
+    <string name="live_location_on_map">Live Location on Map</string>
+    <string name="logout">Logout</string>
+    <string name="training">Training</string>
+    <string name="add_train">Add Training</string>
 
 </resources>
