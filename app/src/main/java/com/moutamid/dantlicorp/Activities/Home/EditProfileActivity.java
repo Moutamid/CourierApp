@@ -44,7 +44,7 @@ public class EditProfileActivity extends AppCompatActivity {
     Calendar myCalendar = Calendar.getInstance();
     Uri image_profile_str = null;
     UserModel userNew;
-    EditText facebook_url_edt, twitter_url_edt, instagram_url_edt, reddit_url_edt, pinterest_url_edt, linkedIn_url_edt;
+    EditText city, state, facebook_url_edt, twitter_url_edt, instagram_url_edt, reddit_url_edt, pinterest_url_edt, linkedIn_url_edt;
     String facebook_url_str, twitter_url_str, instagram_url_str, reddit_url_str, pinterest_url_str, linkedIn_url_str;
     Dialog lodingbar;
     @Override
@@ -55,12 +55,16 @@ public class EditProfileActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         dob = findViewById(R.id.dob);
         email = findViewById(R.id.email);
+        city = findViewById(R.id.city);
+        state = findViewById(R.id.state);
         phone_number = findViewById(R.id.phone_number);
         userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
         SocialModel socialModel = (SocialModel) Stash.getObject("UserLinks", SocialModel.class);
         name.setText(userNew.name);
         dob.setText(userNew.dob);
         email.setText(userNew.email);
+        city.setText(userNew.city);
+        state.setText(userNew.state);
         phone_number.setText(userNew.phone_number);
         lodingbar = new Dialog(EditProfileActivity.this);
         facebook_url_edt = findViewById(R.id.facebook);
@@ -136,6 +140,8 @@ public class EditProfileActivity extends AppCompatActivity {
                         userModel.email = email.getText().toString();
                         userModel.phone_number = phone_number.getText().toString();
                         userModel.image_url = downloadImageUri.toString();
+                        userModel.city = city.getText().toString();
+                        userModel.state = state.getText().toString();
                         userModel.id = userNew.id;
 
                         Constants.UserReference.child(userNew.id).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -155,6 +161,8 @@ public class EditProfileActivity extends AppCompatActivity {
             userModel.dob = dob.getText().toString();
             userModel.email = email.getText().toString();
             userModel.phone_number = phone_number.getText().toString();
+            userModel.city = city.getText().toString();
+            userModel.state = state.getText().toString();
             userModel.image_url = userNew.image_url;
             userModel.id = userNew.id;
             Constants.UserReference.child(userNew.id).setValue(userModel).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -191,6 +199,20 @@ public class EditProfileActivity extends AppCompatActivity {
         } else if (phone_number.getText().toString().isEmpty()) {
             phone_number.setError("Enter Phone Number");
             phone_number.requestFocus();
+            Config.openKeyboard(this);
+
+            return false;
+
+        }  else if (state.getText().toString().isEmpty()) {
+            state.setError("Enter State");
+            state.requestFocus();
+            Config.openKeyboard(this);
+
+            return false;
+
+        }  else if (city.getText().toString().isEmpty()) {
+            city.setError("Enter City");
+            city.requestFocus();
             Config.openKeyboard(this);
 
             return false;

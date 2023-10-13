@@ -33,7 +33,7 @@
         android:layout_height="match_parent"
         android:fontFamily="@font/poppins_bold"
         android:gravity="center_vertical"
-        android:text="Edit Profile"
+        android:text="@string/edit_profile"
         android:textSize="20dp" />
 
   </LinearLayout>
@@ -68,7 +68,7 @@
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
 
-        android:hint="Name"
+        android:hint="@string/name"
         android:layout_marginTop="40dp"
         android:textColor="@color/textColor"
         android:padding="12dp"
@@ -86,7 +86,7 @@
 
         android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Full Name"
+        android:hint="@string/full_name"
         android:padding="12dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
@@ -95,7 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
-        android:hint="DOB "
+        android:hint="@string/dob"
         android:padding="12dp"
         android:layout_marginLeft="20dp"
         android:textColor="@color/textColor"
@@ -115,7 +115,7 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Date of Birth"
+        android:hint="@string/dob"
         android:padding="12dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
@@ -126,7 +126,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Email "
+        android:hint="@string/email"
 
         android:padding="12dp"
         android:textColor="@color/textColor"
@@ -142,7 +142,7 @@
         android:layout_marginRight="25dp"
         android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Email"
+        android:hint="@string/email"
         android:clickable="false"
         android:cursorVisible="false"
         android:focusable="false"
@@ -159,7 +159,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Phone Number "
+        android:hint="@string/phone_number"
 
         android:padding="12dp"
         android:textColor="@color/textColor"
@@ -175,7 +175,7 @@
         android:layout_marginRight="25dp"
         android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Phone Number"
+        android:hint="@string/phone_number"
         android:inputType="phone"
         android:padding="12dp"
         android:textColor="@color/textColor"
@@ -188,7 +188,59 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Facebook "
+        android:hint="@string/city"
+        android:padding="12dp"
+
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/city"
+        android:padding="12dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textSize="15dp" />
+   <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/state"
+        android:padding="12dp"
+
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_bg"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/state"
+        android:padding="12dp"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/textColor"
+        android:textSize="15dp" />
+   <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:fontFamily="@font/poppins_regular"
+        android:hint="@string/facebook"
         android:padding="12dp"
 
         android:textColor="@color/textColor"
@@ -204,7 +256,7 @@
         android:layout_marginRight="25dp"
         android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Facebook"
+        android:hint="@string/facebook"
         android:padding="12dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
@@ -215,7 +267,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Twitter "
+        android:hint="@string/twitter"
         android:padding="12dp"
 
         android:textColor="@color/textColor"
@@ -231,7 +283,7 @@
         android:layout_marginRight="25dp"
         android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Twitter"
+        android:hint="@string/twitter"
         android:padding="12dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
@@ -244,7 +296,7 @@
         android:fontFamily="@font/poppins_regular"
         android:hint="Reddit"
         android:padding="12dp"
-
+android:visibility="gone"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
         android:textSize="15dp"
@@ -260,6 +312,8 @@
         android:fontFamily="@font/poppins_regular"
         android:hint="Reddit"
         android:padding="12dp"
+        android:visibility="gone"
+
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
         android:textSize="15dp" />
@@ -269,7 +323,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Instagram"
+        android:hint="@string/instagram"
         android:padding="12dp"
 
         android:textColor="@color/textColor"
@@ -285,7 +339,7 @@
         android:layout_marginRight="25dp"
         android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Instagram"
+        android:hint="@string/instagram"
         android:padding="12dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
@@ -298,6 +352,8 @@
         android:fontFamily="@font/poppins_regular"
         android:hint="Pinterest"
         android:padding="12dp"
+        android:visibility="gone"
+
 
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
@@ -313,6 +369,8 @@
         android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
         android:hint="Pinterest"
+        android:visibility="gone"
+
         android:padding="12dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
@@ -323,7 +381,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Linked In"
+        android:hint="@string/linked_in"
         android:padding="12dp"
 
         android:textColor="@color/textColor"
@@ -339,7 +397,7 @@
         android:layout_marginRight="25dp"
         android:background="@drawable/edit_bg"
         android:fontFamily="@font/poppins_regular"
-        android:hint="Linked In"
+        android:hint="@string/linked_in"
         android:padding="12dp"
         android:textColor="@color/textColor"
         android:textColorHint="@color/textColor"
@@ -357,7 +415,7 @@
         android:background="@drawable/btn_bg"
         android:fontFamily="@font/poppins_regular"
         android:onClick="sign_up"
-        android:text="Update Profile"
+        android:text="@string/update_profile"
         android:layout_marginBottom="20dp"
         android:textColor="@color/white" />
 

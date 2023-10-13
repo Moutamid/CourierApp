@@ -25,7 +25,7 @@
                 android:onClick="login"
                 android:layout_marginTop="60dp"
                 android:layout_marginLeft="30dp"
-                android:text="Social Links"
+                android:text="@string/social_links"
                 android:textColor="@color/app_color"
                 android:textSize="35dp" />
             <EditText
@@ -38,7 +38,7 @@
                 
                 android:background="@drawable/edit_bg"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Enter facebook url (Optional)"
+                android:hint="@string/enter_facebook_url_optional"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
                 android:textColorHint="#A39A9A"
@@ -53,7 +53,7 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/edit_bg"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Enter Twitter url (Optional)"
+                android:hint="@string/enter_twitter_url_optional"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
                 android:textColorHint="#A39A9A"
@@ -68,7 +68,7 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/edit_bg"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Enter Instagram url (Optional)"
+                android:hint="@string/enter_instagram_url_optional"
                 android:inputType="textEmailAddress"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
@@ -135,7 +135,7 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/edit_bg"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Enter LinkedIn url (Optional)"
+                android:hint="@string/enter_linkedin_url_optional"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
                 android:textColorHint="#A39A9A"
@@ -152,7 +152,7 @@
                 android:background="@drawable/btn_bg"
                 android:fontFamily="@font/poppins_regular"
                 android:layout_marginTop="20dp"
-                android:text="Continue"
+                android:text="@string/continue_"
                 android:textColor="@color/white" />
 
         </LinearLayout>

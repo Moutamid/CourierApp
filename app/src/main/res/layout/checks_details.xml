@@ -27,17 +27,17 @@
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/poppins_bolditalic"
                 android:gravity="center"
-                android:text="Check In Details"
+                android:text="@string/check_in_details"
                 android:textColor="@color/black"
                 android:textSize="22dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="@color/black"
                 android:textSize="16dp" />
 
@@ -54,7 +54,7 @@
 
                 android:background="@drawable/stroke_bg"
                 android:fontFamily="@font/poppins_medium"
-                android:hint="Name"
+                android:hint="@string/name"
                 android:padding="10dp"
 
                 />
@@ -63,10 +63,10 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="No# of Box"
+                android:text="@string/no_of_box"
                 android:textColor="@color/black"
 
                 android:textSize="16dp" />
@@ -86,7 +86,7 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/grey"
 
-                android:hint="Number of Box you deliver"
+                android:hint="@string/number_of_box_you_deliver"
                 android:inputType="number"
                 android:padding="8dp" />
 
@@ -102,7 +102,7 @@
                 android:background="@drawable/btn_bg"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@color/white"
                 android:textSize="23dp" />
 

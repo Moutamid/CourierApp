@@ -1,6 +1,7 @@
 package com.moutamid.dantlicorp.Fragments;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.lang.UCharacter;
 import android.os.Bundle;
@@ -19,11 +20,10 @@ import com.fxn.stash.Stash;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.moutamid.dantlicorp.Adapter.VideoAdapter;
+import com.moutamid.dantlicorp.Activities.Home.TimeSheetActivity;
 import com.moutamid.dantlicorp.Admin.Adapter.TimesheetAdapter;
 import com.moutamid.dantlicorp.Model.TimeSheetModel;
 import com.moutamid.dantlicorp.Model.UserModel;
-import com.moutamid.dantlicorp.Model.VideoModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
@@ -38,7 +38,7 @@ public class TimeSheetFragment extends Fragment {
      public List<TimeSheetModel> productModelList = new ArrayList<>();
     TimesheetAdapter timesheetAdapter;
     TextView no_text;
-
+    TextView btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,12 +50,19 @@ public class TimeSheetFragment extends Fragment {
         timesheetAdapter = new TimesheetAdapter(getContext(), productModelList);
         content_rcv.setAdapter(timesheetAdapter);
         no_text = view.findViewById(R.id.no_text);
+        btn = view.findViewById(R.id.btn);
 
         if (Config.isNetworkAvailable(getContext())) {
             getProducts();
         } else {
             Toast.makeText(getContext(), "No network connection available.", Toast.LENGTH_SHORT).show();
         }
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), TimeSheetActivity.class));
+            }
+        });
         return view;
     }
 

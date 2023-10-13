@@ -36,10 +36,10 @@ public class TimesheetAdapter extends RecyclerView.Adapter<TimesheetAdapter.Gall
     @Override
     public void onBindViewHolder(@NonNull GalleryPhotosViewHolder holder, final int position) {
         TimeSheetModel timeSheetModel = timeSheetModelList.get(position);
-        holder.date.setText(timeSheetModel.date);
-        holder.days.setText(timeSheetModel.days);
-        holder.hours.setText(timeSheetModel.hours);
-        holder.pay.setText(timeSheetModel.pay);
+//        holder.date.setText(timeSheetModel.date);
+//        holder.days.setText(timeSheetModel.days);
+//        holder.hours.setText(timeSheetModel.hours);
+//        holder.pay.setText(timeSheetModel.pay);
 
     }
 

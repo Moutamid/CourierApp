@@ -28,11 +28,25 @@
             android:layout_alignParentRight="true"
             android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="65dp"
             android:id="@+id/notification_icon"
             android:layout_marginBottom="30dp"
             android:src="@drawable/baseline_notifications_active_24"
             android:tint="@color/app_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/language_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/language"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +64,7 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:text="Create an “Amazing” Experience for Everyone You Encounter, Be Creative and Innovative, Do More with Less, Remain Positive, Seek Solutions, Inspire Others, Be Honest With All People, Remain Humble, Love What You Do, Embrace Change"
+            android:text="@string/create_an_amazing_experience_for_everyone_you_encounter_be_creative_and_innovative_do_more_with_less_remain_positive_seek_solutions_inspire_others_be_honest_with_all_people_remain_humble_love_what_you_do_embrace_change"
             android:textColor="#000000"
             android:textSize="15sp" />
 
@@ -85,7 +99,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="Show All Employees Location"
+                android:text="@string/show_all_employees_location"
                 android:textColor="@color/white"
                 android:textSize="15dp" />
 
@@ -104,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Services"
+                android:text="@string/services"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 
@@ -143,9 +157,9 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
-                        android:text="Check In"
+                        android:text="@string/check_in"
                         android:textColor="@color/black"
-                        android:textSize="15dp" />
+                        android:textSize="14dp" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -156,7 +170,7 @@
                         android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
                         android:padding="2dp"
-                        android:text="Add details here"
+                        android:text="@string/add_details_here"
                         android:textColor="#AC9E9E"
                         android:textSize="12dp" />
 
@@ -191,7 +205,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
-                        android:text="Check Out"
+                        android:text="@string/check_out"
                         android:textColor="@color/black"
                         android:textSize="14dp" />
 
@@ -204,7 +218,7 @@
                         android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
                         android:padding="2dp"
-                        android:text="Add details here"
+                        android:text="@string/add_details_here"
                         android:textColor="#AC9E9E"
                         android:textSize="12dp" />
 
@@ -246,7 +260,7 @@
                         android:layout_marginRight="20dp"
                         android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
-                        android:text="Chat with Admin"
+                        android:text="@string/chat_with_admin"
                         android:textColor="@color/black"
                         android:textSize="18dp" />
 

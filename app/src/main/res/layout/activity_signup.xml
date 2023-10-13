@@ -64,7 +64,7 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/edit_bg"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Full Name"
+                android:hint="@string/full_name"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
@@ -83,7 +83,7 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Date of Birth"
+                android:hint="@string/date_of_birth"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
@@ -98,7 +98,7 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/edit_bg"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
@@ -114,7 +114,7 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/edit_bg"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
@@ -148,7 +148,7 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/edit_bg"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Phone Number"
+                android:hint="@string/phone_number"
                 android:inputType="phone"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
@@ -163,7 +163,7 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/edit_bg"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="City"
+                android:hint="@string/city"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
@@ -177,7 +177,7 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/edit_bg"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="State"
+                android:hint="@string/state"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
@@ -191,7 +191,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="25dp"
 
-                android:text="Are you Courier?"
+                android:text="@string/are_you_courier"
                 android:textColor="@color/textColor"
                 android:textSize="12dp" />
             <RadioGroup
@@ -210,7 +210,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:buttonTint="@color/app_color"
                     android:layout_weight="1"
-                    android:text="Yes" />
+                    android:text="@string/yes" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
@@ -218,7 +218,7 @@
                     android:layout_weight="1"
                     android:buttonTint="@color/app_color"
 android:fontFamily="@font/poppins_regular"
-                    android:text="No" />
+                    android:text="@string/no" />
             </RadioGroup>
 
 
@@ -232,7 +232,7 @@ android:fontFamily="@font/poppins_regular"
                 android:background="@drawable/btn_bg"
                 android:fontFamily="@font/poppins_regular"
                 android:onClick="sign_up"
-                android:text="SIGN UP"
+                android:text="@string/sign_up"
                 android:textColor="@color/white" />
 
             <LinearLayout
@@ -249,7 +249,7 @@ android:fontFamily="@font/poppins_regular"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
-                    android:text="Already have an account? "
+                    android:text="@string/already_have_an_account"
                     android:textColor="@color/textColor"
                     android:textSize="14dp" />
 
@@ -259,7 +259,7 @@ android:fontFamily="@font/poppins_regular"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
                     android:onClick="login"
-                    android:text="Login"
+                    android:text="@string/login"
                     android:textColor="@color/app_color"
                     android:textSize="14dp" />
             </LinearLayout>

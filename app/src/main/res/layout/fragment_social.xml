@@ -16,7 +16,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:fontFamily="@font/poppins_bold"
-                android:hint="Facebook "
+                android:hint="@string/facebook"
                 android:padding="12dp"
 
                 android:textColor="@color/textColor"
@@ -31,7 +31,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Not added yet"
+                android:hint="@string/not_added_yet"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:fontFamily="@font/poppins_bold"
-                android:hint="Twitter "
+                android:hint="@string/twitter"
                 android:padding="12dp"
 
                 android:textColor="@color/textColor"
@@ -57,7 +57,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Not added yet"
+                android:hint="@string/not_added_yet"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
@@ -70,7 +70,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:hint="Reddit"
                 android:padding="12dp"
-
+                android:visibility="gone"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
                 android:textSize="17dp"
@@ -83,8 +83,10 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Not added yet"
+                android:hint="@string/not_added_yet"
                 android:padding="12dp"
+                android:visibility="gone"
+
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
                 android:textSize="13dp" />
@@ -94,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:fontFamily="@font/poppins_extrabold"
-                android:hint="Instagram"
+                android:hint="@string/instagram"
                 android:padding="12dp"
 
                 android:textColor="@color/textColor"
@@ -109,7 +111,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Not added yet"
+                android:hint="@string/not_added_yet"
                 android:padding="12dp"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
@@ -121,6 +123,8 @@
                 android:layout_marginLeft="20dp"
                 android:fontFamily="@font/poppins_bold"
                 android:hint="Pinterest"
+                android:visibility="gone"
+
                 android:padding="12dp"
 
                 android:textColor="@color/textColor"
@@ -135,8 +139,10 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Not added yet"
+                android:hint="@string/not_added_yet"
                 android:padding="12dp"
+                android:visibility="gone"
+
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
                 android:textSize="13dp" />
@@ -146,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:fontFamily="@font/poppins_bold"
-                android:hint="Linked In"
+                android:hint="@string/linked_in"
                 android:padding="12dp"
 
                 android:textColor="@color/textColor"
@@ -161,7 +167,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Not added yet"
+                android:hint="@string/not_added_yet"
                 android:padding="12dp"
                 android:layout_marginBottom="60dp"
                 android:textColor="@color/textColor"

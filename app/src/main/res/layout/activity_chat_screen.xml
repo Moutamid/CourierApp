@@ -60,7 +60,7 @@
             android:layout_weight="1"
             android:background="@drawable/edit_bg"
             android:fontFamily="@font/poppins_medium"
-            android:hint="Your Message..."
+            android:hint="@string/your_message"
             android:textColor="@color/black"
             android:textColorHint="@color/grey"
 

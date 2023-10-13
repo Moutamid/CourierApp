@@ -19,7 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.moutamid.dantlicorp.Activities.Home.EditProfileActivity;
 import com.moutamid.dantlicorp.Admin.Adapter.MyAdapter;
-import com.moutamid.dantlicorp.Dailogues.UserDetailsDialogClass;
+//import com.moutamid.dantlicorp.Dailogues.UserDetailsDialogClass;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
@@ -113,8 +113,7 @@ lodingbar.dismiss();                Toast.makeText(CourierDetailsActivity.this, 
     }
 
     public void timeline(View view) {
-        UserDetailsDialogClass cdd = new UserDetailsDialogClass(CourierDetailsActivity.this);
-        cdd.show();
-
+//        UserDetailsDialogClass cdd = new UserDetailsDialogClass(CourierDetailsActivity.this);
+//        cdd.show();
     }
 }

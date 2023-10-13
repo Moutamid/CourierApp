@@ -22,7 +22,7 @@
             android:layout_marginBottom="50dp"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
-            android:text="Welcome to Dantli Corp"
+            android:text="@string/welcome_to_dantli_corp"
             android:textColor="#000"
             android:textSize="18dp" />
 
@@ -37,7 +37,7 @@
             android:layout_marginBottom="50dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
-            android:text="Dantli Corp collects location data to enable Breadcrumbs and Map data even when the app is closed or not in use"
+            android:text="@string/dantli_corp_collects_location_data_to_enable_breadcrumbs_and_map_data_even_when_the_app_is_closed_or_not_in_use"
             android:textColor="#000"
             android:textSize="15dp" />
 
@@ -58,7 +58,7 @@
                 android:background="@drawable/button_bg"
                 android:backgroundTint="#F44336"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Deny"
+                android:text="@string/deny"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 
@@ -72,7 +72,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_bg"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Accept"
+                android:text="@string/accept"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 

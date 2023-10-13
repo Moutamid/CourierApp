@@ -14,7 +14,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/lexend_medium"
-            android:text="Timesheet"
+            android:text="@string/timesheet"
             android:textColor="@color/black"
             android:textSize="56dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,7 +37,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
 
-                android:text="Date"
+                android:text="@string/date"
                 android:textSize="18dp" />
 
             <TextView
@@ -47,18 +47,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
-                android:text="Days"
-
-                android:textSize="18dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/poppins_bold"
-                android:gravity="center"
-                android:text="Hours"
+                android:text="@string/days"
 
                 android:textSize="18dp" />
 
@@ -69,7 +58,18 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
-                android:text="Pay"
+                android:text="@string/hours"
+
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="@string/pay"
 
                 android:textSize="18dp" />
         </LinearLayout>
@@ -87,11 +87,27 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:fontFamily="@font/poppins_bold"
-            android:text="Not added yet"
+            android:text="@string/not_added_yet"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold"
             android:visibility="gone" />
+    <TextView
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_bg"
+        android:gravity="center"
+        android:onClick="add_details"
+        android:padding="6dp"
+        android:text="@string/add_timesheet"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
 
 
 </RelativeLayout>

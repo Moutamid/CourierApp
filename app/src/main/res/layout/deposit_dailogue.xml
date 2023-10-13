@@ -33,7 +33,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Need to update your payment information?  "
+            android:text="@string/need_to_update_your_payment_information"
             android:textColor="#000"
             android:textSize="15dp"
             android:textStyle="bold" />

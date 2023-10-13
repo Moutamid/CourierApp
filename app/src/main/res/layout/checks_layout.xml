@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="No of Box"
+                    android:text="@string/no_of_box"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 
@@ -53,7 +53,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="jjj"
                     android:textColor="#978383"
                     android:textSize="12sp" />
 
@@ -68,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Date"
+                    android:text="@string/date"
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 

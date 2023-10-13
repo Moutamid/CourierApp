@@ -21,7 +21,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
-            android:text="Notifications"
+            android:text="@string/notifications"
             android:textColor="@color/white"
             android:textSize="20dp" />
     </androidx.appcompat.widget.Toolbar>
@@ -34,7 +34,7 @@
         android:background="@drawable/edit_bg"
         android:textColor="@color/black"
         android:textColorHint="@color/grey"
-        android:hint="Write Something"
+        android:hint="@string/write_something"
         android:padding="10dp" />
 
     <EditText
@@ -45,7 +45,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/edit_bg"
-        android:hint="Url"
+        android:hint="@string/url"
         android:padding="10dp"
         android:visibility="gone" />
 
@@ -57,7 +57,7 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/btn_bg"
         android:gravity="center"
-        android:text="Send Notification"
+        android:text="@string/send_notification"
         android:textColor="@color/white"
         android:textSize="20dp" />
 
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/black"
-            android:text="Link" />
+            android:text="@string/link" />
 
         <RadioButton
             android:id="@+id/simple"
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Simple" />
+            android:text="@string/simple" />
     </RadioGroup>
 
     <ProgressBar

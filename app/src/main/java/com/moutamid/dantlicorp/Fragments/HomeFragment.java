@@ -6,6 +6,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.lang.UCharacter;
 import android.location.Address;
@@ -15,7 +17,9 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -42,17 +47,18 @@ import com.moutamid.dantlicorp.Activities.Home.AllUserLocationActivity;
 import com.moutamid.dantlicorp.Activities.Home.ChatActivity;
 import com.moutamid.dantlicorp.Activities.Home.NotificationsActivity;
 import com.moutamid.dantlicorp.Dailogues.ChecksDialogClass;
+import com.moutamid.dantlicorp.MainActivity;
 import com.moutamid.dantlicorp.Model.SocialModel;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Constants;
+import com.moutamid.dantlicorp.helper.LocaleHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-
 
 public class HomeFragment extends Fragment {
     TextView admin;
@@ -64,10 +70,13 @@ public class HomeFragment extends Fragment {
 
     TextView journey_txt;
     ArrayList<UserModel> userArrayList = new ArrayList<>();
-
+    ImageView menu;
     TextView location_txt;
     UserModel userNew;
     ImageView notification_icon;
+    Context context;
+    Resources resources;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,6 +87,7 @@ public class HomeFragment extends Fragment {
         add_check_in_lyt = view.findViewById(R.id.add_check_in_lyt);
         add_check_out_lyt = view.findViewById(R.id.add_check_out_lyt);
         location_txt = view.findViewById(R.id.location);
+        menu = view.findViewById(R.id.language_icon);
         location_txt.setSelected(true);
         chat_Admin = view.findViewById(R.id.chat_Admin);
         userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
@@ -87,6 +97,36 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getContext(), NotificationsActivity.class));
             }
         });
+        menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(getContext(), menu);
+
+                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+                popupMenu.setForceShowIcon(true);
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+                    @Override
+
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        if (menuItem.getItemId() == R.id.spanish) {
+                            setLocale("es");
+                        } else if (menuItem.getItemId() == R.id.chinese) {
+                            setLocale("zh");
+
+                        }
+                        return true;
+
+                    }
+
+                });
+
+                popupMenu.show();
+
+            }
+        });
+
 //        start_journey_lyt = view.findViewById(R.id.start_journey);
 //        journey_txt = view.findViewById(R.id.journey_txt);
         show_map_lyt = view.findViewById(R.id.show_map_lyt);
@@ -363,6 +403,17 @@ public class HomeFragment extends Fragment {
         if (checkPermissions()) {
             getLastLocation();
         }
+    }
+
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        Intent refresh = new Intent(getContext(), MainActivity.class);
+        startActivity(refresh);
     }
 
 }

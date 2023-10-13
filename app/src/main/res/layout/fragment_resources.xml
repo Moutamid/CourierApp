@@ -13,7 +13,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/lexend_medium"
-        android:text="Human Resource"
+        android:text="@string/human_resource"
         android:textColor="@color/black"
         android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +55,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
-                android:text="Direct Deposit"
+                android:text="@string/direct_deposit"
                 android:textColor="@color/black"
                 android:textSize="17dp" />
 
@@ -89,7 +89,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
-                android:text="Verification of Employment Letter"
+                android:text="@string/verification_of_employment_letter"
                 android:textColor="@color/black"
                 android:textSize="17dp" />
 

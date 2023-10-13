@@ -19,7 +19,7 @@
             android:background="@color/app_color"
             android:fontFamily="@font/poppins_extrabold"
             android:padding="20dp"
-            android:text="Chat with Admin"
+            android:text="@string/chat_with_admin"
             android:textColor="@color/white"
             android:textSize="35dp" />
 
@@ -61,7 +61,7 @@
             android:textColor="@color/black"
             android:textColorHint="@color/grey"
             android:fontFamily="@font/poppins_medium"
-            android:hint="Your Message..."
+            android:hint="@string/your_message"
             android:inputType="textMultiLine"
             android:maxHeight="100sp"
             android:textSize="14dp"

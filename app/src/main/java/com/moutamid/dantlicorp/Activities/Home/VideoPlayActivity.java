@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,14 +43,11 @@ public class VideoPlayActivity extends AppCompatActivity {
             public void onStateChange(@NonNull YouTubePlayer youTubePlayer, @NonNull PlayerConstants.PlayerState state) {
                 // this method is called if video has ended,
                 super.onStateChange(youTubePlayer, state);
-//                if (state.equals(state))
-//                {
-//                    Uri webpage = Uri.parse("https://docs.google.com/document/d/1DJz-8OCkQUuxLtROm-l7hF2M0Bbmqrx4WQaKs8K4a_4/edit?usp=sharing");
-//                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-////                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-//                    startActivity(intent);
-////                 Toast.makeText(VideoPlayActivity.this, "yes", Toast.LENGTH_SHORT).show();
-//                }
+                if (state == PlayerConstants.PlayerState.ENDED) {
+                    Uri webpage = Uri.parse("https://docs.google.com/document/d/1DJz-8OCkQUuxLtROm-l7hF2M0Bbmqrx4WQaKs8K4a_4/edit?usp=sharing");
+                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                    startActivity(intent);
+                }
             }
         });
     }

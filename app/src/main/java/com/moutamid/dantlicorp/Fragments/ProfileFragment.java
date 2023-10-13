@@ -34,7 +34,7 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
 
-        textView7 = view.findViewById(R.id.textView7);
+//        textView7 = view.findViewById(R.id.textView7);
         name_txt = view.findViewById(R.id.textView6);
         rlShare = view.findViewById(R.id.rlShare);
         rlRate = view.findViewById(R.id.rlRate);
@@ -43,8 +43,7 @@ public class ProfileFragment extends Fragment {
         name_latter = view.findViewById(R.id.textView5);
         profile = view.findViewById(R.id.profile);
         name_txt.setText(userModel.name);
-
-        textView7.setText(userModel.email);
+//        textView7.setText(userModel.email);
         char c = userModel.name.charAt(0);
         name_latter.setText(c + "");
         profile.setOnClickListener(new View.OnClickListener() {

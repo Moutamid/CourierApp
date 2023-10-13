@@ -21,7 +21,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
-            android:text="Team, Let’s Welcome to the Dantli Corp App"
+            android:text="@string/team_let_s_welcome_to_the_dantli_corp_app"
             android:textColor="#000"
             android:textSize="13dp" />
 
@@ -49,7 +49,7 @@
                 android:layout_marginEnd="30dp"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:text="Team, Let’s Welcome to the Dantli Corp App"
+                android:text="@string/team_let_s_welcome_to_the_dantli_corp_app"
                 android:textColor="#000"
                 android:textSize="15dp" />
 
