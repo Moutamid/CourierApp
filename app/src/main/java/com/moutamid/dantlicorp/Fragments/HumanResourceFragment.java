@@ -21,6 +21,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.moutamid.dantlicorp.Adapter.VideoAdapter;
+import com.moutamid.dantlicorp.Dailogues.ChecksDialogClass;
+import com.moutamid.dantlicorp.Dailogues.DialogClass;
 import com.moutamid.dantlicorp.Model.VideoModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Config;
@@ -45,25 +47,18 @@ public class HumanResourceFragment extends Fragment {
         direct_deposit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri webpage = Uri.parse("https://docs.google.com/document/d/1DJz-8OCkQUuxLtROm-l7hF2M0Bbmqrx4WQaKs8K4a_4/edit?usp=sharing");
-                Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-//                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(intent);
-//                }
+                DialogClass cdd = new DialogClass(getActivity(), getString(R.string.need_to_update_your_payment_information));
+                cdd.show();
             }
         });
         verification_letter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri webpage = Uri.parse("https://docs.google.com/document/d/1DJz-8OCkQUuxLtROm-l7hF2M0Bbmqrx4WQaKs8K4a_4/edit?usp=sharing");
-                Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-//                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(intent);
-//                }
+                DialogClass cdd = new DialogClass(getActivity(), getString(R.string.need_a_verification_of_employment_letter));
+                cdd.show();
             }
         });
         return view;
     }
-
 
 }

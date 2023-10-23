@@ -27,10 +27,9 @@ public class NotificationsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_notifications);
         content_rcv = findViewById(R.id.content_rcv);
         content_rcv.setLayoutManager(new LinearLayoutManager(this));
-
-//       ArrayList<NotificationModel> notification =  Stash.getArrayList("Notification", NotificationModel.class);
-//        Toast.makeText(this, "data "+notification.toString(), Toast.LENGTH_SHORT).show();     notificationAdapter = new NotificationAdapter(this, notification);
-//        content_rcv.setAdapter(notificationAdapter);
+       ArrayList<NotificationModel> notification =  Stash.getArrayList("Notification", NotificationModel.class);
+        notificationAdapter = new NotificationAdapter(this, notification);
+        content_rcv.setAdapter(notificationAdapter);
 //
     }
 

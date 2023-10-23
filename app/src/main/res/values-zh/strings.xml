@@ -107,4 +107,6 @@
     <string name="enter_linkedin_url_optional">输入 LinkedIn URL（可选）</string>
     <string name="continue_">继续</string>
     <string name="all_employees">所有员工</string>
+    <string name="update_profile">更新个人资料</string>
+    <string name="inbox">收件箱</string>
 </resources>

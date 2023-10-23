@@ -22,7 +22,10 @@ import com.moutamid.dantlicorp.MainActivity;
 import com.moutamid.dantlicorp.Model.NotificationModel;
 import com.moutamid.dantlicorp.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 public class MessagingService  extends FirebaseMessagingService {
@@ -40,10 +43,13 @@ public class MessagingService  extends FirebaseMessagingService {
 
     @Override
     public void onMessageReceived(final RemoteMessage remoteMessage) {
+        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
         notificationModel = new NotificationModel();
         notificationModel.type = remoteMessage.getData().get("type");
         notificationModel.title = remoteMessage.getData().get("data");
         notificationModel.message = remoteMessage.getData().get("message");
+        notificationModel.date = currentDate +" at "+currentTime ;
         Log.d("Notification", notificationModel.type+" | "+notificationModel.title+" | "+notificationModel.message+" notification");
         ArrayList<NotificationModel> notificationModelArrayList = Stash.getArrayList("Notification", NotificationModel.class);
         notificationModelArrayList.add(notificationModel);

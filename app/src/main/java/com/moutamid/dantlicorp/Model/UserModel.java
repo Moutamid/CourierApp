@@ -4,9 +4,18 @@ public class UserModel {
     public String name, dob, email, phone_number, id, city, state;
     public String is_courier;
     public String image_url;
+    public String key;
     public double lat, lng;
 
     public UserModel() {
+    }
+
+    public UserModel(String key, double lat, double lng, String image_url, String name) {
+        this.key = key;
+        this.name = name;
+        this.image_url = image_url;
+        this.lat = lat;
+        this.lng = lng;
     }
 
     public UserModel(double lat, double lng, String image_url, String name) {

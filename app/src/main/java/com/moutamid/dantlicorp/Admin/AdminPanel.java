@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +23,6 @@ import com.moutamid.dantlicorp.Admin.Activities.NotifcationsActivity;
 import com.moutamid.dantlicorp.Admin.Video.AllVideo;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
-import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.util.ArrayList;
@@ -56,7 +54,7 @@ public class AdminPanel extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             UserModel userModel = ds.getValue(UserModel.class);
-                            userArrayList.add(new UserModel(userModel.lat, userModel.lng, userModel.image_url, userModel.name));
+                            userArrayList.add(new UserModel(ds.getKey(), userModel.lat, userModel.lng, userModel.image_url, userModel.name));
                         }
                         Stash.put("AllUserLocation", userArrayList);
                         startActivity(new Intent(AdminPanel.this, AllUserLocationActivity.class));

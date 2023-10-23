@@ -69,20 +69,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+       this.mMap = googleMap;
         int height = 50;
         int width = 50;
+
         BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.human);
         Bitmap b = bitmapdraw.getBitmap();
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
         for (int i = 0; i < locationArrayList.size(); i++) {
             if (lat != 0.0) {
-                mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(name+" ("+ box+" boxes)").icon(BitmapDescriptorFactory.fromBitmap(smallMarker))).showInfoWindow();
+                this. mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(name+" ("+ box+" boxes)").icon(BitmapDescriptorFactory.fromBitmap(smallMarker))).showInfoWindow();
             } else {
-                mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(locationModels.get(i).name+" ("+ locationModels.get(i).box+" boxes)").icon(BitmapDescriptorFactory.fromBitmap(smallMarker))).showInfoWindow();
+                this.mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(locationModels.get(i).name+" ("+ locationModels.get(i).box+" boxes)").icon(BitmapDescriptorFactory.fromBitmap(smallMarker))).showInfoWindow();
             }
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(12.0f));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationArrayList.get(i), 12.0f));
+            this.mMap.animateCamera(CameraUpdateFactory.zoomTo(12.0f));
+            this. mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationArrayList.get(i), 12.0f));
 //            float zoomLevel = 16.0f; //This goes up to 21
 //            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
         }

@@ -37,7 +37,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(@NonNull GalleryPhotosViewHolder holder, final int position) {
         NotificationModel notificationModel = notificationModelList.get(position);
-        holder.notification_txt.setText(notificationModel.message);
+        holder.notification_txt.setText(notificationModel.message+ notificationModel.title);
+        holder.date.setText(notificationModel.date );
+
     }
 
     @Override
@@ -47,11 +49,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     public class GalleryPhotosViewHolder extends RecyclerView.ViewHolder {
 
-        TextView notification_txt;
+        TextView notification_txt, date;
 
         public GalleryPhotosViewHolder(@NonNull View itemView) {
             super(itemView);
             notification_txt = itemView.findViewById(R.id.notification_txt);
+            date = itemView.findViewById(R.id.date);
         }
     }
 }

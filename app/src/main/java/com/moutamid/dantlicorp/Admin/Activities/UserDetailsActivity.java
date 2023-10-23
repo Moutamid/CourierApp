@@ -112,6 +112,7 @@ lodingbar.dismiss();                Toast.makeText(UserDetailsActivity.this, "Us
     }
 
     public void timeline(View view) {
+        startActivity(new Intent(UserDetailsActivity.this, AllTimeSheetsActivity.class));
 //        UserDetailsDialogClass cdd = new UserDetailsDialogClass(UserDetailsActivity.this);
 //        cdd.show();
 

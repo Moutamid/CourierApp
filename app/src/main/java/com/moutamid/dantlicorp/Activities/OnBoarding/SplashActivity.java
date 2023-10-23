@@ -2,8 +2,11 @@ package com.moutamid.dantlicorp.Activities.OnBoarding;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -22,6 +25,8 @@ import com.moutamid.dantlicorp.MainActivity;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 
+import java.util.Locale;
+
 
 public class SplashActivity extends AppCompatActivity {
     int SPLASH_TIME = 2500;
@@ -35,6 +40,10 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
         initViews();
+        if(!Stash.getString("language").isEmpty())
+        {
+            setLocale(Stash.getString("language"));
+        }
         new Handler().postDelayed(() -> {
             int adminLogin = Stash.getInt("admin_login");
             if (adminLogin != 1) {
@@ -87,4 +96,14 @@ public class SplashActivity extends AppCompatActivity {
 
 
     }
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+
+    }
+
 }

@@ -52,7 +52,6 @@ import com.moutamid.dantlicorp.Model.SocialModel;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Constants;
-import com.moutamid.dantlicorp.helper.LocaleHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -108,13 +107,19 @@ public class HomeFragment extends Fragment {
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 
                     @Override
-
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         if (menuItem.getItemId() == R.id.spanish) {
                             setLocale("es");
                         } else if (menuItem.getItemId() == R.id.chinese) {
                             setLocale("zh");
-
+                        } else if (menuItem.getItemId() == R.id.english) {
+                            setLocale("en");
+                        } else if (menuItem.getItemId() == R.id.russian) {
+                            setLocale("ru");
+                        } else if (menuItem.getItemId() == R.id.mandarin) {
+                            setLocale("mdr");
+                        } else if (menuItem.getItemId() == R.id.french) {
+                            setLocale("fr");
                         }
                         return true;
 
@@ -197,7 +202,7 @@ public class HomeFragment extends Fragment {
 
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             UserModel userModel = ds.getValue(UserModel.class);
-                            userArrayList.add(new UserModel(userModel.lat, userModel.lng, userModel.image_url, userModel.name));
+                            userArrayList.add(new UserModel(ds.getKey(), userModel.lat, userModel.lng, userModel.image_url, userModel.name));
                         }
                         Stash.put("AllUserLocation", userArrayList);
                         startActivity(new Intent(getContext(), AllUserLocationActivity.class));
@@ -316,6 +321,8 @@ public class HomeFragment extends Fragment {
                             userModel.name = userNew.name;
                             userModel.image_url = userNew.image_url;
                             if (userNew.id != null) {
+                                Stash.put("userID", userNew.id);
+
                                 Constants.LocationReference.child(userNew.id).setValue(userModel);
                             }
                         }
@@ -406,6 +413,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void setLocale(String lang) {
+        Stash.put("language", lang);
         Locale myLocale = new Locale(lang);
         Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
@@ -414,6 +422,7 @@ public class HomeFragment extends Fragment {
         res.updateConfiguration(conf, dm);
         Intent refresh = new Intent(getContext(), MainActivity.class);
         startActivity(refresh);
+        getActivity().finishAffinity();
     }
 
 }

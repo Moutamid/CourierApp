@@ -23,14 +23,12 @@ public class DialogClass extends Dialog {
     Button button;
     ImageView imgBack;
     String name;
-    int i;
 
-    public DialogClass(Activity a, String name, int i) {
+    public DialogClass(Activity a, String name) {
         super(a);
         // TODO Auto-generated constructor stub
         this.c = a;
         this.name = name;
-        this.i = i;
     }
 
     @Override

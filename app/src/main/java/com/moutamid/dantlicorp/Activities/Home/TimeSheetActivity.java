@@ -141,7 +141,7 @@ public class TimeSheetActivity extends AppCompatActivity {
                             int hours = (int) ((difference - (1000 * 60 * 60 * 24 * days)) / (1000 * 60 * 60));
                             int min = (int) (difference - (1000 * 60 * 60 * 24 * days) - (1000 * 60 * 60 * hours)) / (1000 * 60);
                             hours = (hours < 0 ? -hours : hours);
-                            Toast.makeText(TimeSheetActivity.this, "jkhjhj"+hours, Toast.LENGTH_SHORT).show();
+                            editTextTotal.setText(hours+"");
                         } catch (Exception e) {
                             Log.i("=====>", "error " + e.getMessage());
 
@@ -182,6 +182,10 @@ public class TimeSheetActivity extends AppCompatActivity {
                     lodingbar.setCancelable(false);
                     lodingbar.show();
                     TimeSheetModel timeSheetModel = new TimeSheetModel();
+                    String userID = Stash.getString("userID");
+
+                    String key = Constants.UserReference.child(userID).child(Constants.TIME_SHEET).push().getKey();
+                    timeSheetModel.work_type_str = work_type_str;
                     timeSheetModel.date = date;
                     timeSheetModel.number = number;
                     timeSheetModel.name = name;
@@ -192,10 +196,10 @@ public class TimeSheetActivity extends AppCompatActivity {
                     timeSheetModel.comments = comments;
                     timeSheetModel.lat = Constants.cur_lat;
                     timeSheetModel.lng = (Constants.cur_lng);
+                    timeSheetModel.status = "pending";
+                    timeSheetModel.key = key;
 
-                    String userID = Stash.getString("userID");
-
-                    Constants.UserReference.child(userID).child(Constants.TIME_SHEET).push().setValue(timeSheetModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    Constants.UserReference.child(userID).child(Constants.TIME_SHEET).child(key).setValue(timeSheetModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isComplete()) {

@@ -113,6 +113,8 @@ lodingbar.dismiss();                Toast.makeText(CourierDetailsActivity.this, 
     }
 
     public void timeline(View view) {
+        startActivity(new Intent(CourierDetailsActivity.this, AllTimeSheetsActivity.class));
+
 //        UserDetailsDialogClass cdd = new UserDetailsDialogClass(CourierDetailsActivity.this);
 //        cdd.show();
     }
