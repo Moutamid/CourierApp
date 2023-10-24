@@ -176,7 +176,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getLastLocation();
-                ChecksDialogClass cdd = new ChecksDialogClass(getActivity(), "Check Out");
+                ChecksDialogClass cdd = new ChecksDialogClass(getActivity(), getContext().getString(R.string.check_out));
                 cdd.show();
             }
         });
@@ -184,7 +184,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 getLastLocation();
-                ChecksDialogClass cdd = new ChecksDialogClass(getActivity(), "Check In");
+                ChecksDialogClass cdd = new ChecksDialogClass(getActivity(), getContext().getString(R.string.check_in));
                 cdd.show();
             }
         });

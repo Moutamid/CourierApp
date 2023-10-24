@@ -19,7 +19,6 @@ import com.google.android.gms.tasks.Task;
 import com.moutamid.dantlicorp.Model.ChecksModel;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
-import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.text.SimpleDateFormat;
@@ -37,7 +36,6 @@ public class ChecksDialogClass extends Dialog {
 
     public ChecksDialogClass(Activity a, String type) {
         super(a);
-        // TODO Auto-generated constructor stub
         this.c = a;
         this.type = type;
     }
@@ -51,8 +49,7 @@ public class ChecksDialogClass extends Dialog {
         editTextBox = findViewById(R.id.editTextBox);
         buttonSubmit = findViewById(R.id.buttonSubmit);
         title = findViewById(R.id.title);
-        title.setText(type+" Details");
-
+        title.setText(type+c.getString(R.string.details));
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +59,7 @@ public class ChecksDialogClass extends Dialog {
                 String box_str = editTextBox.getText().toString();
                 if (name_str.isEmpty() || box_str.isEmpty()) {
                     // Display an error message if the edit text fields are empty.
-                    Toast.makeText(c, "Please enter details.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(c, c.getString(R.string.please_enter_details), Toast.LENGTH_SHORT).show();
                 } else {
                     Dialog    lodingbar = new Dialog(c);
                     lodingbar.setContentView(R.layout.loading);
@@ -85,15 +82,19 @@ public class ChecksDialogClass extends Dialog {
 
                     Constants.UserReference.child(userModel.id).child(type).child(Constants.UserReference.push().getKey()).setValue(checksModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isComplete()) {
-
+                        public void onComplete(@NonNull Task<Void> task)
+                        {
+                            if (task.isComplete())
+                            {
                                 dismiss();
-                                Toast.makeText(c, "Successfully Submitted", Toast.LENGTH_SHORT).show();
-        lodingbar.dismiss();                            } else {
+                                Toast.makeText(c, c.getString(R.string.successfully_submitted), Toast.LENGTH_SHORT).show();
+                                lodingbar.dismiss();
+                            }
+                            else
+                            {
                                 dismiss();
-                                Toast.makeText(c, "Something went wrong", Toast.LENGTH_SHORT).show();
-        lodingbar.dismiss();
+                                Toast.makeText(c, c.getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
+                                lodingbar.dismiss();
                             }
                         }
                     });

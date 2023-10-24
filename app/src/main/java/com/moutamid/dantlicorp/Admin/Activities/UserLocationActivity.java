@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -28,6 +29,7 @@ public class UserLocationActivity extends FragmentActivity implements OnMapReady
     // creating array list for adding all our locations.
     private ArrayList<LatLng> locationArrayList;
     String name, box;
+    private MapView mapView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +37,12 @@ public class UserLocationActivity extends FragmentActivity implements OnMapReady
         setContentView(R.layout.activity_maps);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
 
+        mapView = findViewById(R.id.map_view);
+        mapView.onCreate(savedInstanceState);
+        mapView.onResume();
+
+        mapView.getMapAsync(this);
         // in below line we are initializing our array list.
         locationArrayList = new ArrayList<>();
 
@@ -60,7 +65,7 @@ public class UserLocationActivity extends FragmentActivity implements OnMapReady
         mMap = googleMap;
         int height = 50;
         int width = 50;
-        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.human);
+        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.record);
         Bitmap b = bitmapdraw.getBitmap();
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
         for (int i = 0; i < locationArrayList.size(); i++) {

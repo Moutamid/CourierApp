@@ -109,4 +109,18 @@
     <string name="all_employees">所有员工</string>
     <string name="update_profile">更新个人资料</string>
     <string name="inbox">收件箱</string>
+    <string name="click_here">点击这里</string>
+    <string name="need_a_verification_of_employment_letter">需要一份就业验证信吗？</string>
+    <string name="timesheet_details">工时详情</string>
+    <string name="all_timesheets">所有工时表</string>
+    <string name="welcome_to_dantli_corp_">欢迎来到Dantli Corp</string>
+    <string name="all_notifications">所有通知</string>
+    <string name="successfully_submitted">成功提交</string>
+    <string name="something_went_wrong">出现了问题</string>
+    <string name="please_enter_details">请输入详细信息。</string>
+    <string name="invoice_">发票号码 #</string>
+    <string name="status">状态</string>
+    <string name="details">详情</string>
+    <string name="profile">个人资料</string>
+
 </resources>

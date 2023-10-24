@@ -109,4 +109,18 @@
     <string name="all_employees">Все сотрудники</string>
     <string name="update_profile">Обновить профиль</string>
     <string name="inbox">Входящие</string>
+    <string name="click_here">Нажмите здесь</string>
+    <string name="need_a_verification_of_employment_letter">Нужно письмо о подтверждении занятости?</string>
+    <string name="timesheet_details">Детали табеля учёта времени</string>
+    <string name="all_timesheets">Все табели учёта времени</string>
+    <string name="welcome_to_dantli_corp_">Добро пожаловать в Dantli Corp</string>
+    <string name="all_notifications">Все уведомления</string>
+    <string name="successfully_submitted">Успешно отправлено</string>
+    <string name="something_went_wrong">Что-то пошло не так</string>
+    <string name="please_enter_details">Пожалуйста, введите данные.</string>
+    <string name="invoice_">Счёт №</string>
+    <string name="status">Статус</string>
+    <string name="details">Детали</string>
+    <string name="profile">Профиль</string>
+
 </resources>

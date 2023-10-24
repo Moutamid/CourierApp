@@ -43,8 +43,8 @@ public class UserDetailsActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Profile"));
-        tabLayout.addTab(tabLayout.newTab().setText("Social Links"));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.profile)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.social_links)));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final UserAdapter adapter = new UserAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());

@@ -52,7 +52,7 @@ public class ChatActivity extends AppCompatActivity {
         back = findViewById(R.id.back);
         send = findViewById(R.id.send);
         message = findViewById(R.id.message);
-        String name = "Chat with Admin";
+        String name = getString(R.string.chat_with_admin);
         chatName.setText(name);
         userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
 

@@ -40,11 +40,12 @@ public class CourierDetailsActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Profile"));
-        tabLayout.addTab(tabLayout.newTab().setText("Social Links"));
-        tabLayout.addTab(tabLayout.newTab().setText("Check In"));
-        tabLayout.addTab(tabLayout.newTab().setText("Check Out"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.profile)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.social_links)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.check_in)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.check_out)));
+
+         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final MyAdapter adapter = new MyAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);

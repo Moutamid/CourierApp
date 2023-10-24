@@ -9,7 +9,7 @@ android {
     namespace 'com.moutamid.dantlicorp'
     compileSdk 33
 
-    defaultConfig {
+    defaultConfig  {
         applicationId "com.moutamid.dantlicorp"
         minSdk 24
         targetSdk 33

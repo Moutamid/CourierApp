@@ -48,7 +48,7 @@ public class CheckoutFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler);
         all_check_in = view.findViewById(R.id.all_check_in);
-        all_check_in.setText("All CheckOut");
+        all_check_in.setText(getString(R.string.check_out));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(false);
         list = new ArrayList<>();

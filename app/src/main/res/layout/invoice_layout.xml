@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:layout_margin="12sp"
     app:cardBackgroundColor="@color/white"
-
     app:cardCornerRadius="6dp"
     app:cardElevation="2sp">
 
@@ -25,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Invoice # "
+            android:text="@string/invoice_"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -51,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Status "
+            android:text="@string/status"
             android:textColor="@color/black"
             android:textSize="16sp" />
 

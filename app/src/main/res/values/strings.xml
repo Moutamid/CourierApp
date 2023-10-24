@@ -113,5 +113,14 @@
     <string name="need_a_verification_of_employment_letter">Need a Verification of Employment Letter?</string>
     <string name="timesheet_details">Timesheet Details</string>
     <string name="all_timesheets">All TimeSheets</string>
+    <string name="welcome_to_dantli_corp_">Welcome to Dantli Corp</string>
+    <string name="all_notifications">All Notifications</string>
+    <string name="successfully_submitted">Successfully Submitted</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="please_enter_details">Please enter details.</string>
+    <string name="invoice_">Invoice #</string>
+    <string name="status">Status</string>
+    <string name="details">" Details"</string>
+    <string name="profile">Profile</string>
 
 </resources>

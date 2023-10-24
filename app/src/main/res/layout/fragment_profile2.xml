@@ -91,7 +91,7 @@
                         android:padding="12dp"
                         android:textColor="#615454"
 
-                        android:textSize="15dp" />
+                        android:textSize="10dp" />
 
 
                 </LinearLayout>
@@ -124,7 +124,7 @@
                         android:hint="@string/dob"
                         android:padding="12dp"
                         android:textColor="#6E6B6B"
-                        android:textSize="15dp" />
+                        android:textSize="10dp" />
 
 
                 </LinearLayout>
@@ -157,7 +157,7 @@
                         android:hint="@string/email"
                         android:padding="12dp"
                         android:textColor="#6E6B6B"
-                        android:textSize="15dp" />
+                        android:textSize="10dp" />
 
 
                 </LinearLayout>
@@ -190,7 +190,7 @@
                         android:hint="@string/phone_number"
                         android:padding="12dp"
                         android:textColor="#6E6B6B"
-                        android:textSize="15dp" />
+                        android:textSize="10dp" />
 
 
                 </LinearLayout>

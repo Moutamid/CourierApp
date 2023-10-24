@@ -109,4 +109,18 @@
     <string name="all_employees">Tous les employés</string>
     <string name="update_profile">Mettre à jour le profil</string>
     <string name="inbox">Boîte de réception</string>
+    <string name="click_here">Cliquez ici</string>
+    <string name="need_a_verification_of_employment_letter">Besoin d une lettre de vérification d emploi ?</string>
+    <string name="timesheet_details">Détails de la feuille de temps</string>
+    <string name="all_timesheets">Toutes les feuilles de temps</string>
+    <string name="welcome_to_dantli_corp_">Bienvenue chez Dantli Corp</string>
+    <string name="all_notifications">Toutes les notifications</string>
+    <string name="successfully_submitted">Soumis avec succès</string>
+    <string name="something_went_wrong">Quelque chose sest mal passé</string>
+    <string name="please_enter_details">Veuillez entrer les détails.</string>
+    <string name="invoice_">Facture n</string>
+    <string name="status">Statut</string>
+    <string name="details">Détails</string>
+    <string name="profile">Profil</string>
+
 </resources>
