@@ -122,5 +122,7 @@
     <string name="status">Statut</string>
     <string name="details">Détails</string>
     <string name="profile">Profil</string>
+    <string name="courier_services">Services de messagerie</string>
+    <string name="if_you_are_a_courier_please_use_this_section_while_completing_your_route">Si vous êtes un coursier, veuillez utiliser cette section lorsque vous complétez votre itinéraire</string>
 
 </resources>

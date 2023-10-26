@@ -160,8 +160,8 @@ public class HomeFragment extends Fragment {
                 add_check_in_lyt.setVisibility(View.VISIBLE);
                 add_check_out_lyt.setVisibility(View.VISIBLE);
             } else {
-                add_check_in_lyt.setVisibility(View.GONE);
-                add_check_out_lyt.setVisibility(View.GONE);
+                add_check_in_lyt.setVisibility(View.VISIBLE);
+                add_check_out_lyt.setVisibility(View.VISIBLE);
 
             }
         }

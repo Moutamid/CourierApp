@@ -122,5 +122,7 @@
     <string name="status">Статус</string>
     <string name="details">Детали</string>
     <string name="profile">Профиль</string>
+    <string name="courier_services">Курьерские услуги</string>
+    <string name="if_you_are_a_courier_please_use_this_section_while_completing_your_route">Если вы курьер, используйте этот раздел при завершении маршрута</string>
 
 </resources>

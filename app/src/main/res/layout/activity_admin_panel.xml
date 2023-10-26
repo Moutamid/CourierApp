@@ -30,6 +30,7 @@
         android:layout_height="70dp"
         android:layout_margin="20dp"
         app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="@color/white"
         app:cardElevation="10dp">
 
         <TextView
@@ -48,6 +49,7 @@
         android:id="@+id/notification_btn"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        app:cardBackgroundColor="@color/white"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         app:cardCornerRadius="12dp"
@@ -68,6 +70,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/btn"
         android:layout_width="match_parent"
+        app:cardBackgroundColor="@color/white"
         android:layout_height="70dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -90,6 +93,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/inbox_btn"
         android:layout_width="match_parent"
+        app:cardBackgroundColor="@color/white"
         android:layout_height="70dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -116,6 +120,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="12dp"
         app:cardElevation="10dp">
 
@@ -138,6 +143,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="12dp"
         app:cardElevation="10dp">
 

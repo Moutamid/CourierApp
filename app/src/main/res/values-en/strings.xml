@@ -121,4 +121,8 @@
     <string name="invoice_">Invoice #</string>
     <string name="status">Status</string>
     <string name="details">" Details"</string>
+    <string name="profile">Profile</string>
+    <string name="courier_services">Courier Services</string>
+    <string name="if_you_are_a_courier_please_use_this_section_while_completing_your_route">If you are a Courier, please use this section while completing your route</string>
+
 </resources>
