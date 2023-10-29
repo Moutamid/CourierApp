@@ -124,6 +124,20 @@
     <string name="profile">Perfil</string>
     <string name="if_you_are_a_courier_please_use_this_section_while_completing_your_route">Si eres un mensajero, por favor utiliza esta sección al completar tu ruta</string>
     <string name="courier_services">Servicios de mensajería</string>
+    <!-- Strings for Spanish -->
+    <string name="customer_support">Atención al Cliente</string>
+    <string name="start_route">Comenzar Ruta</string>
+    <string name="route_name">Nombre de la Ruta</string>
+    <string name="adress">Dirección</string>
+    <string name="no_of_package_picked_up">Número de Paquetes Recogidos</string>
+    <string name="no_of_package_dropped_off">Número de Paquetes Entregados</string>
+    <string name="enter_here">Ingresar aquí</string>
+    <string name="signature_here">Firma del Cliente</string>
+    <string name="not_available">Firma No Disponible</string>
+    <string name="end_route">Finalizar Ruta</string>
+    <string name="routes">Rutas</string>
+    <string name="all_checkout">Todos los Registros</string>
+    <string name="route_details">Detalles de la Ruta</string>
 
 
 </resources>

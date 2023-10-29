@@ -42,21 +42,25 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.moutamid.dantlicorp.Activities.Home.AllUserLocationActivity;
 import com.moutamid.dantlicorp.Activities.Home.ChatActivity;
 import com.moutamid.dantlicorp.Activities.Home.NotificationsActivity;
 import com.moutamid.dantlicorp.Dailogues.ChecksDialogClass;
+import com.moutamid.dantlicorp.Dailogues.StartRouteDialogClass;
 import com.moutamid.dantlicorp.MainActivity;
+import com.moutamid.dantlicorp.Model.ChecksModel;
 import com.moutamid.dantlicorp.Model.SocialModel;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Constants;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment {
@@ -75,6 +79,7 @@ public class HomeFragment extends Fragment {
     ImageView notification_icon;
     Context context;
     Resources resources;
+    LinearLayout start_route, end_route;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -89,7 +94,48 @@ public class HomeFragment extends Fragment {
         menu = view.findViewById(R.id.language_icon);
         location_txt.setSelected(true);
         chat_Admin = view.findViewById(R.id.chat_Admin);
+        start_route = view.findViewById(R.id.start_route);
+        end_route = view.findViewById(R.id.end_route);
         userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+        start_route.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StartRouteDialogClass cdd = new StartRouteDialogClass(getActivity(), add_check_in_lyt, add_check_out_lyt, start_route);
+                cdd.show();
+
+
+            }
+        });
+        end_route.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ChecksModel checksModel = new ChecksModel();
+                checksModel.status = "end";
+
+                UserModel userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+                Map<String, Object> values = new HashMap<>();
+                values.put("status", "end");
+
+                DatabaseReference child = Constants.UserReference.child(userModel.id).child("Routes").child(Stash.getString("route_key"));
+                child.updateChildren(values).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isComplete())
+                        {
+                            add_check_in_lyt.setVisibility(View.GONE);
+                            add_check_out_lyt.setVisibility(View.GONE);
+                            start_route.setVisibility(View.VISIBLE);
+                            end_route.setVisibility(View.GONE);
+                            Stash.put("route_start", "no");
+                            Stash.put("check_in", "no");
+                        }
+                    }
+                });
+
+            }
+
+
+        });
         notification_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,14 +201,19 @@ public class HomeFragment extends Fragment {
 ////                }
 //            }
 //        });
-        if (userNew.is_courier != null) {
-            if (userNew.is_courier.equals("Yes")) {
+        String route_start = Stash.getString("route_start");
+        if (route_start != null) {
+            if (route_start.equals("yes")) {
                 add_check_in_lyt.setVisibility(View.VISIBLE);
                 add_check_out_lyt.setVisibility(View.VISIBLE);
-            } else {
-                add_check_in_lyt.setVisibility(View.VISIBLE);
-                add_check_out_lyt.setVisibility(View.VISIBLE);
+                end_route.setVisibility(View.VISIBLE);
+                start_route.setVisibility(View.GONE);
 
+            } else {
+                add_check_in_lyt.setVisibility(View.GONE);
+                add_check_out_lyt.setVisibility(View.GONE);
+                end_route.setVisibility(View.GONE);
+                start_route.setVisibility(View.VISIBLE);
             }
         }
         chat_Admin.setOnClickListener(new View.OnClickListener() {
@@ -172,20 +223,39 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getContext(), ChatActivity.class));
             }
         });
-        add_check_out_lyt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getLastLocation();
-                ChecksDialogClass cdd = new ChecksDialogClass(getActivity(), getContext().getString(R.string.check_out));
-                cdd.show();
-            }
-        });
         add_check_in_lyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getLastLocation();
-                ChecksDialogClass cdd = new ChecksDialogClass(getActivity(), getContext().getString(R.string.check_in));
-                cdd.show();
+                String check_in = Stash.getString("check_in");
+                if (check_in != null) {
+                    if (check_in.equals("yes")) {
+                        Toast.makeText(getContext(), "Please done check out before check in", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = (new Intent(getContext(), ChecksDialogClass.class));
+                        intent.putExtra("type", getString(R.string.check_in));
+                        startActivity(intent);
+
+                    }
+                }
+            }
+        });
+        add_check_out_lyt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                getLastLocation();
+                String check_in = Stash.getString("check_in");
+                if (check_in != null) {
+                    if (check_in.equals("yes")) {
+                        Intent intent = (new Intent(getContext(), ChecksDialogClass.class));
+                        intent.putExtra("type", getString(R.string.check_out));
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getContext(), "Please done check in before check out", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
             }
         });
         show_map_lyt.setOnClickListener(new View.OnClickListener() {
@@ -302,15 +372,15 @@ public class HomeFragment extends Fragment {
                             UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
                             Geocoder geocoder;
                             List<Address> addresses;
-                            geocoder = new Geocoder(getContext(), Locale.getDefault());
+//                            geocoder = new Geocoder(getContext(), Locale.getDefault());
 
-                            try {
-                                addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
+//                            try {
+//                                addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+//                            } catch (IOException e) {
+//                                Log.d("data", e.getMessage() + "");
+//                            }
 
-                            String address = addresses.get(0).getAddressLine(0);
+//                            String address = addresses.get(0).getAddressLine(0);
 //                            location_txt.setText(address);
 //                            Toast.makeText(getContext(), "" + address, Toast.LENGTH_SHORT).show();
                             Constants.cur_lat = location.getLatitude();
@@ -407,6 +477,22 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        String route_start = Stash.getString("route_start");
+        if (route_start != null) {
+            if (route_start.equals("yes")) {
+                end_route.setVisibility(View.VISIBLE);
+                add_check_in_lyt.setVisibility(View.VISIBLE);
+                add_check_out_lyt.setVisibility(View.VISIBLE);
+                start_route.setVisibility(View.GONE);
+
+            } else {
+                add_check_in_lyt.setVisibility(View.GONE);
+                add_check_out_lyt.setVisibility(View.GONE);
+                end_route.setVisibility(View.GONE);
+                start_route.setVisibility(View.VISIBLE);
+
+            }
+        }
         if (checkPermissions()) {
             getLastLocation();
         }

@@ -3,5 +3,13 @@
     <style name="Base.Theme.CourierApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <item name="colorPrimary">#6D42B1</item>
+
+    </style>
+    <style name="TimePickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/app_color</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="backgroundColor">@color/white</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 </resources>

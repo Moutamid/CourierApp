@@ -124,5 +124,19 @@
     <string name="profile">Profil</string>
     <string name="courier_services">Services de messagerie</string>
     <string name="if_you_are_a_courier_please_use_this_section_while_completing_your_route">Si vous êtes un coursier, veuillez utiliser cette section lorsque vous complétez votre itinéraire</string>
+    <!-- Strings for French -->
+    <string name="customer_support">Service Client</string>
+    <string name="start_route">Commencer l Itinéraire</string>
+    <string name="route_name">Nom de l Itinéraire</string>
+    <string name="adress">Adresse</string>
+    <string name="no_of_package_picked_up">Nombre de Colis Ramassés</string>
+    <string name="no_of_package_dropped_off">Nombre de Colis Livrés</string>
+    <string name="enter_here">Saisir ici</string>
+    <string name="signature_here">Signature du Client</string>
+    <string name="not_available">Signature Non Disponible</string>
+    <string name="end_route">Terminer l Itinéraire</string>
+    <string name="routes">Itinéraires</string>
+    <string name="all_checkout">Tous les Enregistrements</string>
+    <string name="route_details">Détails de la Route</string>
 
 </resources>

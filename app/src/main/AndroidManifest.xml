@@ -28,6 +28,12 @@
         android:theme="@style/Theme.CourierApp"
         tools:targetApi="31">
         <activity
+            android:name=".Admin.Activities.ChecksDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Dailogues.ChecksDialogClass"
+            android:exported="false" />
+        <activity
             android:name=".Admin.Activities.AllTimeSheetsActivity"
             android:exported="false" />
         <activity

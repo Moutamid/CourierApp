@@ -31,4 +31,5 @@ public class Constants {
     public static DatabaseReference ChatReference = FirebaseDatabase.getInstance().getReference(db_path).child("chats");
     public static DatabaseReference ChatListReference = FirebaseDatabase.getInstance().getReference(db_path).child("chats_list");
     public static DatabaseReference LocationReference = FirebaseDatabase.getInstance().getReference(db_path).child("location");
+    public static DatabaseReference RouteReference = FirebaseDatabase.getInstance().getReference(db_path).child("routes");
 }

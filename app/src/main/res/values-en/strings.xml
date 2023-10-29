@@ -124,5 +124,17 @@
     <string name="profile">Profile</string>
     <string name="courier_services">Courier Services</string>
     <string name="if_you_are_a_courier_please_use_this_section_while_completing_your_route">If you are a Courier, please use this section while completing your route</string>
+    <string name="customer_support">Customer Support</string>
+    <string name="start_route">Start Route</string>
+    <string name="route_name">Route Name</string>
+    <string name="adress">Address</string>
+    <string name="no_of_package_picked_up">Number of Packages Picked Up</string>
+    <string name="no_of_package_dropped_off">Number of Packages Dropped off</string>
+    <string name="enter_here">Enter here</string>
+    <string name="signature_here">Client Signature</string>
+    <string name="not_available">Signature Not Available</string>
+    <string name="end_route">End Route</string>
+    <string name="routes">Routes</string>
+    <string name="all_checkout">All Checkout</string>
 
 </resources>

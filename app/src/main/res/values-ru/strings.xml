@@ -124,5 +124,19 @@
     <string name="profile">Профиль</string>
     <string name="courier_services">Курьерские услуги</string>
     <string name="if_you_are_a_courier_please_use_this_section_while_completing_your_route">Если вы курьер, используйте этот раздел при завершении маршрута</string>
+    <!-- Strings for Russian -->
+    <string name="customer_support">Служба поддержки клиентов</string>
+    <string name="start_route">Начать маршрут</string>
+    <string name="route_name">Название маршрута</string>
+    <string name="adress">Адрес</string>
+    <string name="no_of_package_picked_up">Количество забранных посылок</string>
+    <string name="no_of_package_dropped_off">Количество доставленных посылок</string>
+    <string name="enter_here">Введите здесь</string>
+    <string name="signature_here">Подпись клиента</string>
+    <string name="not_available">Подпись недоступна</string>
+    <string name="end_route">Завершить маршрут</string>
+    <string name="routes">Маршруты</string>
+    <string name="all_checkout">Все регистрации</string>
+    <string name="route_details">Детали маршрута</string>
 
 </resources>

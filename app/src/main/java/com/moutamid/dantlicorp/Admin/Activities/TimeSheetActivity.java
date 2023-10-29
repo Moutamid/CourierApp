@@ -55,10 +55,12 @@ public class TimeSheetActivity extends AppCompatActivity {
         editTextComments.setText(timeSheetModel.comments);
         work_type.setText(timeSheetModel.work_type_str);
         String userID = Stash.getString("userID");
-        if(userID.equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
-        {
-            accept.setVisibility(View.GONE);
-            deny.setVisibility(View.GONE);
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
+            if (userID.equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
+            {
+                accept.setVisibility(View.GONE);
+                deny.setVisibility(View.GONE);
+            }
         }
         DatabaseReference ref = Constants.UserReference.child(userID).child(Constants.TIME_SHEET).child(timeSheetModel.key);
 

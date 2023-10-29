@@ -3,6 +3,7 @@ package com.moutamid.dantlicorp.Activities.Home;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.lang.UCharacter;
 import android.os.Bundle;
@@ -59,6 +60,7 @@ public class TimeSheetActivity extends AppCompatActivity {
         UserModel userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
         editTextName.setText(userModel.name);
         editTextEmail.setText(userModel.email);
+
         work_type.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -88,24 +90,35 @@ public class TimeSheetActivity extends AppCompatActivity {
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(TimeSheetActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                mTimePicker = new TimePickerDialog(TimeSheetActivity.this, R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int selectedMinute) {
                         if (hourOfDay > 12) {
-                            editTextstartTime.setText(String.valueOf(hourOfDay - 12) + ":" + (String.valueOf(selectedMinute) + " PM"));
+                            int i = hourOfDay - 12;
+                            editTextstartTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
+
                         } else if (hourOfDay == 12) {
-                            editTextstartTime.setText("12" + ":" + (String.valueOf(selectedMinute) + " PM"));
+                            int i = 12;
+                            editTextstartTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
+
                         } else if (hourOfDay < 12) {
                             if (hourOfDay != 0) {
-                                editTextstartTime.setText(String.valueOf(hourOfDay) + ":" + (String.valueOf(selectedMinute) + " AM"));
+                                editTextstartTime.setText(String.format("%02d:%02d %s", hourOfDay, selectedMinute, " AM"));
+
                             } else {
-                                editTextstartTime.setText("12" + ":" + (String.valueOf(selectedMinute) + " AM"));
+                                int i = 12;
+                                editTextstartTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " AM"));
+
                             }
                         }
                     }
                 }, hour, minute, false);//Yes 24 hour time
                 mTimePicker.setTitle("Select Start Time");
+
                 mTimePicker.show();
+
+                mTimePicker.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                mTimePicker.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
             }
         });
         editTextEndTime.setOnClickListener(new View.OnClickListener() {
@@ -115,19 +128,27 @@ public class TimeSheetActivity extends AppCompatActivity {
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
-                mTimePicker = new TimePickerDialog(TimeSheetActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                mTimePicker = new TimePickerDialog(TimeSheetActivity.this, R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int selectedMinute) {
                         if (hourOfDay > 12) {
-                            editTextEndTime.setText(String.valueOf(hourOfDay - 12) + ":" + (String.valueOf(selectedMinute) + " PM"));
+                            int i = hourOfDay - 12;
+                            editTextEndTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
+
                         } else if (hourOfDay == 12) {
-                            editTextEndTime.setText("12" + ":" + (String.valueOf(selectedMinute) + " PM"));
+                            int i = 12;
+                            editTextEndTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
+
                         } else if (hourOfDay < 12) {
                             if (hourOfDay != 0) {
-                                editTextEndTime.setText(String.valueOf(hourOfDay) + ":" + (String.valueOf(selectedMinute) + " AM"));
+                                editTextEndTime.setText(String.format("%02d:%02d %s", hourOfDay, selectedMinute, " AM"));
+
                             } else {
-                                editTextEndTime.setText("12" + ":" + (String.valueOf(selectedMinute) + " AM"));
+                                int i = 12;
+                                editTextEndTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " AM"));
+
                             }
+
                         }
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
                         try {
@@ -141,7 +162,7 @@ public class TimeSheetActivity extends AppCompatActivity {
                             int hours = (int) ((difference - (1000 * 60 * 60 * 24 * days)) / (1000 * 60 * 60));
                             int min = (int) (difference - (1000 * 60 * 60 * 24 * days) - (1000 * 60 * 60 * hours)) / (1000 * 60);
                             hours = (hours < 0 ? -hours : hours);
-                            editTextTotal.setText(hours+"");
+                            editTextTotal.setText(hours + "");
                         } catch (Exception e) {
                             Log.i("=====>", "error " + e.getMessage());
 
@@ -151,6 +172,9 @@ public class TimeSheetActivity extends AppCompatActivity {
                 }, hour, minute, false);//Yes 24 hour time
                 mTimePicker.setTitle("Select End Time");
                 mTimePicker.show();
+                mTimePicker.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                mTimePicker.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+
             }
         });
 

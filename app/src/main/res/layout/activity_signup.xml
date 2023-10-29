@@ -210,12 +210,15 @@
                     android:fontFamily="@font/poppins_regular"
                     android:buttonTint="@color/app_color"
                     android:layout_weight="1"
+                    android:textColor="@color/black"
                     android:text="@string/yes" />
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/black"
+
                     android:buttonTint="@color/app_color"
 android:fontFamily="@font/poppins_regular"
                     android:text="@string/no" />

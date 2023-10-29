@@ -124,5 +124,19 @@
     <string name="profile">个人资料</string>
     <string name="if_you_are_a_courier_please_use_this_section_while_completing_your_route">如果您是快递员，请在完成路线时使用此部分</string>
     <string name="courier_services">快递服务</string>
+    <!-- Strings for Mandarin Chinese (Simplified) -->
+    <string name="customer_support">客户支持</string>
+    <string name="start_route">开始路线</string>
+    <string name="route_name">路线名称</string>
+    <string name="adress">地址</string>
+    <string name="no_of_package_picked_up">取件数量</string>
+    <string name="no_of_package_dropped_off">送达数量</string>
+    <string name="enter_here">在此输入</string>
+    <string name="signature_here">客户签名</string>
+    <string name="not_available">签名不可用</string>
+    <string name="end_route">结束路线</string>
+    <string name="routes">路线</string>
+    <string name="all_checkout">所有结账</string>
+    <string name="route_details">路线详情</string>
 
 </resources>

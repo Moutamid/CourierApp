@@ -25,7 +25,6 @@ import com.moutamid.dantlicorp.Activities.Home.MapsActivity;
 import com.moutamid.dantlicorp.Admin.Adapter.ChecksAdapter;
 import com.moutamid.dantlicorp.Model.ChecksModel;
 import com.moutamid.dantlicorp.R;
-import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.util.ArrayList;
@@ -72,22 +71,31 @@ public class CheckinFragment extends Fragment {
         lodingbar.setContentView(R.layout.loading);
         Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
         lodingbar.setCancelable(false);
-        lodingbar.show();        Constants.UserReference.child(userID).child("check_in").addValueEventListener(new ValueEventListener() {
+        lodingbar.show();
+        Constants.UserReference.child(userID).child("Routes").child(Stash.getString("route_key")).child("check_in").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     list.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         if (dataSnapshot.exists()) {
-                            ChecksModel model = dataSnapshot.getValue(ChecksModel.class);
-                            list.add(model);
+                            ChecksModel checksModel = new ChecksModel();
+                            checksModel.name = dataSnapshot.child("name").getValue().toString();
+                            checksModel.picked_up = dataSnapshot.child("picked_up").getValue().toString();
+                            checksModel.drop_off = dataSnapshot.child("drop_off").getValue().toString();
+                            checksModel.lat = Double.parseDouble(dataSnapshot.child("lat").getValue().toString());
+                            checksModel.lng = Double.parseDouble(dataSnapshot.child("lng").getValue().toString());
+                            checksModel.date = dataSnapshot.child("date").getValue().toString();
+                            checksModel.sign = dataSnapshot.child("sign").getValue().toString();
+
+                            list.add(checksModel);
                         }
                     }
 
 
                     Stash.put("CheckIn", list);
 
-                    Log.d("listSize", "ee : " + list.get(0).name);
+                    Log.d("listSize", "ee : " + list.get(0).picked_up);
 
                 }
                 adapter = new ChecksAdapter(getContext(), list);

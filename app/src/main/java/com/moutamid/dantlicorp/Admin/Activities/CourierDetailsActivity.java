@@ -42,8 +42,8 @@ public class CourierDetailsActivity extends AppCompatActivity {
 
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.profile)));
         tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.social_links)));
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.check_in)));
-        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.check_out)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.routes)));
+//        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.check_out)));
 
          tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 

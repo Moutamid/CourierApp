@@ -48,7 +48,7 @@ public class CheckoutFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler);
         all_check_in = view.findViewById(R.id.all_check_in);
-        all_check_in.setText(getString(R.string.check_out));
+        all_check_in.setText(getString(R.string.all_checkout));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(false);
         list = new ArrayList<>();
@@ -67,43 +67,52 @@ public class CheckoutFragment extends Fragment {
 
 
     }
-
     private void getData() {
         Dialog lodingbar = new Dialog(getContext());
         lodingbar.setContentView(R.layout.loading);
         Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
         lodingbar.setCancelable(false);
-        lodingbar.show();        Constants.UserReference.child(userID).child("check_out").addValueEventListener(new ValueEventListener() {
+        lodingbar.show();
+        Constants.UserReference.child(userID).child("Routes").child(Stash.getString("route_key")).child("check_out").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     list.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         if (dataSnapshot.exists()) {
-                            ChecksModel model = dataSnapshot.getValue(ChecksModel.class);
-                            list.add(model);
+                            ChecksModel checksModel = new ChecksModel();
+                            checksModel.name = dataSnapshot.child("name").getValue().toString();
+                            checksModel.picked_up = dataSnapshot.child("picked_up").getValue().toString();
+                            checksModel.drop_off = dataSnapshot.child("drop_off").getValue().toString();
+                            checksModel.lat = Double.parseDouble(dataSnapshot.child("lat").getValue().toString());
+                            checksModel.lng = Double.parseDouble(dataSnapshot.child("lng").getValue().toString());
+                            checksModel.date = dataSnapshot.child("date").getValue().toString();
+                            checksModel.sign = dataSnapshot.child("sign").getValue().toString();
+
+                            list.add(checksModel);
                         }
                     }
 
 
-                    Stash.put("CheckOut", list);
+                    Stash.put("CheckIn", list);
 
-                    Log.d("listSize", "ee : " + list.get(0).name);
+                    Log.d("listSize", "ee : " + list.get(0).picked_up);
 
                 }
                 adapter = new ChecksAdapter(getContext(), list);
                 recyclerView.setAdapter(adapter);
 
                 adapter.notifyDataSetChanged();
-lodingbar.dismiss();
+                lodingbar.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-lodingbar.dismiss();                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                lodingbar.dismiss();                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
     }
+
 
 }

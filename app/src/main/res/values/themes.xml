@@ -18,5 +18,13 @@
         </item>
 
     </style>
+    <style name="TimePickerTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/app_color</item>
+        <item name="itemTextColor">@color/app_color</item>
+        <item name="android:textColor">@color/app_color</item>
+        <item name="textColor">@color/app_color</item>
 
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>

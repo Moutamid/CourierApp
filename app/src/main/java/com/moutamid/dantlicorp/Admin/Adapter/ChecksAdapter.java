@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.fxn.stash.Stash;
 import com.moutamid.dantlicorp.Activities.Home.MapsActivity;
+import com.moutamid.dantlicorp.Dailogues.DialogClass;
+import com.moutamid.dantlicorp.Dailogues.SignDailogClass;
 import com.moutamid.dantlicorp.Model.ChecksModel;
 import com.moutamid.dantlicorp.R;
 
@@ -40,8 +42,8 @@ public class ChecksAdapter extends RecyclerView.Adapter<ChecksAdapter.ChatVH> {
     public void onBindViewHolder(@NonNull ChatVH holder, int position) {
         ChecksModel model = list.get(holder.getAdapterPosition());
         holder.name.setText(model.name);
-        holder.no_box.setText(model.box);
-        holder.date.setText(model.date);
+        holder.no_box.setText(model.picked_up);
+        holder.date.setText(model.drop_off);
         holder.map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,13 +52,27 @@ public class ChecksAdapter extends RecyclerView.Adapter<ChecksAdapter.ChatVH> {
                     intent.putExtra("lat", model.lat);
                     intent.putExtra("lng", model.lng);
                     intent.putExtra("name", model.name);
-                    intent.putExtra("box", model.box);
+                    intent.putExtra("box", model.picked_up);
                     context.startActivity(intent);
 
                 } else {
                     Toast.makeText(context, "Invalid Coordinates to show marker", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+        holder.sign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(model.sign.equals("Not available"))
+                {
+                    Toast.makeText(context, "User was not available for signature", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    SignDailogClass cdd = new SignDailogClass(context, model.sign);
+                    cdd.show();
+                }
             }
         });
     }
@@ -68,12 +84,13 @@ public class ChecksAdapter extends RecyclerView.Adapter<ChecksAdapter.ChatVH> {
 
 
     public class ChatVH extends RecyclerView.ViewHolder {
-        ImageView map;
+        ImageView map, sign;
         TextView name, no_box, date;
 
         public ChatVH(@NonNull View itemView) {
             super(itemView);
 //
+            sign = itemView.findViewById(R.id.sign);
             map = itemView.findViewById(R.id.map);
             name = itemView.findViewById(R.id.name);
             no_box = itemView.findViewById(R.id.no_box);

@@ -84,9 +84,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
         for (int i = 0; i < locationArrayList.size(); i++) {
             if (lat != 0.0) {
-                this. mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(name+" ("+ box+" boxes)").icon(BitmapDescriptorFactory.fromBitmap(smallMarker))).showInfoWindow();
+                this. mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(name).icon(BitmapDescriptorFactory.fromBitmap(smallMarker))).showInfoWindow();
             } else {
-                this.mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(locationModels.get(i).name+" ("+ locationModels.get(i).box+" boxes)").icon(BitmapDescriptorFactory.fromBitmap(smallMarker))).showInfoWindow();
+                this.mMap.addMarker(new MarkerOptions().position(locationArrayList.get(i)).title(locationModels.get(i).name).icon(BitmapDescriptorFactory.fromBitmap(smallMarker))).showInfoWindow();
             }
             this.mMap.animateCamera(CameraUpdateFactory.zoomTo(12.0f));
             this. mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationArrayList.get(i), 12.0f));
