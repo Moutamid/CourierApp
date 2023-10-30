@@ -136,5 +136,8 @@
     <string name="end_route">End Route</string>
     <string name="routes">Routes</string>
     <string name="all_checkout">All Checkout</string>
+    <string name="route_details">Route Details</string>
+    <string name="please_check_out_before_check_in">Please check out before check in</string>
+    <string name="please_check_in_before_check_out">Please check in before check out</string>
 
 </resources>

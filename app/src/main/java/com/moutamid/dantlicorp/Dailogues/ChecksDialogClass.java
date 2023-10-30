@@ -9,7 +9,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.util.Base64;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
@@ -27,6 +26,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.kyanogen.signatureview.SignatureView;
+import com.moutamid.dantlicorp.Fragments.HomeFragment;
 import com.moutamid.dantlicorp.MainActivity;
 import com.moutamid.dantlicorp.Model.ChecksModel;
 import com.moutamid.dantlicorp.Model.UserModel;
@@ -65,7 +65,12 @@ public class ChecksDialogClass extends AppCompatActivity {
         title.setText(type + getString(R.string.details));
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-
+//        editTextName.setText();
+        if (type.equals(getString(R.string.check_out))) {
+            if (Stash.getString("address_check") != null) {
+                editTextName.setText(Stash.getString("address_check"));
+            }
+        }
         not_available.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -92,6 +97,7 @@ public class ChecksDialogClass extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
                 String name_str = editTextName.getText().toString();
                 String box_str = editTextBox.getText().toString();
                 String editTextdropoff_str = editTextdropoff.getText().toString();
@@ -99,6 +105,7 @@ public class ChecksDialogClass extends AppCompatActivity {
                     // Display an error message if the edit text fields are empty.
                     Toast.makeText(ChecksDialogClass.this, getString(R.string.please_enter_details), Toast.LENGTH_SHORT).show();
                 } else {
+                    Stash.put("address_check", name_str);
                     String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                     screenShot(signature_view, name_str, box_str, editTextdropoff_str, date);
                 }
@@ -137,11 +144,11 @@ public class ChecksDialogClass extends AppCompatActivity {
             lodingbar.dismiss();
             checksModel.sign = imageB64;
         }
-        if (type.equals("Check In")) {
+        if (type.equals(getString(R.string.check_in))) {
             type = "check_in";
             Stash.put("check_in", "yes");
-
         } else {
+            HomeFragment.address = "Can't fetch automatically";
             type = "check_out";
             Stash.put("check_in", "no");
 

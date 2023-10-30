@@ -138,5 +138,8 @@
     <string name="routes">路线</string>
     <string name="all_checkout">所有结账</string>
     <string name="route_details">路线详情</string>
+    <!-- Mandarin Chinese (Simplified) Strings -->
+    <string name="please_check_out_before_check_in">请在办理入住手续之前办理退房手续</string>
+    <string name="please_check_in_before_check_out">请在办理退房手续之前办理入住手续</string>
 
 </resources>

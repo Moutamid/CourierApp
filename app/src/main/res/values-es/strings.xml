@@ -138,6 +138,8 @@
     <string name="routes">Rutas</string>
     <string name="all_checkout">Todos los Registros</string>
     <string name="route_details">Detalles de la Ruta</string>
+    <string name="please_check_out_before_check_in">Por favor, haga el check-out antes de hacer el check-in</string>
+    <string name="please_check_in_before_check_out">Por favor, haga el check-in antes de hacer el check-out</string>
 
 
 </resources>

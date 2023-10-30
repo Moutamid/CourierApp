@@ -138,5 +138,8 @@
     <string name="routes">Маршруты</string>
     <string name="all_checkout">Все регистрации</string>
     <string name="route_details">Детали маршрута</string>
+    <!-- Russian Strings -->
+    <string name="please_check_out_before_check_in">Пожалуйста, выписывайтесь перед заселением</string>
+    <string name="please_check_in_before_check_out">Пожалуйста, заселяйтесь перед выпиской</string>
 
 </resources>

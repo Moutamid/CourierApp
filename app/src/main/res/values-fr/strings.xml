@@ -138,5 +138,8 @@
     <string name="routes">Itinéraires</string>
     <string name="all_checkout">Tous les Enregistrements</string>
     <string name="route_details">Détails de la Route</string>
+    <!-- French Strings -->
+    <string name="please_check_out_before_check_in">Veuillez faire le check-out avant de faire le check-in</string>
+    <string name="please_check_in_before_check_out">Veuillez faire le check-in avant de faire le check-out</string>
 
 </resources>

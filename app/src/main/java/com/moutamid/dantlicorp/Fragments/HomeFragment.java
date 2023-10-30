@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,6 +57,7 @@ import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Constants;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,6 +82,7 @@ public class HomeFragment extends Fragment {
     Context context;
     Resources resources;
     LinearLayout start_route, end_route;
+    public static String address ="Can't fetch automatically";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -230,7 +233,7 @@ public class HomeFragment extends Fragment {
                 String check_in = Stash.getString("check_in");
                 if (check_in != null) {
                     if (check_in.equals("yes")) {
-                        Toast.makeText(getContext(), "Please done check out before check in", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.please_check_out_before_check_in), Toast.LENGTH_SHORT).show();
                     } else {
                         Intent intent = (new Intent(getContext(), ChecksDialogClass.class));
                         intent.putExtra("type", getString(R.string.check_in));
@@ -252,7 +255,7 @@ public class HomeFragment extends Fragment {
                         intent.putExtra("type", getString(R.string.check_out));
                         startActivity(intent);
                     } else {
-                        Toast.makeText(getContext(), "Please done check in before check out", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getString(R.string.please_check_in_before_check_out), Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -370,19 +373,16 @@ public class HomeFragment extends Fragment {
                             requestNewLocationData();
                         } else {
                             UserModel userNew = (UserModel) Stash.getObject("UserDetails", UserModel.class);
-                            Geocoder geocoder;
-                            List<Address> addresses;
-//                            geocoder = new Geocoder(getContext(), Locale.getDefault());
-
+//                            Geocoder geocoder;
+//                            List<Address> addresses = null;
+//                            geocoder = new Geocoder(getActivity(), Locale.getDefault());
 //                            try {
 //                                addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 //                            } catch (IOException e) {
 //                                Log.d("data", e.getMessage() + "");
 //                            }
-
-//                            String address = addresses.get(0).getAddressLine(0);
-//                            location_txt.setText(address);
-//                            Toast.makeText(getContext(), "" + address, Toast.LENGTH_SHORT).show();
+//                            address = Objects.requireNonNull(addresses).get(0).getAddressLine(0);
+//                          location_txt.setText(address);
                             Constants.cur_lat = location.getLatitude();
                             Constants.cur_lng = location.getLongitude();
                             UserModel userModel = new UserModel();
