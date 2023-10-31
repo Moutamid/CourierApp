@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -33,14 +34,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class TimeSheetActivity extends AppCompatActivity {
     RadioGroup work_type;
-    private EditText editTextnumber, editTextName, editTextEmail, editTextDate, editTextstartTime, editTextEndTime, editTextTotal, editTextComments;
+    EditText editTextnumber, editTextTotalDays, editTextEndDate, editTextStartDate, editTextName, editTextEmail, editTextDate, editTextstartTime, editTextEndTime, editTextTotal, editTextComments;
     CheckBox agree_terms;
-    private TextView buttonSubmit;
+    TextView buttonSubmit;
     String work_type_str = "select";
     Calendar myCalendar = Calendar.getInstance();
+    Calendar start_Calendar = Calendar.getInstance();
+    String start_time, end_time;
+    String start_date_str;
+    LinearLayout days_layout, hours_layout;
+    RadioButton hours, days;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,8 @@ public class TimeSheetActivity extends AppCompatActivity {
         editTextnumber = findViewById(R.id.editTextnumber);
         editTextName = findViewById(R.id.editTextName);
         editTextEmail = findViewById(R.id.editTextEmail);
+        editTextEndDate = findViewById(R.id.editTextEndDate);
+        editTextStartDate = findViewById(R.id.editTextStartDate);
         editTextDate = findViewById(R.id.editTextDate);
         editTextstartTime = findViewById(R.id.editTextstartTime);
         editTextEndTime = findViewById(R.id.editTextEndTime);
@@ -56,18 +65,37 @@ public class TimeSheetActivity extends AppCompatActivity {
         editTextComments = findViewById(R.id.editTextComments);
         agree_terms = findViewById(R.id.agree_terms);
         buttonSubmit = findViewById(R.id.buttonSubmit);
+        editTextTotalDays = findViewById(R.id.editTextTotalDays);
         work_type = findViewById(R.id.work_type);
+        hours_layout = findViewById(R.id.hours_layout);
+        days_layout = findViewById(R.id.days_layout);
+        hours = findViewById(R.id.hours);
+        days = findViewById(R.id.days);
         UserModel userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
         editTextName.setText(userModel.name);
         editTextEmail.setText(userModel.email);
-
+        work_type_str = getString(R.string.hours);
         work_type.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = findViewById(i);
                 work_type_str = radioButton.getText().toString();
+
+                if (work_type_str.equals(getString(R.string.days))) {
+                    hours_layout.setVisibility(View.GONE);
+                    days_layout.setVisibility(View.VISIBLE);
+                    hours.setChecked(false);
+                    days.setChecked(true);
+                } else {
+                    hours_layout.setVisibility(View.VISIBLE);
+                    days_layout.setVisibility(View.GONE);
+                    hours.setChecked(true);
+                    days.setChecked(false);
+                }
             }
         });
+
+
         DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
             myCalendar.set(Calendar.YEAR, year);
             myCalendar.set(Calendar.MONTH, monthOfYear);
@@ -76,9 +104,48 @@ public class TimeSheetActivity extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
             editTextDate.setText(sdf.format(myCalendar.getTime()));
         };
+        DatePickerDialog.OnDateSetListener start_date = (view, year, monthOfYear, dayOfMonth) -> {
+            start_Calendar.set(Calendar.YEAR, year);
+            start_Calendar.set(Calendar.MONTH, monthOfYear);
+            start_Calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            String myFormat = "MM/dd/yyyy"; //In which you need put here
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            editTextStartDate.setText(sdf.format(start_Calendar.getTime()));
+            start_date_str = sdf.format(start_Calendar.getTime());
+        };
+        DatePickerDialog.OnDateSetListener end_date = (view, year, monthOfYear, dayOfMonth) -> {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            String myFormat = "MM/dd/yyyy"; //In which you need put here
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            try {
+                Date date1 = sdf.parse(start_date_str);
+                Date date2 = sdf.parse(sdf.format(myCalendar.getTime()));
+                long diff = date2.getTime() - date1.getTime();
+                editTextTotalDays.setText(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + " Days");
+            } catch (Exception e) {
+                System.out.println("Exceptions: " + e.toString());
+
+            }
+            editTextEndDate.setText(sdf.format(myCalendar.getTime()));
+
+        };
 
         editTextDate.setOnClickListener(v -> {
             DatePickerDialog datePickerDialog = new DatePickerDialog(TimeSheetActivity.this, date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH));
+            datePickerDialog.show();
+        });
+        editTextStartDate.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(TimeSheetActivity.this, start_date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH));
+            datePickerDialog.show();
+        });
+        editTextEndDate.setOnClickListener(v -> {
+            DatePickerDialog datePickerDialog = new DatePickerDialog(TimeSheetActivity.this, end_date, myCalendar
                     .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                     myCalendar.get(Calendar.DAY_OF_MONTH));
             datePickerDialog.show();
@@ -93,21 +160,28 @@ public class TimeSheetActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(TimeSheetActivity.this, R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int selectedMinute) {
+
+
                         if (hourOfDay > 12) {
+
                             int i = hourOfDay - 12;
                             editTextstartTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
+                            start_time = hourOfDay + ":" + selectedMinute + " PM";
 
                         } else if (hourOfDay == 12) {
                             int i = 12;
                             editTextstartTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
+                            start_time = hourOfDay + ":" + selectedMinute + " PM";
 
                         } else if (hourOfDay < 12) {
                             if (hourOfDay != 0) {
                                 editTextstartTime.setText(String.format("%02d:%02d %s", hourOfDay, selectedMinute, " AM"));
+                                start_time = hourOfDay + ":" + selectedMinute + " AM";
 
                             } else {
                                 int i = 12;
                                 editTextstartTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " AM"));
+                                start_time = hourOfDay + ":" + selectedMinute + " AM";
 
                             }
                         }
@@ -134,33 +208,37 @@ public class TimeSheetActivity extends AppCompatActivity {
                         if (hourOfDay > 12) {
                             int i = hourOfDay - 12;
                             editTextEndTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
+                            end_time = hourOfDay + ":" + selectedMinute + " PM";
 
                         } else if (hourOfDay == 12) {
                             int i = 12;
                             editTextEndTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
+                            end_time = hourOfDay + ":" + selectedMinute + " PM";
 
                         } else if (hourOfDay < 12) {
                             if (hourOfDay != 0) {
                                 editTextEndTime.setText(String.format("%02d:%02d %s", hourOfDay, selectedMinute, " AM"));
+                                end_time = hourOfDay + ":" + selectedMinute + " AM";
 
                             } else {
                                 int i = 12;
                                 editTextEndTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " AM"));
+                                end_time = hourOfDay + ":" + selectedMinute + " AM";
+
 
                             }
 
                         }
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
                         try {
-                            Date date1 = simpleDateFormat.parse(editTextstartTime.getText().toString());
-                            Date date2 = simpleDateFormat.parse(editTextEndTime.getText().toString());
+                            Date date1 = simpleDateFormat.parse(start_time);
+                            Date date2 = simpleDateFormat.parse(end_time);
 //                           Date date1 = simpleDateFormat.parse("08:00 AM");
 //                           Date date2 = simpleDateFormat.parse("04:00 PM");
 
                             long difference = date2.getTime() - date1.getTime();
                             int days = (int) (difference / (1000 * 60 * 60 * 24));
                             int hours = (int) ((difference - (1000 * 60 * 60 * 24 * days)) / (1000 * 60 * 60));
-                            int min = (int) (difference - (1000 * 60 * 60 * 24 * days) - (1000 * 60 * 60 * hours)) / (1000 * 60);
                             hours = (hours < 0 ? -hours : hours);
                             editTextTotal.setText(hours + "");
                         } catch (Exception e) {
@@ -189,53 +267,105 @@ public class TimeSheetActivity extends AppCompatActivity {
                 String startTime = editTextstartTime.getText().toString();
                 String endTime = editTextEndTime.getText().toString();
                 String total = editTextTotal.getText().toString();
+                String start_date = editTextStartDate.getText().toString();
+                String end_date = editTextEndDate.getText().toString();
+                String total_days = editTextTotalDays.getText().toString();
                 String comments = editTextComments.getText().toString();
 
-                if (number.isEmpty() || name.isEmpty() || email.isEmpty() || date.isEmpty() || startTime.isEmpty()
-                        || endTime.isEmpty() || total.isEmpty() || comments.isEmpty()) {
+                if (number.isEmpty() || name.isEmpty() || email.isEmpty() || comments.isEmpty()) {
                     // Display an error message if the edit text fields are empty.
                     Toast.makeText(TimeSheetActivity.this, "Please enter complete details", Toast.LENGTH_SHORT).show();
                 } else if (work_type_str.equals("select")) {
                     Toast.makeText(TimeSheetActivity.this, "Please select Invoice Based on (Hours or Days)", Toast.LENGTH_SHORT).show();
                 } else if (!agree_terms.isChecked()) {
                     Toast.makeText(TimeSheetActivity.this, "Please check Confirmation of Accuracy", Toast.LENGTH_SHORT).show();
-                } else {
-                    Dialog lodingbar = new Dialog(TimeSheetActivity.this);
-                    lodingbar.setContentView(R.layout.loading);
-                    Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
-                    lodingbar.setCancelable(false);
-                    lodingbar.show();
-                    TimeSheetModel timeSheetModel = new TimeSheetModel();
-                    String userID = Stash.getString("userID");
+                } else if (work_type_str.equals("Hours")) {
+                    if (date.isEmpty() || startTime.isEmpty()
+                            || endTime.isEmpty() || total.isEmpty()) {
+                        Toast.makeText(TimeSheetActivity.this, "Please enter complete details", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Dialog lodingbar = new Dialog(TimeSheetActivity.this);
+                        lodingbar.setContentView(R.layout.loading);
+                        Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+                        lodingbar.setCancelable(false);
+                        lodingbar.show();
+                        TimeSheetModel timeSheetModel = new TimeSheetModel();
+                        String userID = Stash.getString("userID");
+                        String key = Constants.UserReference.child(userID).child(Constants.TIME_SHEET).push().getKey();
+                        timeSheetModel.work_type_str = work_type_str;
+                        timeSheetModel.number = number;
+                        timeSheetModel.name = name;
+                        timeSheetModel.email = email;
+                        timeSheetModel.date = date;
+                        timeSheetModel.startTime = startTime;
+                        timeSheetModel.endTime = endTime;
+                        timeSheetModel.total = total;
 
-                    String key = Constants.UserReference.child(userID).child(Constants.TIME_SHEET).push().getKey();
-                    timeSheetModel.work_type_str = work_type_str;
-                    timeSheetModel.date = date;
-                    timeSheetModel.number = number;
-                    timeSheetModel.name = name;
-                    timeSheetModel.email = email;
-                    timeSheetModel.startTime = startTime;
-                    timeSheetModel.endTime = endTime;
-                    timeSheetModel.total = total;
-                    timeSheetModel.comments = comments;
-                    timeSheetModel.lat = Constants.cur_lat;
-                    timeSheetModel.lng = (Constants.cur_lng);
-                    timeSheetModel.status = "pending";
-                    timeSheetModel.key = key;
+                        timeSheetModel.comments = comments;
+                        timeSheetModel.lat = Constants.cur_lat;
+                        timeSheetModel.lng = (Constants.cur_lng);
+                        timeSheetModel.status = "pending";
+                        timeSheetModel.key = key;
 
-                    Constants.UserReference.child(userID).child(Constants.TIME_SHEET).child(key).setValue(timeSheetModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isComplete()) {
-                                Toast.makeText(TimeSheetActivity.this, "Successfully Submitted", Toast.LENGTH_SHORT).show();
-                                lodingbar.dismiss();
-                                onBackPressed();
-                            } else {
-                                Toast.makeText(TimeSheetActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                                lodingbar.dismiss();
+                        Constants.UserReference.child(userID).child(Constants.TIME_SHEET).child(key).setValue(timeSheetModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isComplete()) {
+                                    Toast.makeText(TimeSheetActivity.this, "Successfully Submitted", Toast.LENGTH_SHORT).show();
+                                    lodingbar.dismiss();
+                                    onBackPressed();
+                                } else {
+                                    Toast.makeText(TimeSheetActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                    lodingbar.dismiss();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+
+                } else if (work_type_str.equals("Days")) {
+
+                    if (start_date.isEmpty() || end_date.isEmpty() ) {
+                        Toast.makeText(TimeSheetActivity.this, "Please enter complete details", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Dialog lodingbar = new Dialog(TimeSheetActivity.this);
+                        lodingbar.setContentView(R.layout.loading);
+                        Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));
+                        lodingbar.setCancelable(false);
+                        lodingbar.show();
+                        TimeSheetModel timeSheetModel = new TimeSheetModel();
+                        String userID = Stash.getString("userID");
+                        String key = Constants.UserReference.child(userID).child(Constants.TIME_SHEET).push().getKey();
+                        timeSheetModel.work_type_str = work_type_str;
+                        timeSheetModel.number = number;
+                        timeSheetModel.name = name;
+                        timeSheetModel.email = email;
+
+                        timeSheetModel.date = "01/01/2000";
+                        timeSheetModel.startTime = start_date;
+                        timeSheetModel.endTime = end_date;
+                        timeSheetModel.total = total_days;
+
+                        timeSheetModel.comments = comments;
+                        timeSheetModel.lat = Constants.cur_lat;
+                        timeSheetModel.lng = (Constants.cur_lng);
+                        timeSheetModel.status = "pending";
+                        timeSheetModel.key = key;
+
+                        Constants.UserReference.child(userID).child(Constants.TIME_SHEET).child(key).setValue(timeSheetModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isComplete()) {
+                                    Toast.makeText(TimeSheetActivity.this, "Successfully Submitted", Toast.LENGTH_SHORT).show();
+                                    lodingbar.dismiss();
+                                    onBackPressed();
+                                } else {
+                                    Toast.makeText(TimeSheetActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                    lodingbar.dismiss();
+                                }
+                            }
+                        });
+                    }
+
                 }
             }
         });

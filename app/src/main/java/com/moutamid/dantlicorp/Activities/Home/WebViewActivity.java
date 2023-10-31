@@ -41,16 +41,16 @@ public class WebViewActivity extends AppCompatActivity {
                 "<p><span style=\"color:#222222;font-size:12pt;\">&nbsp;</span><strong><span style=\"font-size:14pt;\">Service Providers</span></strong></p>\n" +
                 "<p><span style=\"font-size:11pt;\">Dantli Corp may employ third-party companies and individuals due to the following reasons:</span></p>\n" +
                 "<ol>\n" +
-                "    <li><span style=\"font-size:11pt;\">&nbsp;</span><span style=\"font-size:10pt;\">&middot;</span><span style=\"font-size:6.999999999999999pt;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style=\"font-size:11pt;\">To create the Dantli Corp App;</span></li>\n" +
-                "    <li><span style=\"font-size:10pt;\">&middot;</span><span style=\"font-size:6.999999999999999pt;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style=\"font-size:11pt;\">To provide the Dantli Corp App on our behalf;</span></li>\n" +
-                "    <li><span style=\"font-size:10pt;\">&middot;</span><span style=\"font-size:6.999999999999999pt;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style=\"font-size:11pt;\">To perform maintenance related services; or</span></li>\n" +
-                "    <li><span style=\"font-size:10pt;\">&middot;</span><span style=\"font-size:6.999999999999999pt;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style=\"font-size:11pt;\">To assist us in analyzing how the Dantli Corp App is used.</span></li>\n" +
+                "    <li><span style=\"font-size:6.999999999999999pt;\">&nbsp; &nbsp;</span><span style=\"font-size:11pt;\">To create the Dantli Corp App;</span></li>\n" +
+                "    <li><span style=\"font-size:6.999999999999999pt;\">&nbsp; &nbsp;</span><span style=\"font-size:11pt;\">To provide the Dantli Corp App on our behalf;</span></li>\n" +
+                "    <li><span style=\"font-size:6.999999999999999pt;\">&nbsp; &nbsp;</span><span style=\"font-size:11pt;\">To perform maintenance related services; or</span></li>\n" +
+                "    <li><span style=\"font-size:6.999999999999999pt;\">&nbsp; &nbsp;</span><span style=\"font-size:11pt;\">To assist us in analyzing how the Dantli Corp App is used.</span></li>\n" +
                 "</ol>\n" +
                 "<p><span style=\"font-size:11pt;\">&nbsp;</span><span style=\"font-size:11pt;\">Dantli Corp wants to inform users of this Service that these third parties have access to their Personal Information. The reason is to perform the tasks assigned to them on our behalf. However, they are obligated not to disclose or use the information for any other purpose.</span></p>\n" +
-                "<p><span style=\"font-size:11pt;\">&nbsp;</span><strong><span style=\"font-size:14pt;\">Security:</span></strong></p>\n" +
+                "<p><span style=\"font-size:11pt;\">&nbsp;</span><strong><span style=\"font-size:14pt;\">Security</span></strong></p>\n" +
                 "<p><span style=\"font-size:11pt;\">Dantli Corp values your trust in providing us with your Personal Information, thus we are striving to use commercially acceptable means of protecting it.</span></p>\n" +
                 "<p><span style=\"font-size:11pt;\">&nbsp;</span><span style=\"font-size:11pt;\">But remember that no method of transmission over the internet, or method of electronic storage is 100% secure and reliable, and Dantli Corp cannot guarantee its absolute security.</span></p>\n" +
-                "<p><span style=\"font-size:11pt;\">&nbsp;</span><strong><span style=\"font-size:14pt;\">Links to Other Sites:</span></strong></p>\n" +
+                "<p><span style=\"font-size:11pt;\">&nbsp;</span><strong><span style=\"font-size:14pt;\">Links to Other Sites</span></strong></p>\n" +
                 "<p><span style=\"font-size:11pt;\">The Dantli Corp App may contain links to other sites. If you click on a third-party link, you will be directed to that site. Note that Dantli Corp does not operate these external sites. Therefore, Dantli Corp strongly advises users to review the Privacy Policy of the third-party websites.</span></p>\n" +
                 "<p><span style=\"font-size:11pt;\">&nbsp;</span><span style=\"font-size:11pt;\">Dantli Corp has no control over and assumes no responsibility for the content, privacy policies, or practices of any third-party sites or services.</span></p>\n" +
                 "<p><span style=\"font-size:11pt;\">&nbsp;</span><strong><span style=\"font-size:14pt;\">Children&rsquo;s Privacy</span></strong></p>\n" +
@@ -59,7 +59,7 @@ public class WebViewActivity extends AppCompatActivity {
                 "<p><span style=\"font-size:11pt;\">&nbsp;</span><strong><span style=\"font-size:14pt;\">Changes to This Privacy Policy</span></strong></p>\n" +
                 "<p><span style=\"font-size:11pt;\">Dantli Corp may update our Privacy Policy from time to time. Thus, users are advised to review this page periodically for any changes. Dantli Corp will notify users of any changes by posting the new Privacy Policy on this page.</span></p>\n" +
                 "<p><span style=\"font-size:11pt;\">&nbsp;</span><strong><span style=\"font-size:14pt;\">Contact Us</span></strong></p>\n" +
-                "<p><span style=\"font-size:11pt;\">If you have any questions or suggestions about the Dantli Corp App Privacy Policy, please do not hesitate to contact us at h</span><span style=\"font-size:11pt;\">r@dantlicorp.com.&rdquo;&nbsp;</span></p>"));
+                "<p><span style=\"font-size:11pt;\">If you have any questions or suggestions about the Dantli Corp App Privacy Policy, please do not hesitate to contact us at h</span><span style=\"font-size:11pt;\">r@dantlicorp.com.&nbsp;</span></p>"));
 //        WebView browser = (WebView) findViewById(R.id.webview);
 //        browser.getSettings().setLoadsImagesAutomatically(true);
 //        browser.setWebViewClient(new MyBrowser());

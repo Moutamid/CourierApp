@@ -139,5 +139,8 @@
     <string name="route_details">Route Details</string>
     <string name="please_check_out_before_check_in">Please check out before check in</string>
     <string name="please_check_in_before_check_out">Please check in before check out</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="total_days">Total days</string>
 
 </resources>

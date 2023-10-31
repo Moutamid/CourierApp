@@ -115,18 +115,23 @@
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textSize="12dp" />
+<LinearLayout
+    android:id="@+id/days"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/lexend_semi_bold"
-                android:text="@string/date"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/lexend_semi_bold"
+        android:text="@string/date"
+        android:textColor="@color/black"
+        android:textSize="14dp" />
 
-            <TextView
+    <TextView
                 android:id="@+id/editTextDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -178,27 +183,102 @@
                 android:padding="10dp"
                 android:textColor="@color/black"
                 android:textSize="12dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/lexend_semi_bold"
+        android:text="@string/total_hours"
+        android:textColor="@color/black"
+        android:textSize="14dp" />
 
-            <TextView
+    <TextView
+        android:id="@+id/editTextTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/lexend_medium"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="12dp" />
+
+</LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/hours"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/lexend_semi_bold"
-                android:text="@string/total_hours"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/editTextTotal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:fontFamily="@font/lexend_medium"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:textSize="12dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/lexend_semi_bold"
+                    android:text="@string/start_date"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/editTextStartDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/lexend_medium"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/lexend_semi_bold"
+                    android:text="@string/end_date"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/editTextEndDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/lexend_medium"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/lexend_semi_bold"
+                    android:text="@string/total_days"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/editTextTotalDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="@font/lexend_medium"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+
+
+
+            </LinearLayout>
+
 
             <TextView
 

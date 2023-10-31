@@ -6,6 +6,7 @@ import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +26,9 @@ import java.util.Objects;
 
 public class TimeSheetActivity extends AppCompatActivity {
     TextView work_type;
-    private TextView editTextnumber, editTextName, editTextEmail, editTextDate, editTextstartTime, editTextEndTime, editTextTotal, editTextComments;
+    private TextView editTextTotalDays, editTextEndDate, editTextStartDate, editTextnumber, editTextName, editTextEmail, editTextDate, editTextstartTime, editTextEndTime, editTextTotal, editTextComments;
     Button deny, accept;
+    LinearLayout days_layout, hours_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +36,13 @@ public class TimeSheetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_time_sheet2);
         TimeSheetModel timeSheetModel = (TimeSheetModel) Stash.getObject(Constants.TIME_SHEET, TimeSheetModel.class);
 
+        days_layout = findViewById(R.id.days);
+        hours_layout = findViewById(R.id.hours);
         accept = findViewById(R.id.accept);
         deny = findViewById(R.id.deny);
+        editTextTotalDays = findViewById(R.id.editTextTotalDays);
+        editTextEndDate = findViewById(R.id.editTextEndDate);
+        editTextStartDate = findViewById(R.id.editTextStartDate);
         editTextnumber = findViewById(R.id.editTextnumber);
         editTextName = findViewById(R.id.editTextName);
         editTextEmail = findViewById(R.id.editTextEmail);
@@ -45,6 +52,13 @@ public class TimeSheetActivity extends AppCompatActivity {
         editTextTotal = findViewById(R.id.editTextTotal);
         editTextComments = findViewById(R.id.editTextComments);
         work_type = findViewById(R.id.work_type);
+        if (timeSheetModel.work_type_str.equals("Hours")) {
+            hours_layout.setVisibility(View.GONE);
+            days_layout.setVisibility(View.VISIBLE);
+        } else if (timeSheetModel.work_type_str.equals("Days")) {
+            hours_layout.setVisibility(View.VISIBLE);
+            days_layout.setVisibility(View.GONE);
+        }
         editTextnumber.setText(timeSheetModel.number);
         editTextName.setText(timeSheetModel.name);
         editTextEmail.setText(timeSheetModel.email);
@@ -52,6 +66,9 @@ public class TimeSheetActivity extends AppCompatActivity {
         editTextstartTime.setText(timeSheetModel.startTime);
         editTextEndTime.setText(timeSheetModel.endTime);
         editTextTotal.setText(timeSheetModel.total);
+        editTextStartDate.setText(timeSheetModel.startTime);
+        editTextEndDate.setText(timeSheetModel.endTime);
+        editTextTotalDays.setText(timeSheetModel.total);
         editTextComments.setText(timeSheetModel.comments);
         work_type.setText(timeSheetModel.work_type_str);
         String userID = Stash.getString("userID");
