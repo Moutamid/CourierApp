@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,8 +26,23 @@ public class VideoPlayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_video_play);
         video_id = getIntent().getStringExtra("url");
         Log.d("data", video_id + "");
-        video_id = video_id.substring(32, 43);
-        Log.d("data", video_id + "");
+        if(video_id.contains("youtube"))
+        {
+            video_id = video_id.substring(32, 43);
+        }
+        else
+        {
+
+        int startIndex = video_id.lastIndexOf('/') + 1;
+        int endIndex = video_id.indexOf('?');
+
+        if (startIndex >= 0 && endIndex >= 0) {
+            video_id = video_id.substring(startIndex, endIndex);
+
+        }
+
+        }
+//        Log.d("data", video_id + ""+videoId);
         final YouTubePlayerView youTubePlayerView = findViewById(R.id.videoPlayer);
         getLifecycle().addObserver(youTubePlayerView);
         youTubePlayerView.getPlayerUiController();
