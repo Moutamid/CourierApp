@@ -1,9 +1,17 @@
 package com.moutamid.dantlicorp.Model;
 
 public class VideoModel {
-    String thumbnail, key, url;
+    String thumbnail, key, url, link;
 
     public VideoModel() {
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public String getThumbnail() {

@@ -99,7 +99,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="@string/show_all_employees_location"
+                android:text="@string/show_all_dantli_corp_locations"
                 android:textColor="@color/white"
                 android:textSize="15dp" />
 

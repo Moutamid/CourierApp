@@ -141,5 +141,16 @@
     <string name="please_check_out_before_check_in">Por favor, haga el check-out antes de hacer el check-in</string>
     <string name="please_check_in_before_check_out">Por favor, haga el check-in antes de hacer el check-out</string>
 
+    <!-- Strings in Spanish -->
+    <string name="start_date">Fecha de Inicio</string>
+    <string name="end_date">Fecha de Finalización</string>
+    <string name="total_days">Días Totales</string>
+    <string name="show_all_dantli_corp_locations">Mostrar todas las ubicaciones de Dantli Corp</string>
+    <string name="spanish">Español</string>
+    <string name="english">Inglés</string>
+    <string name="russian">Ruso</string>
+    <string name="mandarin_chinese">Chino Mandarín</string>
+    <string name="french">Francés</string>
+    <string name="human_resources">Recursos Humanos</string>
 
 </resources>

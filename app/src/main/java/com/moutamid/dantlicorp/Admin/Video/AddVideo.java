@@ -107,14 +107,17 @@ public class AddVideo extends AppCompatActivity {
                 hashMap.put("thumbnail", "" + thumbnail);
                 hashMap.put("key", key);
                 hashMap.put("url", edt_url.getText().toString());
+                hashMap.put("link", edt_link.getText().toString());
                 Constants.VideosReference.child(key).setValue(hashMap)
                         .addOnSuccessListener(aVoid -> {
-    lodingbar.dismiss();                            Toast.makeText(AddVideo.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                            lodingbar.dismiss();
+                            Toast.makeText(AddVideo.this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
                             onBackPressed();
                             finish();
                         })
                         .addOnFailureListener(e -> {
-    lodingbar.dismiss();                            Toast.makeText(AddVideo.this, "Please try again", Toast.LENGTH_SHORT).show();
+                            lodingbar.dismiss();
+                            Toast.makeText(AddVideo.this, "Please try again", Toast.LENGTH_SHORT).show();
                         });
 
             } else {
@@ -137,14 +140,17 @@ public class AddVideo extends AppCompatActivity {
                             hashMap.put("thumbnail", "" + downloadImageUri);
                             hashMap.put("key", key);
                             hashMap.put("url", edt_url.getText().toString());
-                           Constants.VideosReference.child(key).setValue(hashMap)
+                            hashMap.put("link", edt_link.getText().toString());
+                            Constants.VideosReference.child(key).setValue(hashMap)
                                     .addOnSuccessListener(aVoid -> {
-                lodingbar.dismiss();                                        Toast.makeText(this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                                        lodingbar.dismiss();
+                                        Toast.makeText(this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
                                         onBackPressed();
                                         finish();
                                     })
                                     .addOnFailureListener(e -> {
-                lodingbar.dismiss();                                        Toast.makeText(this, "Please try again", Toast.LENGTH_SHORT).show();
+                                        lodingbar.dismiss();
+                                        Toast.makeText(this, "Please try again", Toast.LENGTH_SHORT).show();
                                     });
                         }
                     }
@@ -173,19 +179,23 @@ lodingbar.dismiss();                    Toast.makeText(this, "Failed to upload",
                 if (task.isSuccessful()) {
                     Uri downloadImageUri = task.getResult();
                     if (downloadImageUri != null) {
-                        String key =Constants.VideosReference.push().getKey();
+                        String key = Constants.VideosReference.push().getKey();
                         HashMap<String, Object> hashMap = new HashMap<>();
                         hashMap.put("thumbnail", "" + downloadImageUri);
                         hashMap.put("key", key);
                         hashMap.put("url", edt_url.getText().toString());
+                        hashMap.put("link", edt_link.getText().toString());
+
                         Constants.VideosReference.child(key).setValue(hashMap)
                                 .addOnSuccessListener(aVoid -> {
-            lodingbar.dismiss();                                    Toast.makeText(this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                                    lodingbar.dismiss();
+                                    Toast.makeText(this, "Uploaded Successfully", Toast.LENGTH_SHORT).show();
                                     onBackPressed();
                                     finish();
                                 })
                                 .addOnFailureListener(e -> {
-            lodingbar.dismiss();                                    Toast.makeText(this, "Please try again", Toast.LENGTH_SHORT).show();
+                                    lodingbar.dismiss();
+                                    Toast.makeText(this, "Please try again", Toast.LENGTH_SHORT).show();
                                 });
                     }
                 }

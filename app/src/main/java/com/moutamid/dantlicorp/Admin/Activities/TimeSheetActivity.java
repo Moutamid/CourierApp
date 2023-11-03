@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.lang.UCharacter;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -26,7 +27,7 @@ import java.util.Objects;
 
 public class TimeSheetActivity extends AppCompatActivity {
     TextView work_type;
-    private TextView editTextTotalDays, editTextEndDate, editTextStartDate, editTextnumber, editTextName, editTextEmail, editTextDate, editTextstartTime, editTextEndTime, editTextTotal, editTextComments;
+    private TextView comment_txt, editTextTotalDays, editTextEndDate, editTextStartDate, editTextnumber, editTextName, editTextEmail, editTextDate, editTextstartTime, editTextEndTime, editTextTotal, editTextComments;
     Button deny, accept;
     LinearLayout days_layout, hours_layout;
 
@@ -36,6 +37,7 @@ public class TimeSheetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_time_sheet2);
         TimeSheetModel timeSheetModel = (TimeSheetModel) Stash.getObject(Constants.TIME_SHEET, TimeSheetModel.class);
 
+        comment_txt = findViewById(R.id.comment_txt);
         days_layout = findViewById(R.id.days);
         hours_layout = findViewById(R.id.hours);
         accept = findViewById(R.id.accept);
@@ -58,6 +60,13 @@ public class TimeSheetActivity extends AppCompatActivity {
         } else if (timeSheetModel.work_type_str.equals("Days")) {
             hours_layout.setVisibility(View.VISIBLE);
             days_layout.setVisibility(View.GONE);
+        }
+        Log.d("nothing", timeSheetModel.comments);
+        if(timeSheetModel.comments.equals("nothing"))
+        {
+            editTextComments.setVisibility(View.GONE);
+            comment_txt.setVisibility(View.GONE);
+
         }
         editTextnumber.setText(timeSheetModel.number);
         editTextName.setText(timeSheetModel.name);

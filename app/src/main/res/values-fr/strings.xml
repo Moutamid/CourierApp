@@ -141,5 +141,16 @@
     <!-- French Strings -->
     <string name="please_check_out_before_check_in">Veuillez faire le check-out avant de faire le check-in</string>
     <string name="please_check_in_before_check_out">Veuillez faire le check-in avant de faire le check-out</string>
+    <!-- Strings in French -->
+    <string name="start_date">Date de Début</string>
+    <string name="end_date">Date de Fin</string>
+    <string name="total_days">Nombre de Jours</string>
+    <string name="show_all_dantli_corp_locations">Afficher toutes les emplacements de Dantli Corp</string>
+    <string name="spanish">Espagnol</string>
+    <string name="english">Anglais</string>
+    <string name="russian">Russe</string>
+    <string name="mandarin_chinese">Chinois Mandarin</string>
+    <string name="french">Français</string>
+    <string name="human_resources">Ressources Humaines</string>
 
 </resources>

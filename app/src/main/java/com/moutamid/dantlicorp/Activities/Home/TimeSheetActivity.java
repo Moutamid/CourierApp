@@ -42,6 +42,8 @@ public class TimeSheetActivity extends AppCompatActivity {
     CheckBox agree_terms;
     TextView buttonSubmit;
     String work_type_str = "select";
+    String comment_str = "nothing";
+
     Calendar myCalendar = Calendar.getInstance();
     Calendar start_Calendar = Calendar.getInstance();
     String start_time, end_time;
@@ -123,7 +125,12 @@ public class TimeSheetActivity extends AppCompatActivity {
                 Date date1 = sdf.parse(start_date_str);
                 Date date2 = sdf.parse(sdf.format(myCalendar.getTime()));
                 long diff = date2.getTime() - date1.getTime();
-                editTextTotalDays.setText(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + " Days");
+                if (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) == 0) {
+                    editTextTotalDays.setText(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + 1 + " Day");
+                } else {
+                    editTextTotalDays.setText(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + 1 + " Days");
+
+                }
             } catch (Exception e) {
                 System.out.println("Exceptions: " + e.toString());
 
@@ -156,35 +163,36 @@ public class TimeSheetActivity extends AppCompatActivity {
                 Calendar mcurrentTime = Calendar.getInstance();
                 int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
                 int minute = mcurrentTime.get(Calendar.MINUTE);
+
                 TimePickerDialog mTimePicker;
                 mTimePicker = new TimePickerDialog(TimeSheetActivity.this, R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int selectedMinute) {
-
-
-                        if (hourOfDay > 12) {
-
-                            int i = hourOfDay - 12;
-                            editTextstartTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
-                            start_time = hourOfDay + ":" + selectedMinute + " PM";
-
-                        } else if (hourOfDay == 12) {
-                            int i = 12;
-                            editTextstartTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
-                            start_time = hourOfDay + ":" + selectedMinute + " PM";
-
-                        } else if (hourOfDay < 12) {
-                            if (hourOfDay != 0) {
-                                editTextstartTime.setText(String.format("%02d:%02d %s", hourOfDay, selectedMinute, " AM"));
-                                start_time = hourOfDay + ":" + selectedMinute + " AM";
-
-                            } else {
-                                int i = 12;
-                                editTextstartTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " AM"));
-                                start_time = hourOfDay + ":" + selectedMinute + " AM";
-
-                            }
-                        }
+                        start_time = String.format("%02d:%02d %s", hourOfDay == 0 ? 12 : hourOfDay > 12 ? hourOfDay - 12 : hourOfDay, selectedMinute, hourOfDay >= 12 ? "PM" : "AM");
+                        editTextstartTime.setText(start_time);
+//                        if (hourOfDay > 12) {
+//
+//                            int i = hourOfDay - 12;
+//                            editTextstartTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
+//                            start_time = hourOfDay + ":" + selectedMinute + " PM";
+//
+//                        } else if (hourOfDay == 12) {
+//                            int i = 12;
+//                            editTextstartTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
+//                            start_time = hourOfDay + ":" + selectedMinute + " PM";
+//
+//                        } else if (hourOfDay < 12) {
+//                            if (hourOfDay != 0) {
+//                                editTextstartTime.setText(String.format("%02d:%02d %s", hourOfDay, selectedMinute, " AM"));
+//                                start_time = hourOfDay + ":" + selectedMinute + " AM";
+//
+//                            } else {
+//                                int i = 12;
+//                                editTextstartTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " AM"));
+//                                start_time = hourOfDay + ":" + selectedMinute + " AM";
+//
+//                            }
+//                        }
                     }
                 }, hour, minute, false);//Yes 24 hour time
                 mTimePicker.setTitle("Select Start Time");
@@ -205,42 +213,47 @@ public class TimeSheetActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(TimeSheetActivity.this, R.style.TimePickerTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int selectedMinute) {
-                        if (hourOfDay > 12) {
-                            int i = hourOfDay - 12;
-                            editTextEndTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
-                            end_time = hourOfDay + ":" + selectedMinute + " PM";
-
-                        } else if (hourOfDay == 12) {
-                            int i = 12;
-                            editTextEndTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
-                            end_time = hourOfDay + ":" + selectedMinute + " PM";
-
-                        } else if (hourOfDay < 12) {
-                            if (hourOfDay != 0) {
-                                editTextEndTime.setText(String.format("%02d:%02d %s", hourOfDay, selectedMinute, " AM"));
-                                end_time = hourOfDay + ":" + selectedMinute + " AM";
-
-                            } else {
-                                int i = 12;
-                                editTextEndTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " AM"));
-                                end_time = hourOfDay + ":" + selectedMinute + " AM";
-
-
-                            }
-
-                        }
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
+                        end_time = String.format("%02d:%02d %s", hourOfDay == 0 ? 12 : hourOfDay > 12 ? hourOfDay - 12 : hourOfDay, selectedMinute, hourOfDay >= 12 ? "PM" : "AM");
+                        editTextEndTime.setText(end_time);
+//                        if (hourOfDay > 12) {
+//                            int i = hourOfDay - 12;
+//                            editTextEndTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
+//                            end_time = hourOfDay + ":" + selectedMinute + " PM";
+//
+//                        } else if (hourOfDay == 12) {
+//                            int i = 12;
+//                            editTextEndTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " PM"));
+//                            end_time = hourOfDay + ":" + selectedMinute + " PM";
+//
+//                        } else if (hourOfDay < 12) {
+//                            if (hourOfDay != 0) {
+//                                editTextEndTime.setText(String.format("%02d:%02d %s", hourOfDay, selectedMinute, " AM"));
+//                                end_time = hourOfDay + ":" + selectedMinute + " AM";
+//
+//                            } else {
+//                                int i = 12;
+//                                editTextEndTime.setText(String.format("%02d:%02d %s", i, selectedMinute, " AM"));
+//                                end_time = hourOfDay + ":" + selectedMinute + " AM";
+//
+//
+//                            }
+//
+//                        }
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm aa");
                         try {
-                            Date date1 = simpleDateFormat.parse(start_time);
-                            Date date2 = simpleDateFormat.parse(end_time);
-//                           Date date1 = simpleDateFormat.parse("08:00 AM");
-//                           Date date2 = simpleDateFormat.parse("04:00 PM");
+                            SimpleDateFormat sdf = new SimpleDateFormat("hh:mm aa");
+                            Date earlierTime = sdf.parse(start_time);
+                            Date laterTime = sdf.parse(end_time);
+                            long timeDifferenceInMillis = laterTime.getTime() - earlierTime.getTime();
+                            int hours = (int) (timeDifferenceInMillis / (1000 * 60 * 60));
+                            int minutes = (int) (timeDifferenceInMillis / (1000 * 60)) % 60;
+                            if (hours < 0) {
+                                hours += 24;
+                            }
+                            double totalHours = hours + minutes / 60.0;
 
-                            long difference = date2.getTime() - date1.getTime();
-                            int days = (int) (difference / (1000 * 60 * 60 * 24));
-                            int hours = (int) ((difference - (1000 * 60 * 60 * 24 * days)) / (1000 * 60 * 60));
-                            hours = (hours < 0 ? -hours : hours);
-                            editTextTotal.setText(hours + "");
+
+                            editTextTotal.setText(String.format("%.1f", totalHours));
                         } catch (Exception e) {
                             Log.i("=====>", "error " + e.getMessage());
 
@@ -270,9 +283,13 @@ public class TimeSheetActivity extends AppCompatActivity {
                 String start_date = editTextStartDate.getText().toString();
                 String end_date = editTextEndDate.getText().toString();
                 String total_days = editTextTotalDays.getText().toString();
-                String comments = editTextComments.getText().toString();
+                comment_str = editTextComments.getText().toString();
 
-                if (number.isEmpty() || name.isEmpty() || email.isEmpty() || comments.isEmpty()) {
+                if (comment_str.isEmpty()) {
+                    comment_str = "nothing";
+                }
+
+                if (number.isEmpty() || name.isEmpty() || email.isEmpty()) {
                     // Display an error message if the edit text fields are empty.
                     Toast.makeText(TimeSheetActivity.this, "Please enter complete details", Toast.LENGTH_SHORT).show();
                 } else if (work_type_str.equals("select")) {
@@ -301,7 +318,7 @@ public class TimeSheetActivity extends AppCompatActivity {
                         timeSheetModel.endTime = endTime;
                         timeSheetModel.total = total;
 
-                        timeSheetModel.comments = comments;
+                        timeSheetModel.comments = comment_str;
                         timeSheetModel.lat = Constants.cur_lat;
                         timeSheetModel.lng = (Constants.cur_lng);
                         timeSheetModel.status = "pending";
@@ -345,7 +362,7 @@ public class TimeSheetActivity extends AppCompatActivity {
                         timeSheetModel.endTime = end_date;
                         timeSheetModel.total = total_days;
 
-                        timeSheetModel.comments = comments;
+                        timeSheetModel.comments = comment_str;
                         timeSheetModel.lat = Constants.cur_lat;
                         timeSheetModel.lng = (Constants.cur_lng);
                         timeSheetModel.status = "pending";

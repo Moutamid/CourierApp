@@ -141,5 +141,16 @@
     <!-- Russian Strings -->
     <string name="please_check_out_before_check_in">Пожалуйста, выписывайтесь перед заселением</string>
     <string name="please_check_in_before_check_out">Пожалуйста, заселяйтесь перед выпиской</string>
+    <!-- Strings in Russian -->
+    <string name="start_date">Дата начала</string>
+    <string name="end_date">Дата окончания</string>
+    <string name="total_days">Всего дней</string>
+    <string name="show_all_dantli_corp_locations">Показать все местоположения Dantli Corp</string>
+    <string name="spanish">Испанский</string>
+    <string name="english">Английский</string>
+    <string name="russian">Русский</string>
+    <string name="mandarin_chinese">Китайский (Упрощенный)</string>
+    <string name="french">Французский</string>
+    <string name="human_resources">Управление персоналом</string>
 
 </resources>

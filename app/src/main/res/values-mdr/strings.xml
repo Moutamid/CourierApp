@@ -141,5 +141,16 @@
     <!-- Mandarin Chinese (Simplified) Strings -->
     <string name="please_check_out_before_check_in">请在办理入住手续之前办理退房手续</string>
     <string name="please_check_in_before_check_out">请在办理退房手续之前办理入住手续</string>
+    <!-- Strings in Mandarin Chinese (Simplified) -->
+    <string name="start_date">开始日期</string>
+    <string name="end_date">结束日期</string>
+    <string name="total_days">总天数</string>
+    <string name="show_all_dantli_corp_locations">显示所有Dantli Corp位置</string>
+    <string name="spanish">西班牙语</string>
+    <string name="english">英语</string>
+    <string name="russian">俄语</string>
+    <string name="mandarin_chinese">普通话</string>
+    <string name="french">法语</string>
+    <string name="human_resources">人力资源</string>
 
 </resources>

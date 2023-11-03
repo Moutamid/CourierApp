@@ -142,5 +142,12 @@
     <string name="start_date">Start Date</string>
     <string name="end_date">End Date</string>
     <string name="total_days">Total days</string>
+    <string name="show_all_dantli_corp_locations">Show all Dantli Corp Locations</string>
+    <string name="spanish">Spanish</string>
+    <string name="english">English</string>
+    <string name="russian">Russian</string>
+    <string name="mandarin_chinese">Mandarin Chinese</string>
+    <string name="french">French</string>
+    <string name="human_resources">Human Resources</string>
 
 </resources>

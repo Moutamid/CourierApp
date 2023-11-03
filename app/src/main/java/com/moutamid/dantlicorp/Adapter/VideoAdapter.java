@@ -43,6 +43,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.GalleryPhoto
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(ctx, VideoPlayActivity.class);
             intent.putExtra("url", videoModel.getUrl());
+            intent.putExtra("link", videoModel.getLink());
              ctx.startActivity(intent);
         });
         holder.remove_herb.setVisibility(View.GONE);
