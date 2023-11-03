@@ -34,7 +34,6 @@ public class AddVideo extends AppCompatActivity {
     ImageView video_thumbnail;
     private Uri uri = null;
     EditText edt_url;
-    EditText edt_link;
     TextView upload_video;
     String thumbnail = "";
     String url = "";
@@ -46,7 +45,6 @@ public class AddVideo extends AppCompatActivity {
         setContentView(R.layout.activity_add_video);
         video_thumbnail = findViewById(R.id.video_thumbnail);
         edt_url = findViewById(R.id.edt_url);
-        edt_link = findViewById(R.id.edt_link);
         upload_video = findViewById(R.id.upload_video);
 //          intent.putExtra("url", url);
 //            intent.putExtra("thumbnail", thumbnail);
@@ -67,8 +65,6 @@ public class AddVideo extends AppCompatActivity {
         upload_video.setOnClickListener(v -> {
             if (edt_url.getText().toString().isEmpty()) {
                 edt_url.setError("Please Enter");
-            } else if (edt_link.getText().toString().isEmpty()) {
-                edt_link.setError("Please Enter");
             } else {
                 if (edt_url.getText().toString().contains("https://youtu.be/")) {
                     edt_url_str = edt_url.getText().toString().replace("https://youtu.be/", "https://www.youtube.com/watch?v=");
@@ -107,7 +103,6 @@ public class AddVideo extends AppCompatActivity {
                 hashMap.put("thumbnail", "" + thumbnail);
                 hashMap.put("key", key);
                 hashMap.put("url", edt_url.getText().toString());
-                hashMap.put("link", edt_link.getText().toString());
                 Constants.VideosReference.child(key).setValue(hashMap)
                         .addOnSuccessListener(aVoid -> {
                             lodingbar.dismiss();
@@ -140,7 +135,6 @@ public class AddVideo extends AppCompatActivity {
                             hashMap.put("thumbnail", "" + downloadImageUri);
                             hashMap.put("key", key);
                             hashMap.put("url", edt_url.getText().toString());
-                            hashMap.put("link", edt_link.getText().toString());
                             Constants.VideosReference.child(key).setValue(hashMap)
                                     .addOnSuccessListener(aVoid -> {
                                         lodingbar.dismiss();
@@ -184,7 +178,6 @@ lodingbar.dismiss();                    Toast.makeText(this, "Failed to upload",
                         hashMap.put("thumbnail", "" + downloadImageUri);
                         hashMap.put("key", key);
                         hashMap.put("url", edt_url.getText().toString());
-                        hashMap.put("link", edt_link.getText().toString());
 
                         Constants.VideosReference.child(key).setValue(hashMap)
                                 .addOnSuccessListener(aVoid -> {

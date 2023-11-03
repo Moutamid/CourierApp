@@ -17,7 +17,6 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 
 public class VideoPlayActivity extends AppCompatActivity {
     String video_id;
-    String link;
 
 
     @Override
@@ -25,7 +24,6 @@ public class VideoPlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_play);
         video_id = getIntent().getStringExtra("url");
-        link = getIntent().getStringExtra("link");
         Log.d("data", video_id + "");
         video_id = video_id.substring(32, 43);
         Log.d("data", video_id + "");
@@ -45,11 +43,7 @@ public class VideoPlayActivity extends AppCompatActivity {
             public void onStateChange(@NonNull YouTubePlayer youTubePlayer, @NonNull PlayerConstants.PlayerState state) {
                 // this method is called if video has ended,
                 super.onStateChange(youTubePlayer, state);
-                if (state == PlayerConstants.PlayerState.ENDED) {
-                    Uri webpage = Uri.parse(link);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-                    startActivity(intent);
-                }
+
             }
         });
     }
