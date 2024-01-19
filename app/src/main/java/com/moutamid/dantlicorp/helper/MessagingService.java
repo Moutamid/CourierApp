@@ -73,25 +73,46 @@ public class MessagingService  extends FirebaseMessagingService {
                 R.drawable.ic_launcher_foreground);
 
         Uri notificationSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(MessagingService.this, ADMIN_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setLargeIcon(largeIcon)
-                .setContentTitle(remoteMessage.getData().get("title"))
-//                .setContentTitle("Booking message")
-//                .setContentText("You have a new Appointment. Click to check for details")
-                .setContentText(remoteMessage.getData().get("message")+"\n"+remoteMessage.getData().get("data"))
+        if (remoteMessage.getData().get("data") != null) {
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(MessagingService.this, ADMIN_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setLargeIcon(largeIcon)
+                    .setContentTitle(remoteMessage.getData().get("title"))
+                    .setContentText(remoteMessage.getData().get("message") + "\n" + remoteMessage.getData().get("data"))
+                    .setAutoCancel(true)
+                    .setSound(notificationSoundUri)
+                    .setContentIntent(pendingIntent);
 
-                .setAutoCancel(true)
-                .setSound(notificationSoundUri)
-                .setContentIntent(pendingIntent);
+            //Set notification color to match your app color template
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                notificationBuilder.setColor(getResources().getColor(R.color.app_color));
+            }
 
-        //Set notification color to match your app color template
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            notificationBuilder.setColor(getResources().getColor(R.color.app_color));
+            notificationManager.notify(notificationID, notificationBuilder.build());
         }
+        else
+        {
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(MessagingService.this, ADMIN_CHANNEL_ID)
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setLargeIcon(largeIcon)
+                    .setContentTitle(remoteMessage.getData().get("title"))
+                    .setContentText(remoteMessage.getData().get("message"))
+                    .setAutoCancel(true)
+                    .setSound(notificationSoundUri)
+                    .setContentIntent(pendingIntent);
 
-        notificationManager.notify(notificationID, notificationBuilder.build());
+            //Set notification color to match your app color template
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                notificationBuilder.setColor(getResources().getColor(R.color.app_color));
+            }
+            String message = remoteMessage.getData().get("message");
 
+            notificationManager.notify(notificationID, notificationBuilder.build());
+            NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+            bigTextStyle.bigText(message);
+            notificationBuilder.setStyle(bigTextStyle);
+
+        }
     }
 
 

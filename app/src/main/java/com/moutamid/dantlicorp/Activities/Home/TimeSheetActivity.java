@@ -317,7 +317,6 @@ public class TimeSheetActivity extends AppCompatActivity {
                         timeSheetModel.startTime = startTime;
                         timeSheetModel.endTime = endTime;
                         timeSheetModel.total = total;
-
                         timeSheetModel.comments = comment_str;
                         timeSheetModel.lat = Constants.cur_lat;
                         timeSheetModel.lng = (Constants.cur_lng);

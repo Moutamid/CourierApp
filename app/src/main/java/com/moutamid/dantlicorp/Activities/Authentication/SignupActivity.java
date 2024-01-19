@@ -110,6 +110,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
     private void registerRequest() {
+
         Dialog lodingbar = new Dialog(SignupActivity.this);
         lodingbar.setContentView(R.layout.loading);
         Objects.requireNonNull(lodingbar.getWindow()).setBackgroundDrawable(new ColorDrawable(UCharacter.JoiningType.TRANSPARENT));

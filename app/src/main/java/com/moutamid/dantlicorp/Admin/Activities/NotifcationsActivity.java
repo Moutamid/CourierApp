@@ -111,11 +111,8 @@ public class NotifcationsActivity extends AppCompatActivity {
                 response -> {
                     Log.e("True", response + "");
                     Log.d("Responce", response.toString());
-
-
                     progress_bar.setVisibility(View.GONE);
                     Toast.makeText(NotifcationsActivity.this, "Successfully send a notification", Toast.LENGTH_SHORT).show();
-
                 },
                 error -> {
                     progress_bar.setVisibility(View.GONE);

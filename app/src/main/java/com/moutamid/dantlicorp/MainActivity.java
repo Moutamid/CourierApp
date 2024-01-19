@@ -30,8 +30,12 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.moutamid.dantlicorp.Fragments.ChatFragment;
 import com.moutamid.dantlicorp.Fragments.HomeFragment;
 import com.moutamid.dantlicorp.Fragments.HumanResourceFragment;
 import com.moutamid.dantlicorp.Fragments.ProfileFragment;
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     int PERMISSION_ID = 44;
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle actionBarDrawerToggle;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new HomeFragment());
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         getLastLocation();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        retrieveTokenFromFirebase();
         bottomBar.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public boolean onItemSelect(int i) {
@@ -238,4 +245,29 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void retrieveTokenFromFirebase() {
+        // Reference to "DantliCorp/Admin/token" in the database
+        DatabaseReference tokenRef = mDatabase.child("DantliCorp").child("Admin").child("token");
+
+        // Read from the database
+        tokenRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // Get the token value
+                String token = dataSnapshot.getValue(String.class);
+
+                if (token != null) {
+                    Stash.put("admin_token", token);
+
+                } else {
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
 }

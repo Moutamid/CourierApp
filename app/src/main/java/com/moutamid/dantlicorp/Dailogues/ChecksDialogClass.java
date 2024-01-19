@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
@@ -20,9 +21,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.RetryPolicy;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.fxn.stash.Stash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.kyanogen.signatureview.SignatureView;
@@ -33,10 +42,15 @@ import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Constants;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 public class ChecksDialogClass extends AppCompatActivity {
@@ -160,7 +174,14 @@ public class ChecksDialogClass extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
 //                Toast.makeText(ChecksDialogClass.this, "yesssss", Toast.LENGTH_SHORT).show();
                 if (task.isComplete()) {
+                    if (type.equals(getString(R.string.check_in))) {
+                        sendFCMPush("Check in", Stash.getString("admin_token"), checksModel.picked_up, checksModel.drop_off, checksModel.name);
+                    }
+                    else
+                    {
+                        sendFCMPush("Check Out", Stash.getString("admin_token"), checksModel.picked_up, checksModel.drop_off, checksModel.name);
 
+                    }
                     Toast.makeText(ChecksDialogClass.this, ChecksDialogClass.this.getString(R.string.successfully_submitted), Toast.LENGTH_SHORT).show();
                     lodingbar.dismiss();
                     startActivity(new Intent(ChecksDialogClass.this, MainActivity.class));
@@ -173,6 +194,50 @@ public class ChecksDialogClass extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void sendFCMPush(String title, String token, String number, String dropped, String address) {
+        JSONObject notification = new JSONObject();
+        JSONObject notifcationBody = new JSONObject();
+//        Toast.makeText(this, "yes" + token, Toast.LENGTH_SHORT).show();
+        try {
+          UserModel  userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+
+            notifcationBody.put("title", title);
+            notifcationBody.put("message", userModel.name + " has picked " + number + " and dropped "+ dropped +" packages " + " from " + address);
+            notification.put("to", token);
+            notification.put("data", notifcationBody);
+//            Toast.makeText(ChecksDialogClass.this, notification.toString(), Toast.LENGTH_SHORT).show();
+
+            Log.e("DATAAAAAA", notification.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, Constants.NOTIFICATIONAPIURL, notification,
+                response -> {
+                    Log.e("True", response + "");
+//                    Toast.makeText(ChecksDialogClass.this, response.toString(), Toast.LENGTH_SHORT).show();
+                    Log.d("Responce", response.toString());
+                },
+                error -> {
+                    Log.e("False", error + "");
+                    Toast.makeText(ChecksDialogClass.this, "error", Toast.LENGTH_SHORT).show();
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", "key=" + Constants.ServerKey);
+                params.put("Content-Type", "application/json");
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        int socketTimeout = 1000 * 60;// 60 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsObjRequest.setRetryPolicy(policy);
+        requestQueue.add(jsObjRequest);
     }
 
 }

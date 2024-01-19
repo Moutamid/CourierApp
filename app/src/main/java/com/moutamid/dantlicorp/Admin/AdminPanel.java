@@ -12,9 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.fxn.stash.Stash;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.moutamid.dantlicorp.Activities.Authentication.LoginActivity;
 import com.moutamid.dantlicorp.Activities.Home.AllUserLocationActivity;
 import com.moutamid.dantlicorp.Admin.Activities.EmployeeActivity;
@@ -32,6 +37,8 @@ public class AdminPanel extends AppCompatActivity {
     CardView add_vide_btn, inbox_btn, notification_btn, show_map;
     ArrayList<UserModel> userArrayList = new ArrayList<>();
     CardView employee_btn, logout;
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +49,16 @@ public class AdminPanel extends AppCompatActivity {
         notification_btn = findViewById(R.id.notification_btn);
         show_map = findViewById(R.id.show_map);
         logout = findViewById(R.id.logout);
+        mDatabase = FirebaseDatabase.getInstance().getReference("DantliCorp").child("Admin");
+
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                String result = task.getResult();
+                mDatabase.child("token").setValue(result);
+
+            }
+        });
         show_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
