@@ -48,6 +48,8 @@
         <activity
             android:name=".Activities.Home.TimeSheetActivity"
             android:exported="false" />
+        <activity android:name=".Admin.Activities.PendingAllTimeSheetsActivity"
+            android:exported="true"/>
         <activity
             android:name=".Activities.Home.ChatActivity"
             android:exported="false" />

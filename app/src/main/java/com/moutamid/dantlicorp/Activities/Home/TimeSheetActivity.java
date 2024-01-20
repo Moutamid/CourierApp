@@ -21,18 +21,31 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.RetryPolicy;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.fxn.stash.Stash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.moutamid.dantlicorp.Dailogues.ChecksDialogClass;
 import com.moutamid.dantlicorp.Model.TimeSheetModel;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
 import com.moutamid.dantlicorp.helper.Constants;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -322,6 +335,7 @@ public class TimeSheetActivity extends AppCompatActivity {
                         timeSheetModel.lng = (Constants.cur_lng);
                         timeSheetModel.status = "pending";
                         timeSheetModel.key = key;
+                        timeSheetModel.userID = userID;
 
                         Constants.UserReference.child(userID).child(Constants.TIME_SHEET).child(key).setValue(timeSheetModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -366,15 +380,18 @@ public class TimeSheetActivity extends AppCompatActivity {
                         timeSheetModel.lng = (Constants.cur_lng);
                         timeSheetModel.status = "pending";
                         timeSheetModel.key = key;
+                        timeSheetModel.userID = userID;
 
                         Constants.UserReference.child(userID).child(Constants.TIME_SHEET).child(key).setValue(timeSheetModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isComplete()) {
+                                    sendFCMPush(Stash.getString("admin_token"));
                                     Toast.makeText(TimeSheetActivity.this, "Successfully Submitted", Toast.LENGTH_SHORT).show();
                                     lodingbar.dismiss();
                                     onBackPressed();
-                                } else {
+                                }
+                                else {
                                     Toast.makeText(TimeSheetActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                                     lodingbar.dismiss();
                                 }
@@ -386,6 +403,50 @@ public class TimeSheetActivity extends AppCompatActivity {
             }
         });
 
+    }
+    private void sendFCMPush(String token)
+    {
+        JSONObject notification = new JSONObject();
+        JSONObject notifcationBody = new JSONObject();
+//        Toast.makeText(this, "yes" + token, Toast.LENGTH_SHORT).show();
+        try {
+            UserModel  userModel = (UserModel) Stash.getObject("UserDetails", UserModel.class);
+
+            notifcationBody.put("title", "Timesheet invoice");
+            notifcationBody.put("message", userModel.name + " submitted a invoice");
+            notification.put("to", token);
+            notification.put("data", notifcationBody);
+//            Toast.makeText(ChecksDialogClass.this, notification.toString(), Toast.LENGTH_SHORT).show();
+
+            Log.e("DATAAAAAA", notification.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.POST, Constants.NOTIFICATIONAPIURL, notification,
+                response -> {
+                    Log.e("True", response + "");
+//                    Toast.makeText(ChecksDialogClass.this, response.toString(), Toast.LENGTH_SHORT).show();
+                    Log.d("Responce", response.toString());
+                },
+                error -> {
+                    Log.e("False", error + "");
+                    Toast.makeText(TimeSheetActivity.this, "error", Toast.LENGTH_SHORT).show();
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", "key=" + Constants.ServerKey);
+                params.put("Content-Type", "application/json");
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        int socketTimeout = 1000 * 60;// 60 seconds
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        jsObjRequest.setRetryPolicy(policy);
+        requestQueue.add(jsObjRequest);
     }
 
 

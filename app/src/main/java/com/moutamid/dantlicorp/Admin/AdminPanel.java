@@ -25,6 +25,7 @@ import com.moutamid.dantlicorp.Activities.Home.AllUserLocationActivity;
 import com.moutamid.dantlicorp.Admin.Activities.EmployeeActivity;
 import com.moutamid.dantlicorp.Admin.Activities.InboxActivity;
 import com.moutamid.dantlicorp.Admin.Activities.NotifcationsActivity;
+import com.moutamid.dantlicorp.Admin.Activities.PendingAllTimeSheetsActivity;
 import com.moutamid.dantlicorp.Admin.Video.AllVideo;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
@@ -34,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class AdminPanel extends AppCompatActivity {
-    CardView add_vide_btn, inbox_btn, notification_btn, show_map;
+    CardView add_vide_btn, inbox_btn, notification_btn, show_map, pending_btn;
     ArrayList<UserModel> userArrayList = new ArrayList<>();
     CardView employee_btn, logout;
     private DatabaseReference mDatabase;
@@ -49,6 +50,7 @@ public class AdminPanel extends AppCompatActivity {
         notification_btn = findViewById(R.id.notification_btn);
         show_map = findViewById(R.id.show_map);
         logout = findViewById(R.id.logout);
+        pending_btn = findViewById(R.id.pending_btn);
         mDatabase = FirebaseDatabase.getInstance().getReference("DantliCorp").child("Admin");
 
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
@@ -88,6 +90,11 @@ lodingbar.dismiss();                    }
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(AdminPanel.this, EmployeeActivity.class));
+            }
+        }); pending_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(AdminPanel.this, PendingAllTimeSheetsActivity.class));
             }
         });
 

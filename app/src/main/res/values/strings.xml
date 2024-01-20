@@ -149,5 +149,7 @@
     <string name="mandarin_chinese">Mandarin Chinese</string>
     <string name="french">French</string>
     <string name="human_resources">Human Resources</string>
+    <string name="pending">Pending Timesheets</string>
+
 
 </resources>

@@ -81,6 +81,7 @@ public class TimeSheetActivity extends AppCompatActivity {
         editTextComments.setText(timeSheetModel.comments);
         work_type.setText(timeSheetModel.work_type_str);
         String userID = Stash.getString("userID");
+        Toast.makeText(this, "user"+ userID, Toast.LENGTH_SHORT).show();
         if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
             if (userID.equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
             {

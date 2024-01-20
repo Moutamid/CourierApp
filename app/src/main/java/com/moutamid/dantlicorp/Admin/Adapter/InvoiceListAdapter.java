@@ -41,9 +41,9 @@ public class InvoiceListAdapter extends RecyclerView.Adapter<InvoiceListAdapter.
         TimeSheetModel model = list.get(holder.getAdapterPosition());
         holder.name.setText(model.number);
         holder.status.setText(model.status);
-
         holder.itemView.setOnClickListener(v -> {
                     Stash.put(Constants.TIME_SHEET, model);
+                    Stash.put("userID", model.userID);
                     context.startActivity(new Intent(context, TimeSheetActivity.class));
                 }
         );

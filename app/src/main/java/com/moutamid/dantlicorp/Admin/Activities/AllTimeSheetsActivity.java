@@ -57,7 +57,7 @@ public class AllTimeSheetsActivity extends AppCompatActivity {
                             list.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                                     TimeSheetModel model = dataSnapshot.getValue(TimeSheetModel.class);
-                                if (model.status.equals("pending")) {
+                                if (model.status.equals("accepted")||model.status.equals("rejected")) {
 
                                     list.add(model);
                                     Log.d("listSize", "ee : " + model.number);

@@ -48,23 +48,26 @@ public class MapDialogClass extends Dialog {
         Constants.UserReference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserModel userNew = snapshot.getValue(UserModel.class);
-                if (snapshot.child("city").exists() && snapshot.child("is_courier").exists())
-                {
-                    if (userNew.is_courier.equals("Yes")) {
-                        userNew.is_courier = "courier";
+                if (snapshot.hasChild("name")) {
+                    UserModel userNew = snapshot.getValue(UserModel.class);
+                    if (snapshot.child("city").exists() && snapshot.child("is_courier").exists()) {
+                        if (userNew.is_courier.equals("Yes")) {
+                            userNew.is_courier = "courier";
+                        } else {
+                            userNew.is_courier = "not courier";
+                        }
+                        if (userNew.getName() != null) {
+
+                            name_person.setText(userNew.getName() + " is " + userNew.is_courier + " in " + userNew.city + ", " + userNew.state);
+                        }
+                        Glide.with(getContext()).load(userNew.image_url).into(profile_img);
                     } else {
-                        userNew.is_courier = "not courier";
+                        if (userNew.getName() != null) {
+                            name_person.setText(userNew.getName());
+                        }
+                        Glide.with(getContext()).load(userNew.image_url).into(profile_img);
+
                     }
-                    name_person.setText(userNew.getName() + " is " + userNew.is_courier + " in " + userNew.city + ", " + userNew.state);
-                    Glide.with(getContext()).load(userNew.image_url).into(profile_img);
-                }
-                else
-                {
-
-                    name_person.setText(userNew.getName()  );
-                    Glide.with(getContext()).load(userNew.image_url).into(profile_img);
-
                 }
             }
 
