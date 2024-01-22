@@ -398,13 +398,13 @@ public class TimeSheetActivity extends AppCompatActivity {
                             }
                         });
                     }
-
                 }
             }
         });
-
     }
+
     private void sendFCMPush(String token)
+
     {
         JSONObject notification = new JSONObject();
         JSONObject notifcationBody = new JSONObject();
