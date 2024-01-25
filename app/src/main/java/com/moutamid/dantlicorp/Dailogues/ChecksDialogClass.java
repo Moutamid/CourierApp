@@ -31,7 +31,6 @@ import com.android.volley.toolbox.Volley;
 import com.fxn.stash.Stash;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.kyanogen.signatureview.SignatureView;
@@ -56,7 +55,7 @@ import java.util.Objects;
 public class ChecksDialogClass extends AppCompatActivity {
 
     private EditText editTextName, editTextBox, editTextdropoff;
-    private TextView buttonSubmit, title;
+    private TextView buttonSubmit, title, remove;
     String type;
     CheckBox not_available;
     SignatureView signature_view;
@@ -68,6 +67,7 @@ public class ChecksDialogClass extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checks_details);
+        remove = findViewById(R.id.remove);
         editTextName = findViewById(R.id.editTxtName);
         editTextBox = findViewById(R.id.editTextBox);
         buttonSubmit = findViewById(R.id.buttonSubmit);
@@ -85,6 +85,13 @@ public class ChecksDialogClass extends AppCompatActivity {
                 editTextName.setText(Stash.getString("address_check"));
             }
         }
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signature_view.clearCanvas();
+
+            }
+        });
         not_available.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

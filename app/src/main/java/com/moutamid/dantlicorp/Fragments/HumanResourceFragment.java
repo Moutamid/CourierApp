@@ -46,14 +46,14 @@ public class HumanResourceFragment extends Fragment {
         direct_deposit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogClass cdd = new DialogClass(getActivity(), getString(R.string.need_to_update_your_payment_information));
+                DialogClass cdd = new DialogClass(getActivity(), getString(R.string.need_to_update_your_payment_information), "https://dantlicorp.com/onlineform/auth-form/");
                 cdd.show();
             }
         });
         verification_letter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogClass cdd = new DialogClass(getActivity(), getString(R.string.need_a_verification_of_employment_letter));
+                DialogClass cdd = new DialogClass(getActivity(), "Want to see W-9 Form?", "https://dantlicorp.com/onlineform/w-9/");
                 cdd.show();
             }
         });
