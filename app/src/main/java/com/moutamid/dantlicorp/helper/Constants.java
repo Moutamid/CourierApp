@@ -13,8 +13,7 @@ public class Constants {
     public static boolean is_journey_start =false;
 
     public static String NOTIFICATIONAPIURL = "https://fcm.googleapis.com/fcm/send";
-//  TODO
-public static String ServerKey = "AAAAFp-OyHA:APA91bGndaKxmUVhoqvOGw6N2bA079pgW-6kiRcfvsb2-9Iw6tiW4aAnIGVZI4eb22uF3qzhOthzmQocVlhHb4wkRvPiqCC2OS_DWKYehZzNf3mL6Qztn4keRM09CiSn4JsrFn6TmA0e";
+public static String ServerKey = "AAAAzzvbhX8:APA91bGavDjgYZn9tdcqZCSxPEZtmvOxUSRbNxSrpakLAvMAZ8uZ5pmaqBxo4AVmpued6aKR-Nwkj8pngfV_yhNvdAytaTh_8wuGcZ-ueTYe90LFF_zgwzVXtEyYLQv42JJae9SWdHC9";
 
     public static FirebaseAuth auth() {
         return FirebaseAuth.getInstance();

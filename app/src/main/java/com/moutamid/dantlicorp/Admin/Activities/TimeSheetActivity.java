@@ -81,7 +81,7 @@ public class TimeSheetActivity extends AppCompatActivity {
         editTextComments.setText(timeSheetModel.comments);
         work_type.setText(timeSheetModel.work_type_str);
         String userID = Stash.getString("userID");
-        Toast.makeText(this, "user"+ userID, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "user"+ userID, Toast.LENGTH_SHORT).show();
         if(FirebaseAuth.getInstance().getCurrentUser()!=null) {
             if (userID.equals(FirebaseAuth.getInstance().getCurrentUser().getUid()))
             {
@@ -102,7 +102,7 @@ public class TimeSheetActivity extends AppCompatActivity {
                 ref.child("status").setValue("accepted").addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        finish();
+                        onBackPressed();
                         lodingbar.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -124,7 +124,7 @@ public class TimeSheetActivity extends AppCompatActivity {
                 ref.child("status").setValue("rejected").addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        finish();
+                        onBackPressed();
                         lodingbar.dismiss();
                     }
                 }).addOnFailureListener(new OnFailureListener() {

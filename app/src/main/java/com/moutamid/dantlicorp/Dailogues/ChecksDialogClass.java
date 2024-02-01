@@ -181,7 +181,7 @@ public class ChecksDialogClass extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
 //                Toast.makeText(ChecksDialogClass.this, "yesssss", Toast.LENGTH_SHORT).show();
                 if (task.isComplete()) {
-                    if (type.equals(getString(R.string.check_in))) {
+                    if (type.equals("check_in")) {
                         sendFCMPush("Check in", Stash.getString("admin_token"), checksModel.picked_up, checksModel.drop_off, checksModel.name);
                     }
                     else

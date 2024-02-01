@@ -140,6 +140,9 @@
         <activity
             android:name=".Activities.Home.NotificationsActivity"
             android:exported="true" />
+        <activity
+            android:name=".Activities.Authentication.ResetPasswordActivity"
+            android:exported="true" />
 
         <service
             android:name=".helper.MessagingService"

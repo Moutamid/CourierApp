@@ -24,7 +24,6 @@ import com.moutamid.dantlicorp.Admin.AdminPanel;
 import com.moutamid.dantlicorp.MainActivity;
 import com.moutamid.dantlicorp.Model.UserModel;
 import com.moutamid.dantlicorp.R;
-import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.util.Objects;
@@ -124,5 +123,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
         }
+    }
+
+    public void forgot_password(View view) {
+        startActivity(new Intent(this, ResetPasswordActivity.class));
     }
 }

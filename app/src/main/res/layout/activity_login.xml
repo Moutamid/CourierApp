@@ -56,6 +56,19 @@
             android:textColorHint="@color/textColor"
             android:textSize="15dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="25dp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="end"
+            android:onClick="forgot_password"
+            android:text="Forgot Password?"
+            android:textColor="@color/app_color"
+            android:textSize="12dp" />
+
         <Button
             android:id="@+id/login"
             android:layout_width="match_parent"
