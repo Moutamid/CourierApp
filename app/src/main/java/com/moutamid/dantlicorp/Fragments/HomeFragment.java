@@ -127,7 +127,7 @@ public class HomeFragment extends Fragment {
                         {
                             add_check_in_lyt.setVisibility(View.GONE);
                             add_check_out_lyt.setVisibility(View.GONE);
-                            start_route.setVisibility(View.VISIBLE);
+                            start_route.setVisibility(View.GONE);
                             end_route.setVisibility(View.GONE);
                             Stash.put("route_start", "no");
                             Stash.put("check_in", "no");
@@ -207,16 +207,16 @@ public class HomeFragment extends Fragment {
         String route_start = Stash.getString("route_start");
         if (route_start != null) {
             if (route_start.equals("yes")) {
-                add_check_in_lyt.setVisibility(View.VISIBLE);
-                add_check_out_lyt.setVisibility(View.VISIBLE);
-                end_route.setVisibility(View.VISIBLE);
+                add_check_in_lyt.setVisibility(View.GONE);
+                add_check_out_lyt.setVisibility(View.GONE);
+                end_route.setVisibility(View.GONE);
                 start_route.setVisibility(View.GONE);
 
             } else {
                 add_check_in_lyt.setVisibility(View.GONE);
                 add_check_out_lyt.setVisibility(View.GONE);
                 end_route.setVisibility(View.GONE);
-                start_route.setVisibility(View.VISIBLE);
+                start_route.setVisibility(View.GONE);
             }
         }
         chat_Admin.setOnClickListener(new View.OnClickListener() {
@@ -480,16 +480,16 @@ public class HomeFragment extends Fragment {
         String route_start = Stash.getString("route_start");
         if (route_start != null) {
             if (route_start.equals("yes")) {
-                end_route.setVisibility(View.VISIBLE);
-                add_check_in_lyt.setVisibility(View.VISIBLE);
-                add_check_out_lyt.setVisibility(View.VISIBLE);
+                end_route.setVisibility(View.GONE);
+                add_check_in_lyt.setVisibility(View.GONE);
+                add_check_out_lyt.setVisibility(View.GONE);
                 start_route.setVisibility(View.GONE);
 
             } else {
                 add_check_in_lyt.setVisibility(View.GONE);
                 add_check_out_lyt.setVisibility(View.GONE);
                 end_route.setVisibility(View.GONE);
-                start_route.setVisibility(View.VISIBLE);
+                start_route.setVisibility(View.GONE);
 
             }
         }

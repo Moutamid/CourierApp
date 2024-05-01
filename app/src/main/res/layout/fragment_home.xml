@@ -117,6 +117,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+
+       android:visibility="gone"
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/courier_services"
                 android:textColor="@color/black"
@@ -125,6 +127,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="25dp"
@@ -136,6 +139,7 @@
 
             <LinearLayout
                 android:id="@+id/start_route"
+                android:visibility="gone"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -183,6 +187,7 @@
             <LinearLayout
                 android:id="@+id/add_Details"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/add_location"
                 android:orientation="horizontal">
@@ -288,6 +293,7 @@
             <LinearLayout
                 android:id="@+id/end_route"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/add_Details"
                 android:layout_marginTop="-15dp"

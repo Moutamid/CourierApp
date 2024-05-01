@@ -34,7 +34,7 @@ import java.util.Objects;
 public class HumanResourceFragment extends Fragment {
 
 
-    LinearLayout direct_deposit, verification_letter;
+    LinearLayout direct_deposit, verification_letter, verification_letter_request;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +43,7 @@ public class HumanResourceFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_resources, container, false);
         direct_deposit = view.findViewById(R.id.direct_deposit);
         verification_letter = view.findViewById(R.id.verification_letter);
+        verification_letter_request = view.findViewById(R.id.verification_letter_request);
         direct_deposit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +55,12 @@ public class HumanResourceFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 DialogClass cdd = new DialogClass(getActivity(), "Want to see W-9 Form?", "https://dantlicorp.com/onlineform/w-9/");
+                cdd.show();
+            }
+        }); verification_letter_request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogClass cdd = new DialogClass(getActivity(), "Want to Request Employment Verification", "https://dantlicorp.com/onlineform/w-9/");
                 cdd.show();
             }
         });

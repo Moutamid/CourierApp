@@ -42,7 +42,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="80dp"
 
                 android:src="@drawable/bank" />
 
@@ -77,7 +77,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="80dp"
 
                 android:src="@drawable/checklist" />
 
@@ -91,6 +91,40 @@
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center"
                 android:text="@string/verification_of_employment_letter"
+                android:textColor="@color/black"
+                android:textSize="17dp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/verification_letter_request"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg"
+            android:backgroundTint="@color/white"
+            android:elevation="10dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+
+                android:src="@drawable/checklist_request" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="Request Employment Verification"
                 android:textColor="@color/black"
                 android:textSize="17dp" />
 

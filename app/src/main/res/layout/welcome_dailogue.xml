@@ -22,7 +22,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
-            android:text="@string/team_let_s_welcome_to_the_dantli_corp_app"
+            android:text=""
             android:textColor="#000"
             android:textSize="13dp" />
 

@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1,
-      "versionName": "1.0",
-      "outputFile": "DANTLI_CORP-1.0-release.apk"
+      "versionCode": 2,
+      "versionName": "1.2",
+      "outputFile": "DANTLI_CORP-1.2-release.apk"
     }
   ],
   "elementType": "File"

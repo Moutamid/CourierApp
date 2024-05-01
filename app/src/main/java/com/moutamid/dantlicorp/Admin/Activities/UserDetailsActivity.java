@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.icu.lang.UCharacter;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,13 +17,8 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.moutamid.dantlicorp.Activities.Home.MapsActivity;
-import com.moutamid.dantlicorp.Admin.Adapter.MyAdapter;
 import com.moutamid.dantlicorp.Admin.Adapter.UserAdapter;
-import com.moutamid.dantlicorp.Dailogues.ChecksDialogClass;
-//import com.moutamid.dantlicorp.Dailogues.UserDetailsDialogClass;
 import com.moutamid.dantlicorp.R;
-import com.moutamid.dantlicorp.helper.Config;
 import com.moutamid.dantlicorp.helper.Constants;
 
 import java.util.Objects;
