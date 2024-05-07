@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.lang.UCharacter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -54,15 +55,18 @@ public class TimeSheetFragment extends Fragment {
         no_text = view.findViewById(R.id.no_text);
         btn = view.findViewById(R.id.btn);
 
-        if (Config.isNetworkAvailable(getContext())) {
-            getData();
-        } else {
-            Toast.makeText(getContext(), "No network connection available.", Toast.LENGTH_SHORT).show();
-        }
+//        if (Config.isNetworkAvailable(getContext())) {
+//            getData();
+//        } else {
+//            Toast.makeText(getContext(), "No network connection available.", Toast.LENGTH_SHORT).show();
+//        }
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), TimeSheetActivity.class));
+                Uri uri = Uri.parse("https://dantlicorp.com/forms/timesheet.php");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+//                startActivity(new Intent(getContext(), TimeSheetActivity.class));
             }
         });
         return view;
@@ -92,7 +96,7 @@ public class TimeSheetFragment extends Fragment {
 
                         }
                         if (list.size() < 1) {
-                            no_text.setVisibility(View.VISIBLE);
+                            no_text.setVisibility(View.GONE);
                         } else {
                             no_text.setVisibility(View.GONE);
                         }
