@@ -20,7 +20,7 @@
     <string name="add_train">Agregar Entrenamiento</string>
     <string name="team_let_s_welcome_to_the_dantli_corp_app">Equipo, demos la bienvenida a la aplicación de Dantli Corp</string>
     <string name="welcome_to_dantli_corp">Bienvenido a Dantli Corp</string>
-    <string name="dantli_corp_collects_location_data_to_enable_breadcrumbs_and_map_data_even_when_the_app_is_closed_or_not_in_use">Dantli Corp recopila datos de ubicación para habilitar migas de pan y datos de mapas incluso cuando la aplicación está cerrada o no está en uso</string>
+    <string name="dantli_corp_collects_location_data_to_enable_breadcrumbs_and_map_data_even_when_the_app_is_closed_or_not_in_use">Dantli Corp recopila datos de ubicación para habilitar migas de pan y datos de mapas incluso cuando la aplicación está cerrada o no está en uso.</string>
     <string name="deny">Rechazar</string>
     <string name="accept">Aceptar</string>
     <string name="not_added_yet">Aún no agregado</string>

@@ -20,7 +20,7 @@
     <string name="add_train">添加培训</string>
     <string name="team_let_s_welcome_to_the_dantli_corp_app">团队，欢迎来到 Dantli Corp 应用程序</string>
     <string name="welcome_to_dantli_corp">欢迎来到 Dantli Corp</string>
-    <string name="dantli_corp_collects_location_data_to_enable_breadcrumbs_and_map_data_even_when_the_app_is_closed_or_not_in_use">Dantli Corp 收集位置数据以启用面包屑和地图数据，即使应用程序处于关闭或未使用的状态</string>
+    <string name="dantli_corp_collects_location_data_to_enable_breadcrumbs_and_map_data_even_when_the_app_is_closed_or_not_in_use">Dantli Corp 收集位置数据以启用面包屑和地图数据，即使应用程序处于关闭或未使用的状态.</string>
     <string name="deny">拒绝</string>
     <string name="accept">接受</string>
     <string name="not_added_yet">尚未添加</string>

@@ -20,7 +20,7 @@
     <string name="add_train">Add Training</string>
     <string name="team_let_s_welcome_to_the_dantli_corp_app">Team, Let’s Welcome to the Dantli Corp App</string>
     <string name="welcome_to_dantli_corp">Welcome to Dantli Corp</string>
-    <string name="dantli_corp_collects_location_data_to_enable_breadcrumbs_and_map_data_even_when_the_app_is_closed_or_not_in_use">Dantli Corp collects location data to enable Breadcrumbs and Map data even when the app is closed or not in use</string>
+    <string name="dantli_corp_collects_location_data_to_enable_breadcrumbs_and_map_data_even_when_the_app_is_closed_or_not_in_use">Dantli Corp collects location data to enable Breadcrumbs and Map data even when the app is closed or not in use.</string>
     <string name="deny">Deny</string>
     <string name="accept">Accept</string>
     <string name="not_added_yet">Not added yet</string>

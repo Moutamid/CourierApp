@@ -60,7 +60,7 @@ public class HumanResourceFragment extends Fragment {
         }); verification_letter_request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogClass cdd = new DialogClass(getActivity(), "Do you need Verification of Employment?", "https://dantlicorp.com/onlineform/employment-verification/");
+                DialogClass cdd = new DialogClass(getActivity(), "Do you want to Request Employment Verification?", "https://dantlicorp.com/onlineform/employment-verification/");
                 cdd.show();
             }
         });

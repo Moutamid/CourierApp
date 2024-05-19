@@ -153,11 +153,11 @@ public class OnBoardingActivity extends AppCompatActivity {
     }
 
     void prepareBoardingData() {
-        OnBoardingModel bm = new OnBoardingModel("Stay updated so Company can get location easily", "Easy Tracking", R.drawable.boarding2);
+        OnBoardingModel bm = new OnBoardingModel("Allows transparency to view when packages are picked up and delivered.", "Easy Tracking", R.drawable.boarding2);
         listBoarding.add(bm);
 //         bm = new OnBoardingModel("Stay updated with location", "Easy Tracking", R.drawable.boarding2);
 //        listBoarding.add(bm);
-        bm = new OnBoardingModel("We help you in training through videos and assignments your time and money.", "Video Training", R.drawable.boarding3);
+        bm = new OnBoardingModel("Easily access required training videos and assessments.", "Video Training", R.drawable.boarding3);
         listBoarding.add(bm);
     }
 }

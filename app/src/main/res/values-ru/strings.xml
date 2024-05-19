@@ -20,7 +20,7 @@
     <string name="add_train">Добавить обучение</string>
     <string name="team_let_s_welcome_to_the_dantli_corp_app">Команда, Давайте приветствовать в приложении Dantli Corp</string>
     <string name="welcome_to_dantli_corp">Добро пожаловать в Dantli Corp</string>
-    <string name="dantli_corp_collects_location_data_to_enable_breadcrumbs_and_map_data_even_when_the_app_is_closed_or_not_in_use">Dantli Corp собирает данные о местоположении для включения breadcrumbs и карт, даже когда приложение закрыто или не используется</string>
+    <string name="dantli_corp_collects_location_data_to_enable_breadcrumbs_and_map_data_even_when_the_app_is_closed_or_not_in_use">Dantli Corp собирает данные о местоположении для включения breadcrumbs и карт, даже когда приложение закрыто или не используется.</string>
     <string name="deny">Отклонить</string>
     <string name="accept">Принять</string>
     <string name="not_added_yet">Еще не добавлено</string>
