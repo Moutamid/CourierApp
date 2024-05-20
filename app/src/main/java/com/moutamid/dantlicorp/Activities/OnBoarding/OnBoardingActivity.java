@@ -157,7 +157,7 @@ public class OnBoardingActivity extends AppCompatActivity {
         listBoarding.add(bm);
 //         bm = new OnBoardingModel("Stay updated with location", "Easy Tracking", R.drawable.boarding2);
 //        listBoarding.add(bm);
-        bm = new OnBoardingModel("Easily access required training videos and assessments.", "Video Training", R.drawable.boarding3);
+        bm = new OnBoardingModel("Easy access to required training videos and assessments.", "Video Training", R.drawable.boarding3);
         listBoarding.add(bm);
     }
 }
